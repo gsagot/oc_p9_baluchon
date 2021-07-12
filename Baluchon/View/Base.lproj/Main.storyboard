@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7oP-fq-DLc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Accueil-->
+        <scene sceneID="uNr-qd-BT9">
+            <objects>
+                <viewController id="dbN-PG-4RP" customClass="SettingsViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zSN-Fv-OPj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-DI-SMF">
+                                <rect key="frame" x="107" y="74" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="RP9-u1-Ev1"/>
+                                    <constraint firstAttribute="height" constant="50" id="WU2-IS-YQ6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KvM-tm-x5Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qqy-DI-SMF" firstAttribute="top" secondItem="KvM-tm-x5Y" secondAttribute="top" constant="30" id="UpU-I5-AT3"/>
+                            <constraint firstItem="Qqy-DI-SMF" firstAttribute="centerX" secondItem="zSN-Fv-OPj" secondAttribute="centerX" id="flV-iH-e4h"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Accueil" id="npD-ai-XyM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wDo-rD-CJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-884" y="480"/>
+        </scene>
+        <!--Meteo-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Oa-T4-uKr">
+                                <rect key="frame" x="182" y="194" width="50" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="WxT-Bj-Pgf"/>
+                                    <constraint firstAttribute="width" constant="50" id="rak-fX-mzg"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0°C" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cyP-sJ-DTN">
+                                <rect key="frame" x="177" y="134" width="60" height="50.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="45"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0°C" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hk-OM-DrX">
+                                <rect key="frame" x="177" y="672.5" width="60" height="50.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="45"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New York" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzT-qO-OBi">
+                                <rect key="frame" x="107" y="74" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="p8q-FI-aVF"/>
+                                    <constraint firstAttribute="height" constant="50" id="uNp-uD-6Eq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Paris" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dMs-Xf-0fw">
+                                <rect key="frame" x="107" y="612.5" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="69K-mU-cz8"/>
+                                    <constraint firstAttribute="height" constant="50" id="zOW-SC-hxh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3o2-D6-sbR">
+                                <rect key="frame" x="182" y="732.5" width="50" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="UIo-He-5zC"/>
+                                    <constraint firstAttribute="height" constant="50" id="alJ-Gh-16G"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dMs-Xf-0fw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0SH-6C-Uq1"/>
+                            <constraint firstItem="rzT-qO-OBi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8pl-9Z-Yzh"/>
+                            <constraint firstItem="3o2-D6-sbR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C5e-y6-qb1"/>
+                            <constraint firstItem="8Oa-T4-uKr" firstAttribute="top" secondItem="cyP-sJ-DTN" secondAttribute="bottom" constant="10" id="EvL-Op-0go"/>
+                            <constraint firstItem="cyP-sJ-DTN" firstAttribute="top" secondItem="rzT-qO-OBi" secondAttribute="bottom" constant="10" id="QFf-ck-iiP"/>
+                            <constraint firstItem="rzT-qO-OBi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="UGb-oM-P6a"/>
+                            <constraint firstItem="cyP-sJ-DTN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WC1-Wr-gJ6"/>
+                            <constraint firstItem="0hk-OM-DrX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bIJ-Ih-dKZ"/>
+                            <constraint firstItem="0hk-OM-DrX" firstAttribute="top" secondItem="dMs-Xf-0fw" secondAttribute="bottom" constant="10" id="jt1-yK-GRW"/>
+                            <constraint firstItem="3o2-D6-sbR" firstAttribute="top" secondItem="0hk-OM-DrX" secondAttribute="bottom" constant="10" id="qAV-ry-sx5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3o2-D6-sbR" secondAttribute="bottom" constant="30" id="ubY-Af-N5g"/>
+                            <constraint firstItem="8Oa-T4-uKr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zYQ-tV-DcG"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Meteo" image="picto_meteo" id="ZWp-Qo-h8F"/>
+                    <connections>
+                        <outlet property="imageWeatherLocationFrom" destination="3o2-D6-sbR" id="B6s-fp-UKB"/>
+                        <outlet property="imageWeatherLocationIn" destination="8Oa-T4-uKr" id="cuj-QO-7GW"/>
+                        <outlet property="textLocationFrom" destination="dMs-Xf-0fw" id="c0X-IX-lmG"/>
+                        <outlet property="textLocationIn" destination="rzT-qO-OBi" id="rXQ-Fv-c56"/>
+                        <outlet property="textLocationTempFrom" destination="0hk-OM-DrX" id="bxG-UV-5UC"/>
+                        <outlet property="textLocationTempIn" destination="cyP-sJ-DTN" id="392-Jr-MDJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="743"/>
+        </scene>
+        <!--Traduction-->
+        <scene sceneID="fir-zo-KLK">
+            <objects>
+                <viewController id="fRA-RQ-Nrt" customClass="TranslateViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qVY-RM-4f9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E3-SP-f6u">
+                                <rect key="frame" x="77" y="74" width="260" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="2ne-Sy-pC6"/>
+                                    <constraint firstAttribute="width" constant="260" id="edN-cz-0fU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7x-MY-f28">
+                                <rect key="frame" x="77" y="633" width="260" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="ZNy-gm-zL8"/>
+                                    <constraint firstAttribute="height" constant="150" id="sqB-6o-y9d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zUr-Ou-ON7"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0E3-SP-f6u" firstAttribute="centerX" secondItem="qVY-RM-4f9" secondAttribute="centerX" id="FUQ-z8-QdP"/>
+                            <constraint firstItem="0E3-SP-f6u" firstAttribute="top" secondItem="zUr-Ou-ON7" secondAttribute="top" constant="30" id="MzM-nJ-9sO"/>
+                            <constraint firstItem="0E3-SP-f6u" firstAttribute="centerX" secondItem="qVY-RM-4f9" secondAttribute="centerX" id="QvZ-FE-AWT"/>
+                            <constraint firstItem="zUr-Ou-ON7" firstAttribute="bottom" secondItem="J7x-MY-f28" secondAttribute="bottom" constant="30" id="fUp-ez-OKi"/>
+                            <constraint firstItem="J7x-MY-f28" firstAttribute="centerX" secondItem="qVY-RM-4f9" secondAttribute="centerX" id="igq-lj-Lhr"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Traduction" image="picto_traduction" id="fj0-O7-qqQ"/>
+                    <connections>
+                        <outlet property="fromTextView" destination="0E3-SP-f6u" id="H68-gM-LqT"/>
+                        <outlet property="toTextView" destination="J7x-MY-f28" id="iQN-R8-qRF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nE8-7q-mKT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="2071"/>
+        </scene>
+        <!--Change-->
+        <scene sceneID="UW8-Ss-XeV">
+            <objects>
+                <viewController id="0J0-W2-MOS" customClass="ChangeViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6YT-Et-BDw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="USD" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uRt-Od-g0e">
+                                <rect key="frame" x="77" y="74" width="260" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="2ty-v2-VPW"/>
+                                    <constraint firstAttribute="height" constant="40" id="QDx-Aa-qCo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="EUR" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzO-Ve-L9V">
+                                <rect key="frame" x="77" y="214" width="260" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2q5-3L-rrh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="EAO-5D-NfX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MyE-tB-hrB"/>
+                        <color key="backgroundColor" red="0.71764707569999997" green="0.84313726430000002" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="KzO-Ve-L9V" firstAttribute="top" secondItem="uRt-Od-g0e" secondAttribute="bottom" constant="100" id="Mh0-1d-cas"/>
+                            <constraint firstItem="uRt-Od-g0e" firstAttribute="centerX" secondItem="6YT-Et-BDw" secondAttribute="centerX" id="dXz-OJ-UqS"/>
+                            <constraint firstItem="uRt-Od-g0e" firstAttribute="top" secondItem="MyE-tB-hrB" secondAttribute="top" constant="30" id="h3v-8t-Jgc"/>
+                            <constraint firstItem="KzO-Ve-L9V" firstAttribute="centerX" secondItem="6YT-Et-BDw" secondAttribute="centerX" id="iRn-nZ-jMT"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Change" image="picto_change" id="tXk-s7-9OU"/>
+                    <connections>
+                        <outlet property="textLocationFromCurrency" destination="KzO-Ve-L9V" id="VEL-TK-Oi8"/>
+                        <outlet property="textLocationInCurrency" destination="uRt-Od-g0e" id="dXq-Mn-hQg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5o-Rh-4fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="723" y="1492"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="fnn-gH-G0m">
+            <objects>
+                <tabBarController id="7oP-fq-DLc" sceneMemberID="viewController">
+                    <value key="contentSizeForViewInPopover" type="size" width="0.0" height="0.0"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kHH-1y-Xrd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dbN-PG-4RP" kind="relationship" relationship="viewControllers" id="TmJ-5O-xNR"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="d3s-I3-HdP"/>
+                        <segue destination="0J0-W2-MOS" kind="relationship" relationship="viewControllers" id="5xi-nc-Y8x"/>
+                        <segue destination="fRA-RQ-Nrt" kind="relationship" relationship="viewControllers" id="gX9-Rl-4c6"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VQd-o3-uip" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1703" y="1492"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="link" catalog="system" width="128" height="122"/>
+        <image name="picto_change" width="25" height="25"/>
+        <image name="picto_meteo" width="25" height="25"/>
+        <image name="picto_traduction" width="25" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

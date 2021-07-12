@@ -1,0 +1,15 @@
+.DS_Store
+Baluchon/.DS_Store
+Baluchon/exports/.DS_Store
+Baluchon/Controller/.DS_Store
+Baluchon/View/.DS_Store
+Baluchon/Model/.DS_Store
+Baluchon/Model/Service/.DS_Store
+Baluchon/Model/Structure/.DS_Store
+Baluchon/Supporting Files/.DS_Store
+
+Baluchon/key.swift
+
+*.xcuserstate
+Baluchon.xcodeproj/project.xcworkspace/
+Baluchon.xcodeproj/xcuserdata/
