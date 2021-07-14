@@ -1,0 +1,36 @@
+{
+    "weather": [
+        {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        },
+        {
+            "id": 701,
+            "main": "Mist",
+            "description": "mist",
+            "icon": "50n"
+        }
+    ],
+    "main": {
+        "temp": 16.26,
+        "feels_like": 16.47,
+        "temp_min": 15,
+        "temp_max": 17.39,
+        "pressure": 1014,
+        "humidity": 97
+    },
+    "wind": {
+        "speed": 1.34,
+        "deg": 42,
+        "gust": 4.02
+    },
+    "rain": {
+        "1h": 0.75
+    },
+    "clouds": {
+        "all": 75
+    },
+    "name": "Paris"
+}

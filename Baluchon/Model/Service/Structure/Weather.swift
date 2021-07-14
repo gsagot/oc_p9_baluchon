@@ -22,4 +22,5 @@ struct Main: Codable {
 struct WeatherResult: Codable {
     var weather: [Weather]
     var main: Main
+    var name: String
 }

@@ -16,6 +16,10 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         fromTextView.delegate = self
+        fromTextView.layer.cornerRadius = 10
+        toTextView.layer.cornerRadius = 10
+        
+        self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
@@ -50,5 +54,16 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
         }
          
         return true
+    }
+    
+    
+    func gradient(frame:CGRect) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = frame
+        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.colors = [
+        UIColor.cyan.cgColor,UIColor.blue.cgColor]
+        return layer
     }
 }

@@ -17,14 +17,43 @@ class Settings {
         return try! Data(contentsOf: url)
     }
     
+    var jsonWeatherParis: Data? {
+        let bundle = Bundle(for: Settings.self)
+        let url = bundle.url(forResource: "WeatherParis", withExtension: "json")!
+        return try! Data(contentsOf: url)
+    }
+    
+     var jsonWeatherNY: Data? {
+        let bundle = Bundle(for: Settings.self)
+        let url = bundle.url(forResource: "WeatherNY", withExtension: "json")!
+        return try! Data(contentsOf: url)
+    }
+    
     var currencies = [Currency]()
+    
+    var weathers = [WeatherResult]()
     
     private init() {
         
+        print ("init !!!")
         let decoder = JSONDecoder()
         do{
             let product = try decoder.decode(ChangeResult.self, from: jsonCurrencies!)
             saveRates(from: product)
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        do{
+            let product = try decoder.decode(WeatherResult.self, from: jsonWeatherParis!)
+            weathers.append(product)
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        do{
+            let product = try decoder.decode(WeatherResult.self, from: jsonWeatherNY!)
+            weathers.append(product)
         }catch{
             print(error.localizedDescription)
         }
@@ -44,11 +73,11 @@ class Settings {
         currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: " ", amount: from.rates.CHF))
         currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: " ", amount: from.rates.EUR))
         currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: " ", amount: from.rates.GBP))
-        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.GBP, icon: " ", amount: from.rates.GBP))
+        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: " ", amount: from.rates.USD))
         
         
     }
-    
+
     
     
 

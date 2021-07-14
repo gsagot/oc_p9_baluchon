@@ -39,90 +39,6 @@
             </objects>
             <point key="canvasLocation" x="-884" y="480"/>
         </scene>
-        <!--Meteo-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Oa-T4-uKr">
-                                <rect key="frame" x="182" y="194" width="50" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="WxT-Bj-Pgf"/>
-                                    <constraint firstAttribute="width" constant="50" id="rak-fX-mzg"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0°C" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cyP-sJ-DTN">
-                                <rect key="frame" x="177" y="134" width="60" height="50.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="45"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0°C" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hk-OM-DrX">
-                                <rect key="frame" x="177" y="672.5" width="60" height="50.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="45"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New York" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzT-qO-OBi">
-                                <rect key="frame" x="107" y="74" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="p8q-FI-aVF"/>
-                                    <constraint firstAttribute="height" constant="50" id="uNp-uD-6Eq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Paris" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dMs-Xf-0fw">
-                                <rect key="frame" x="107" y="612.5" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="69K-mU-cz8"/>
-                                    <constraint firstAttribute="height" constant="50" id="zOW-SC-hxh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3o2-D6-sbR">
-                                <rect key="frame" x="182" y="732.5" width="50" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="UIo-He-5zC"/>
-                                    <constraint firstAttribute="height" constant="50" id="alJ-Gh-16G"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="dMs-Xf-0fw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0SH-6C-Uq1"/>
-                            <constraint firstItem="rzT-qO-OBi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8pl-9Z-Yzh"/>
-                            <constraint firstItem="3o2-D6-sbR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C5e-y6-qb1"/>
-                            <constraint firstItem="8Oa-T4-uKr" firstAttribute="top" secondItem="cyP-sJ-DTN" secondAttribute="bottom" constant="10" id="EvL-Op-0go"/>
-                            <constraint firstItem="cyP-sJ-DTN" firstAttribute="top" secondItem="rzT-qO-OBi" secondAttribute="bottom" constant="10" id="QFf-ck-iiP"/>
-                            <constraint firstItem="rzT-qO-OBi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="UGb-oM-P6a"/>
-                            <constraint firstItem="cyP-sJ-DTN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WC1-Wr-gJ6"/>
-                            <constraint firstItem="0hk-OM-DrX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bIJ-Ih-dKZ"/>
-                            <constraint firstItem="0hk-OM-DrX" firstAttribute="top" secondItem="dMs-Xf-0fw" secondAttribute="bottom" constant="10" id="jt1-yK-GRW"/>
-                            <constraint firstItem="3o2-D6-sbR" firstAttribute="top" secondItem="0hk-OM-DrX" secondAttribute="bottom" constant="10" id="qAV-ry-sx5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3o2-D6-sbR" secondAttribute="bottom" constant="30" id="ubY-Af-N5g"/>
-                            <constraint firstItem="8Oa-T4-uKr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zYQ-tV-DcG"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Meteo" image="picto_meteo" id="ZWp-Qo-h8F"/>
-                    <connections>
-                        <outlet property="imageWeatherLocationFrom" destination="3o2-D6-sbR" id="B6s-fp-UKB"/>
-                        <outlet property="imageWeatherLocationIn" destination="8Oa-T4-uKr" id="cuj-QO-7GW"/>
-                        <outlet property="textLocationFrom" destination="dMs-Xf-0fw" id="c0X-IX-lmG"/>
-                        <outlet property="textLocationIn" destination="rzT-qO-OBi" id="rXQ-Fv-c56"/>
-                        <outlet property="textLocationTempFrom" destination="0hk-OM-DrX" id="bxG-UV-5UC"/>
-                        <outlet property="textLocationTempIn" destination="cyP-sJ-DTN" id="392-Jr-MDJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="141" y="743"/>
-        </scene>
         <!--Traduction-->
         <scene sceneID="fir-zo-KLK">
             <objects>
@@ -168,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nE8-7q-mKT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-74" y="2071"/>
+            <point key="canvasLocation" x="-480" y="2031"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fnn-gH-G0m">
@@ -182,9 +98,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="dbN-PG-4RP" kind="relationship" relationship="viewControllers" id="TmJ-5O-xNR"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="d3s-I3-HdP"/>
                         <segue destination="fRA-RQ-Nrt" kind="relationship" relationship="viewControllers" id="gX9-Rl-4c6"/>
                         <segue destination="Oed-b8-cJa" kind="relationship" relationship="viewControllers" id="u9h-fb-boP"/>
+                        <segue destination="xQN-r4-jhr" kind="relationship" relationship="viewControllers" id="7bc-LH-g9A"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQd-o3-uip" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -246,12 +162,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWG-B3-y24" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="1420"/>
+            <point key="canvasLocation" x="303" y="1492"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="JWk-UQ-GpP">
+            <objects>
+                <viewController id="xQN-r4-jhr" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RkM-BR-gCF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-0D-xl6" customClass="WeatherView" customModule="iOS_test" customModuleProvider="target">
+                                <rect key="frame" x="10" y="54" width="394" height="250"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="0zb-M7-mxo"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ek-w1-BVj" customClass="WeatherView" customModule="iOS_test" customModuleProvider="target">
+                                <rect key="frame" x="10" y="324" width="394" height="250"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="hlp-L1-I2p"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="U76-eO-vcx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="U76-eO-vcx" firstAttribute="trailing" secondItem="3ek-w1-BVj" secondAttribute="trailing" constant="10" id="6nO-Y8-QYC"/>
+                            <constraint firstItem="NHw-0D-xl6" firstAttribute="top" secondItem="U76-eO-vcx" secondAttribute="top" constant="10" id="HFs-jK-zAb"/>
+                            <constraint firstItem="NHw-0D-xl6" firstAttribute="centerX" secondItem="RkM-BR-gCF" secondAttribute="centerX" id="Njh-bX-Eo8"/>
+                            <constraint firstItem="U76-eO-vcx" firstAttribute="trailing" secondItem="NHw-0D-xl6" secondAttribute="trailing" constant="10" id="OZI-Dz-xrb"/>
+                            <constraint firstItem="NHw-0D-xl6" firstAttribute="leading" secondItem="U76-eO-vcx" secondAttribute="leading" constant="10" id="RZz-lW-8ef"/>
+                            <constraint firstItem="3ek-w1-BVj" firstAttribute="leading" secondItem="U76-eO-vcx" secondAttribute="leading" constant="10" id="RgD-M0-Xay"/>
+                            <constraint firstItem="3ek-w1-BVj" firstAttribute="top" secondItem="NHw-0D-xl6" secondAttribute="bottom" constant="20" id="p4z-V2-gEu"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ni7-hp-MV3"/>
+                    <connections>
+                        <outlet property="currentCityView" destination="NHw-0D-xl6" id="sqr-sd-PzV"/>
+                        <outlet property="wantedCityView" destination="3ek-w1-BVj" id="6O0-Xu-aYN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KUm-ad-uMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-25" y="829"/>
         </scene>
     </scenes>
     <resources>
-        <image name="link" catalog="system" width="128" height="122"/>
-        <image name="picto_meteo" width="25" height="25"/>
         <image name="picto_traduction" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
