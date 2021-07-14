@@ -11,7 +11,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
+        ChangeService.shared.getChange(completionHandler: { (success, error, current) in
+            if success == true {
+                ...
+            }
+            else {
+                self.presentUIAlertController(title: "Error", message: error!)
+                
+            } })
+         */
     }
     
     // Alert Controller

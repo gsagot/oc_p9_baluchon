@@ -8,27 +8,27 @@
 import UIKit
 
 
-class ChangeViewController: UIViewController,  UITextFieldDelegate {
+
+class CurrencyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate  {
     
-    @IBOutlet var textLocationInCurrency: UITextField!
-    @IBOutlet var textLocationFromCurrency: UITextField!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var currencyView: CurrencyView!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ChangeService.shared.getChange(completionHandler: { (success, error, current) in
-            if success == true {
-        // TODO : Save all rates in an array 
-            }
-            else {
-                self.presentUIAlertController(title: "Error", message: error!)
-                
-            } })
-        
+
+        self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
+
         // Do any additional setup after loading the view.
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
-        textLocationInCurrency.delegate = self
+        
+        currencyView.amountInDollarText.delegate = self
+        
+        // This view controller itself will provide the delegate methods and row data for the table view.
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     // Alert Controller
@@ -40,13 +40,50 @@ class ChangeViewController: UIViewController,  UITextFieldDelegate {
     
     // Keyboard Hide on tap function
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        textLocationInCurrency.resignFirstResponder()
+        currencyView.amountInDollarText.resignFirstResponder()
+        let index = (self.tableView.indexPathsForVisibleRows ?? [])
+        self.tableView.reloadRows(at: index, with: .automatic)
+        
     }
     
     // Keyboard enter
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textLocationInCurrency.resignFirstResponder()
+        currencyView.amountInDollarText.resignFirstResponder()
+        let index = (self.tableView.indexPathsForVisibleRows ?? [])
+        self.tableView.reloadRows(at: index, with: .automatic)
         return true
+    }
+    
+    // number of rows in table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Settings.shared.currencies.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150.0;//Choose your custom row height
+    }
+    
+    // create a cell for each table view row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a new cell if needed or reuse an old one
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CurrencyCell
+        let  amount = Double(currencyView.amountInDollarText.text ?? "1.0" )
+        
+        cell.currencyName.text = "  " + Settings.shared.currencies[indexPath.row].name
+        cell.currencyAmount.text = " " + String(format:"%.2f ",Settings.shared.currencies[indexPath.row].rate * Double(amount!) ) + "\n" + " "  + Settings.shared.currencies[indexPath.row].code
+      
+        return cell
+    }
+    
+    func gradient(frame:CGRect) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = frame
+        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.colors = [
+        UIColor.cyan.cgColor,UIColor.blue.cgColor]
+        return layer
     }
 
 }

@@ -12,11 +12,11 @@ struct Translations: Codable {
 }
 
 
-struct Data: Codable {
+struct DataWithTranslations: Codable {
     var translations: [Translations]
     
 }
 
 struct TranslationResult: Codable {
-    var data: Data
+    var data: DataWithTranslations
 }

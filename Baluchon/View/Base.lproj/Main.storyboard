@@ -170,54 +170,6 @@
             </objects>
             <point key="canvasLocation" x="-74" y="2071"/>
         </scene>
-        <!--Change-->
-        <scene sceneID="UW8-Ss-XeV">
-            <objects>
-                <viewController id="0J0-W2-MOS" customClass="ChangeViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6YT-Et-BDw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="USD" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uRt-Od-g0e">
-                                <rect key="frame" x="77" y="74" width="260" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="2ty-v2-VPW"/>
-                                    <constraint firstAttribute="height" constant="40" id="QDx-Aa-qCo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="EUR" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzO-Ve-L9V">
-                                <rect key="frame" x="77" y="214" width="260" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2q5-3L-rrh"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="EAO-5D-NfX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="MyE-tB-hrB"/>
-                        <color key="backgroundColor" red="0.71764707569999997" green="0.84313726430000002" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="KzO-Ve-L9V" firstAttribute="top" secondItem="uRt-Od-g0e" secondAttribute="bottom" constant="100" id="Mh0-1d-cas"/>
-                            <constraint firstItem="uRt-Od-g0e" firstAttribute="centerX" secondItem="6YT-Et-BDw" secondAttribute="centerX" id="dXz-OJ-UqS"/>
-                            <constraint firstItem="uRt-Od-g0e" firstAttribute="top" secondItem="MyE-tB-hrB" secondAttribute="top" constant="30" id="h3v-8t-Jgc"/>
-                            <constraint firstItem="KzO-Ve-L9V" firstAttribute="centerX" secondItem="6YT-Et-BDw" secondAttribute="centerX" id="iRn-nZ-jMT"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Change" image="picto_change" id="tXk-s7-9OU"/>
-                    <connections>
-                        <outlet property="textLocationFromCurrency" destination="KzO-Ve-L9V" id="VEL-TK-Oi8"/>
-                        <outlet property="textLocationInCurrency" destination="uRt-Od-g0e" id="dXq-Mn-hQg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u5o-Rh-4fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="723" y="1492"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fnn-gH-G0m">
             <objects>
@@ -231,18 +183,74 @@
                     <connections>
                         <segue destination="dbN-PG-4RP" kind="relationship" relationship="viewControllers" id="TmJ-5O-xNR"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="d3s-I3-HdP"/>
-                        <segue destination="0J0-W2-MOS" kind="relationship" relationship="viewControllers" id="5xi-nc-Y8x"/>
                         <segue destination="fRA-RQ-Nrt" kind="relationship" relationship="viewControllers" id="gX9-Rl-4c6"/>
+                        <segue destination="Oed-b8-cJa" kind="relationship" relationship="viewControllers" id="u9h-fb-boP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQd-o3-uip" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1703" y="1492"/>
         </scene>
+        <!--Currency-->
+        <scene sceneID="Rdi-8M-LHT">
+            <objects>
+                <viewController id="Oed-b8-cJa" customClass="CurrencyViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OHF-lV-8No">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wj1-BH-DVa">
+                                <rect key="frame" x="10" y="319" width="394" height="494"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="wCk-GT-poX"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="qsf-Jd-lLX" customClass="CurrencyCell" customModule="Baluchon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="394" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qsf-Jd-lLX" id="5Ae-lZ-tpR">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uet-Fy-Fra" customClass="CurrencyView" customModule="Baluchon" customModuleProvider="target">
+                                <rect key="frame" x="10" y="59" width="394" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="mjY-zS-Zfq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aH4-gv-Ie2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aH4-gv-Ie2" firstAttribute="bottom" secondItem="wj1-BH-DVa" secondAttribute="bottom" id="PqH-J3-KhV"/>
+                            <constraint firstItem="aH4-gv-Ie2" firstAttribute="trailing" secondItem="Uet-Fy-Fra" secondAttribute="trailing" constant="10" id="Q4P-ie-Ys5"/>
+                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="centerX" secondItem="OHF-lV-8No" secondAttribute="centerX" id="QOl-kb-34V"/>
+                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="top" secondItem="aH4-gv-Ie2" secondAttribute="top" constant="15" id="cBG-Fg-TH6"/>
+                            <constraint firstItem="aH4-gv-Ie2" firstAttribute="trailing" secondItem="wj1-BH-DVa" secondAttribute="trailing" constant="10" id="es9-lv-umC"/>
+                            <constraint firstItem="wj1-BH-DVa" firstAttribute="leading" secondItem="aH4-gv-Ie2" secondAttribute="leading" constant="10" id="pYa-NW-CwK"/>
+                            <constraint firstItem="wj1-BH-DVa" firstAttribute="centerX" secondItem="aH4-gv-Ie2" secondAttribute="centerX" id="scT-6a-pnI"/>
+                            <constraint firstItem="wj1-BH-DVa" firstAttribute="top" secondItem="Uet-Fy-Fra" secondAttribute="bottom" constant="60" id="sh8-wr-L4B"/>
+                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="leading" secondItem="aH4-gv-Ie2" secondAttribute="leading" constant="10" id="ysv-z2-6TF"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Currency" id="Ojx-cJ-URJ"/>
+                    <connections>
+                        <outlet property="currencyView" destination="Uet-Fy-Fra" id="s1B-VW-ebV"/>
+                        <outlet property="tableView" destination="wj1-BH-DVa" id="MGL-sV-rYR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oWG-B3-y24" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="1420"/>
+        </scene>
     </scenes>
     <resources>
         <image name="link" catalog="system" width="128" height="122"/>
-        <image name="picto_change" width="25" height="25"/>
         <image name="picto_meteo" width="25" height="25"/>
         <image name="picto_traduction" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">

@@ -35,11 +35,12 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         fromTextView.resignFirstResponder()
-
+        
         if fromTextView.text != nil {
                 TranslateService.shared.getTranslation(sentence: fromTextView.text!, completionHandler: { (success, erreur, translation) in
                     if success == true {
                         self.toTextView.text = translation!.data.translations[0].translatedText
+                    
                     }else{
                         self.presentUIAlertController(title: "Error", message: erreur!)
                     } })
@@ -47,6 +48,7 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
             
             presentUIAlertController(title: "Error", message: "Text invalid")
         }
+         
         return true
     }
 }
