@@ -31,7 +31,7 @@ class ChangeServiceTests: XCTestCase {
         }
     }
     
-    func testGetTranslateShouldPostFailedCallbackIfError() {
+    func testGetChangeShouldPostFailedCallbackIfError() {
         // Given
         let changeService = ChangeService(
             changeSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.changeError))
@@ -50,7 +50,7 @@ class ChangeServiceTests: XCTestCase {
  
     }
     
-    func testGetTranslateShouldPostFailedCallbackIfNoData() {
+    func testGetChangeShouldPostFailedCallbackIfNoData() {
         // Given
         let changeService = ChangeService(
             changeSession: URLSessionFake(data: nil, response: nil, error: nil))
@@ -69,7 +69,7 @@ class ChangeServiceTests: XCTestCase {
  
     }
     
-    func testGetTranslateShouldPostFailedCallbackIfIncorrectResponse(){
+    func testGetChangeShouldPostFailedCallbackIfIncorrectResponse(){
         // Given
         let changeService = ChangeService(
             changeSession: URLSessionFake(
@@ -90,5 +90,71 @@ class ChangeServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
  
     }
+    
+    
+    func testGetChangeShouldPostFailedCallbackIfIncorrectData() {
+        // Given
+        let changeService = ChangeService(
+            changeSession: URLSessionFake(
+                data: FakeResponseData.changeIncorrectData,
+                response: FakeResponseData.responseOK,
+                error: nil))
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange(completionHandler: { (success, error, current) in
+            
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == "An error occurred, please try again")
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testGetChangeShouldPostSuccessCallbackIfCorrectResponseWithData() {
+        // Given
+        let changeService = ChangeService(
+            changeSession: URLSessionFake(
+                data: FakeResponseData.changeCorrectData,
+                response: FakeResponseData.responseOK,
+                error: nil))
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange(completionHandler: { (success, error, current) in
+            
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(current?.rates.EUR == 1)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+ 
+    
+    /*
+    
+    func testGetRatesShouldPostSuccessCallbackIfUseRealRequest() {
+        // Given
+        let ratesService = ChangeService.shared
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        ratesService.getChange (completionHandler: { (success, error, current) in
+
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(current != nil)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 10)
+    }
+     
+     */
+    
 
 }

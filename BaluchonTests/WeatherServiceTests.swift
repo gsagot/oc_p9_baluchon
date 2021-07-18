@@ -87,5 +87,74 @@ class WeatherServiceTests: XCTestCase {
         })
         wait(for: [expectation], timeout: 1)
     }
+    
+    func testGetWeatherShouldPostFailedCallbackIfIncorrectData() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(
+                data: FakeResponseData.weatherIncorrectData,
+                response: FakeResponseData.responseOK,
+                error: nil))
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        weatherService.getWeather (city:"New York",completionHandler: { (success, error, current) in
+            
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == "An error occurred, please try again")
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testGetWeatherShouldPostSuccessCallbackIfCorrectResponseWithData() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(
+                data: FakeResponseData.weatherCorrectData,
+                response: FakeResponseData.responseOK,
+                error: nil))
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        weatherService.getWeather (city:"New York",completionHandler: { (success, error, current) in
 
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(current?.main.temp == 293.09)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+ 
+    
+    /*
+    
+    func testGetWeatherShouldPostSuccessCallbackIfUseRealRequest() {
+        // Given
+        let weatherService = WeatherService.shared
+            
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        weatherService.getWeather (city:"New York",completionHandler: { (success, error, current) in
+
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(current != nil)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 10)
+    }
+     
+     */
+    
+
+    
+    
 }
+
+

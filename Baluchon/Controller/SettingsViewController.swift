@@ -21,6 +21,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
                 
             } })
          */
+        
+        self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
     }
     
     // Alert Controller
@@ -38,6 +40,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     func weatherInNewYork(){
         // TODO :
         
+    }
+    
+    func gradient(frame:CGRect) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = frame
+        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.colors = [
+        UIColor.cyan.cgColor,UIColor.blue.cgColor]
+        return layer
     }
     
     

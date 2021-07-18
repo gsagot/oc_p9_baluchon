@@ -47,22 +47,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E3-SP-f6u">
+                            <textField opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E3-SP-f6u">
                                 <rect key="frame" x="77" y="74" width="260" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="2ne-Sy-pC6"/>
                                     <constraint firstAttribute="width" constant="260" id="edN-cz-0fU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="32"/>
+                                <color key="textColor" systemColor="linkColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7x-MY-f28">
+                            <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7x-MY-f28">
                                 <rect key="frame" x="77" y="633" width="260" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="ZNy-gm-zL8"/>
                                     <constraint firstAttribute="height" constant="150" id="sqB-6o-y9d"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -154,7 +155,7 @@
                             <constraint firstItem="Uet-Fy-Fra" firstAttribute="leading" secondItem="aH4-gv-Ie2" secondAttribute="leading" constant="10" id="ysv-z2-6TF"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Currency" id="Ojx-cJ-URJ"/>
+                    <tabBarItem key="tabBarItem" title="Currency" image="picto_change" id="Ojx-cJ-URJ"/>
                     <connections>
                         <outlet property="currencyView" destination="Uet-Fy-Fra" id="s1B-VW-ebV"/>
                         <outlet property="tableView" destination="wj1-BH-DVa" id="MGL-sV-rYR"/>
@@ -164,7 +165,7 @@
             </objects>
             <point key="canvasLocation" x="303" y="1492"/>
         </scene>
-        <!--Item-->
+        <!--Weather-->
         <scene sceneID="JWk-UQ-GpP">
             <objects>
                 <viewController id="xQN-r4-jhr" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -172,14 +173,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-0D-xl6" customClass="WeatherView" customModule="iOS_test" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-0D-xl6" customClass="WeatherView" customModule="Baluchon" customModuleProvider="target">
                                 <rect key="frame" x="10" y="54" width="394" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="0zb-M7-mxo"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ek-w1-BVj" customClass="WeatherView" customModule="iOS_test" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ek-w1-BVj" customClass="WeatherView" customModule="Baluchon" customModuleProvider="target">
                                 <rect key="frame" x="10" y="324" width="394" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -199,7 +200,7 @@
                             <constraint firstItem="3ek-w1-BVj" firstAttribute="top" secondItem="NHw-0D-xl6" secondAttribute="bottom" constant="20" id="p4z-V2-gEu"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ni7-hp-MV3"/>
+                    <tabBarItem key="tabBarItem" title="Weather" image="picto_meteo" id="ni7-hp-MV3"/>
                     <connections>
                         <outlet property="currentCityView" destination="NHw-0D-xl6" id="sqr-sd-PzV"/>
                         <outlet property="wantedCityView" destination="3ek-w1-BVj" id="6O0-Xu-aYN"/>
@@ -211,7 +212,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="picto_change" width="25" height="25"/>
+        <image name="picto_meteo" width="25" height="25"/>
         <image name="picto_traduction" width="25" height="25"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

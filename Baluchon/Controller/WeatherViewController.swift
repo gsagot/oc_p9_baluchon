@@ -26,19 +26,6 @@ class WeatherViewController: UIViewController {
             } })
         */
         self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
-        /*
-        currentCityView.cityText.text = Settings.shared.weathers[0].name
-        currentCityView.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[0].main.temp ) + "°"
-        currentCityView.descriptionText.text = Settings.shared.weathers[0].weather[0].description
-        currentCityView.iconImage.image = UIImage(named: Settings.shared.weathers[0].weather[0].icon)
-        currentCityView.iconImage.tintColor = UIColor.blue
-        
-        wantedCityView.cityText.text = Settings.shared.weathers[1].name
-        wantedCityView.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[1].main.temp ) + "°"
-        wantedCityView.descriptionText.text = Settings.shared.weathers[1].weather[0].description
-        wantedCityView.iconImage.image = UIImage(named: Settings.shared.weathers[1].weather[0].icon)
-        wantedCityView.iconImage.tintColor = UIColor.blue
- */
         
         updateView(currentCityView, with: 0)
         updateView(wantedCityView, with: 1)

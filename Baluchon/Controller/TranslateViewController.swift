@@ -39,7 +39,7 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         fromTextView.resignFirstResponder()
-        
+        /*
         if fromTextView.text != nil {
                 TranslateService.shared.getTranslation(sentence: fromTextView.text!, completionHandler: { (success, erreur, translation) in
                     if success == true {
@@ -52,8 +52,34 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
             
             presentUIAlertController(title: "Error", message: "Text invalid")
         }
+         */
+        if fromTextView.text != nil {
+                TranslateService.shared.getLanguage(sentence: fromTextView.text!, completionHandler: { (success, erreur, language) in
+                    if success == true {
+                        print(language!)
+                        self.translate(with: language!)
+                    
+                    }else{
+                        self.presentUIAlertController(title: "Error", message: "Can't detect language")
+                    } })
+        }else {
+            
+            presentUIAlertController(title: "Error", message: "Text invalid")
+        }
          
         return true
+    }
+    
+    func translate (with language: String){
+        
+        TranslateService.shared.getTranslation(sentence: fromTextView.text!,source: language, completionHandler: { (success, erreur, translation) in
+                                                if success == true {
+                                                    self.toTextView.text = translation!.data.translations[0].translatedText
+                                                    
+                                                }else{
+                                                    self.presentUIAlertController(title: "Error", message: erreur!)
+                                                } })
+        
     }
     
     

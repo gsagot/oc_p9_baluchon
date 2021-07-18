@@ -21,6 +21,12 @@ class FakeResponseData {
         return try! Data(contentsOf: url)
     }
     
+    static var detectCorrectData: Data? {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "Detect", withExtension: "json")!
+        return try! Data(contentsOf: url)
+    }
+    
     static var changeCorrectData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
         let url = bundle.url(forResource: "Change", withExtension: "json")!
@@ -31,7 +37,11 @@ class FakeResponseData {
     
     static let translateIncorrectData = "erreur".data(using: .utf8)!
     
+    static let detectIncorrectData = "erreur".data(using: .utf8)!
+    
     static let changeIncorrectData = "erreur".data(using: .utf8)!
+    
+
 
     // MARK: - Response
     static let responseOK = HTTPURLResponse(
@@ -52,5 +62,8 @@ class FakeResponseData {
     
     class ChangeError: Error {}
     static let changeError = ChangeError()
+    
+    class DetectError: Error {}
+    static let detectError = DetectError()
     
 }
