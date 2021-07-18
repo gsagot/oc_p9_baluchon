@@ -14,10 +14,17 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView: UITableView!
     @IBOutlet var currencyView: CurrencyView!
     
+    var background = UIImageView()
+    var screen = CGRect()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
+        backgroundInit()
+        self.view.addSubview(background)
+        self.view.sendSubviewToBack(background)
+        
         self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
 
         // Do any additional setup after loading the view.
@@ -29,6 +36,20 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         // This view controller itself will provide the delegate methods and row data for the table view.
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        background.center.x = CGFloat(Settings.shared.posx)
+        currencyView.alpha = 0
+        tableView.alpha = 0
+    }
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
+        backgroundAnim()
+        
     }
     
     // Alert Controller
@@ -60,7 +81,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150.0;//Choose your custom row height
+        return 80;//Choose your custom row height
     }
     
     // create a cell for each table view row
@@ -71,19 +92,71 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         let  amount = Double(currencyView.amountInDollarText.text ?? "1.0" )
         
         cell.currencyName.text = "  " + Settings.shared.currencies[indexPath.row].name
-        cell.currencyAmount.text = " " + String(format:"%.2f ",Settings.shared.currencies[indexPath.row].rate * Double(amount!) ) + "\n" + " "  + Settings.shared.currencies[indexPath.row].code
+        cell.currencyAmount.text = " " + String(format:"%.2f ",Settings.shared.currencies[indexPath.row].rate * Double(amount!) ) + " "  + Settings.shared.currencies[indexPath.row].code
       
         return cell
     }
     
     func gradient(frame:CGRect) -> CAGradientLayer {
+
         let layer = CAGradientLayer()
         layer.frame = frame
         layer.startPoint = CGPoint(x: 0.5, y: 0.0)
         layer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        layer.colors = [
-        UIColor.cyan.cgColor,UIColor.blue.cgColor]
+        let baseColor = UIColor(red: (80/255), green: (141/255), blue: (196/255), alpha: 1 * (255/255))
+        let lightColor = modifie(color: baseColor, withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: 0.4)
+        layer.colors = [baseColor.cgColor,lightColor.cgColor]
+        
         return layer
+    }
+    
+    func modifie(color: UIColor, withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
+
+        var currentHue: CGFloat = 0.0
+        var currentSaturation: CGFloat = 0.0
+        var currentBrigthness: CGFloat = 0.0
+        var currentAlpha: CGFloat = 0.0
+
+        if color.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentAlpha){
+            return UIColor(hue: currentHue + hue,
+                           saturation: currentSaturation + additionalSaturation,
+                           brightness: currentBrigthness + additionalBrightness,
+                           alpha: currentAlpha)
+        } else {
+            return color
+        }
+    }
+    
+    
+    func backgroundInit() {
+        
+        screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 3 , height: screen.width )
+        background.image = UIImage(named: "Skyline")
+        
+        Settings.shared.posx = Float(background.center.x)
+        Settings.shared.refX = Float(background.center.x)
+        
+        
+    }
+    
+    func backgroundAnim() {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.background.center.x = CGFloat(Settings.shared.refX) - self.view.bounds.width
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [], animations: {
+            self.currencyView.alpha = 100
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
+            self.tableView.alpha = 100
+        }, completion: nil)
+        
+        Settings.shared.posx = Float(background.center.x)
+        
     }
 
 }

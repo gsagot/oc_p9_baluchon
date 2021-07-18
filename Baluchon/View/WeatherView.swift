@@ -13,45 +13,58 @@ class WeatherView: UIView {
     var cityText = UITextView()
     var descriptionText = UITextView()
     var iconImage = UIImageView()
+    var borderView = UIView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.backgroundColor = UIColor(white: 1.0, alpha: 0.3)
-
-        print (self.frame.width," " , self.frame.height)
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    convenience init(inView: UIView) {
+        let rect = CGRect(x: 0, y: 50, width: inView.frame.width, height: 80.0)
+        self.init(frame: rect)
+        self.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
         
-        temperatureText.frame = CGRect(x:10,y:self.frame.height - 140,width:240,height:64)
+        
+        
+        borderView.frame = CGRect(x:0,y:0,width:240,height:4)
+        borderView.center.x = self.center.x
+        borderView.backgroundColor = UIColor(white: 1, alpha: 1.0)
+        self.addSubview(borderView)
+        
+        cityText.frame = CGRect(x:10,y:0,width:240,height:40)
+        cityText.textColor = UIColor.white
+        cityText.backgroundColor = UIColor(white: 1, alpha: 0.0)
+        cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        cityText.text = "Paris"
+        self.addSubview(cityText)
+        
+        descriptionText.frame = CGRect(x:10,y:cityText.frame.maxY,width:240,height:40)
+        descriptionText.textColor = UIColor.white
+        descriptionText.backgroundColor = UIColor(white: 1, alpha: 0.0)
+        descriptionText.font = UIFont(name: "HelveticaNeue", size: 20)
+        descriptionText.text = "Scatered cloud "
+        self.addSubview(descriptionText)
+        
+        
+        temperatureText.frame = CGRect(x:10,y:descriptionText.frame.maxY,width:240,height:60)
         temperatureText.textColor = UIColor.white
         temperatureText.backgroundColor = UIColor(white: 1, alpha: 0)
-        temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 64)
+        temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
         temperatureText.text = "21" + "°"
         temperatureText.layer.cornerRadius = 10
         self.addSubview(temperatureText)
         
-        cityText.frame = CGRect(x:10,y:10,width:240,height:64)
-        cityText.textColor = UIColor.white
-        cityText.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 42)
-        cityText.text = "Paris"
-        self.addSubview(cityText)
-        
-        descriptionText.frame = CGRect(x:10,y:self.frame.height - 60,width:self.frame.width,height:60)
-        descriptionText.textColor = UIColor.white
-        descriptionText.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        descriptionText.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
-        descriptionText.text = "Scatered cloud "
-        self.addSubview(descriptionText)
-        
-        iconImage.frame = CGRect(x:210,y:self.frame.height - 145,width:100,height:100)
+        iconImage.frame = CGRect(x:0,y:0,width:100,height:100)
+        iconImage.center = CGPoint(x: self.bounds.width - 50 - 20, y: descriptionText.center.y)
         iconImage.image = UIImage(named: "02n")
         iconImage.tintColor = UIColor.blue
         //iconImage.backgroundColor = UIColor.blue
         self.addSubview(iconImage)
-         
-        
-        self.layer.cornerRadius = 10
-        
-        
+        print (self.frame)
     }
-    
+
+        
 }

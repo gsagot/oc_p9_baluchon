@@ -13,15 +13,21 @@ class CurrencyView: UIView {
     var currencyCodeText = UITextView()
     var explenationText = UITextView()
     var validationButton = UIButton()
+    var borderView = UIView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.backgroundColor = UIColor(white: 1.0, alpha: 0.3)
+        self.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
         
-        amountInDollarText.frame = CGRect(x:10,y:(self.center.y ) - 100,width:240,height:64)
+        borderView.frame = CGRect(x:0,y:120,width:240,height:4)
+        borderView.center.x = self.center.x
+        borderView.backgroundColor = UIColor(white: 1, alpha: 1.0)
+        self.addSubview(borderView)
+        
+        amountInDollarText.frame = CGRect(x:10,y:10,width:240,height:40)
         amountInDollarText.textColor = UIColor.white
         amountInDollarText.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        amountInDollarText.font = UIFont(name: "HelveticaNeue-Bold", size: 64)
+        amountInDollarText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
         amountInDollarText.text = "10.0"
         amountInDollarText.layer.cornerRadius = 10
         self.addSubview(amountInDollarText)
@@ -30,9 +36,9 @@ class CurrencyView: UIView {
         //validationButton.backgroundColor = UIColor(white: 1, alpha: 1.0)
         validationButton.setBackgroundImage(UIImage(systemName: "checkmark.rectangle"), for: .normal)
         validationButton.tintColor = UIColor.white
-        self.addSubview(validationButton)
+        //self.addSubview(validationButton)
         
-        currencyCodeText.frame = amountInDollarText.frame.offsetBy(dx: 0, dy: 64)
+        currencyCodeText.frame = amountInDollarText.frame.offsetBy(dx: 0, dy: 50)
         currencyCodeText.textColor = UIColor.white
         currencyCodeText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         currencyCodeText.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
@@ -44,10 +50,7 @@ class CurrencyView: UIView {
         explenationText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         explenationText.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         explenationText.text = "montant en euro à convertir : "
-        self.addSubview(explenationText)
-         
-        
-        self.layer.cornerRadius = 10
+        //self.addSubview(explenationText)
         
         
     }

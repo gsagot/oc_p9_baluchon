@@ -11,6 +11,10 @@ class Settings {
     
     static var shared = Settings()
     
+    var posx:Float = 0
+    
+    var refX:Float = 0
+    
     var jsonCurrencies: Data? {
         let bundle = Bundle(for: Settings.self)
         let url = bundle.url(forResource: "Currencies", withExtension: "json")!
@@ -35,7 +39,6 @@ class Settings {
     
     private init() {
         
-        print ("init !!!")
         let decoder = JSONDecoder()
         do{
             let product = try decoder.decode(ChangeResult.self, from: jsonCurrencies!)
