@@ -15,45 +15,41 @@ class WeatherViewController: UIViewController {
     var background = UIImageView()
     var first = false
     var screen = CGRect()
+
     
+    // Prepare once
     override func viewDidLoad() {
         super.viewDidLoad()
-        first = true
+        
+        // Prepare layout
         currentCityView = WeatherView(inView: self.view)
         wantedCityView = WeatherView(inView: self.view)
         wantedCityView.frame = currentCityView.frame.offsetBy(dx: 0, dy: currentCityView.frame.maxY  + 30)
-        
+
         view.addSubview(currentCityView)
         view.addSubview(wantedCityView)
 
-        /*
-        WeatherService.shared.getWeather(city: "Paris", completionHandler: { (success, erreur, current) in
-            if success == true {
-                //self.textLocationTempIn.text  = String(current!.main.temp)
-            }
-            else {
-               // self.presentUIAlertController(title: "Error", message: erreur!)
-                
-            } })
-        */
-        
+        // Prepare animations
+        first = true
         backgroundInit()
         
         self.view.addSubview(background)
         self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
-        
-        updateView(currentCityView, with: 0)
-        updateView(wantedCityView, with: 1)
          
         }
     
+    // Alert Controller
     private func presentUIAlertController(title:String, message:String) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(ac, animated: true, completion: nil)
     }
     
+    // Prepare everytime the Controller will be current
     override func viewWillAppear(_ animated: Bool) {
+        // Request Weather
+        firstWeather()
+    
         currentCityView.alpha = 0
         wantedCityView.alpha = 0
         
@@ -65,7 +61,7 @@ class WeatherViewController: UIViewController {
         }
     }
 
-    
+    // Run Animation everytime the Controller is current
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
         
@@ -73,6 +69,7 @@ class WeatherViewController: UIViewController {
         
     }
     
+    // Init for animation
     func backgroundInit() {
         
         screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -85,7 +82,7 @@ class WeatherViewController: UIViewController {
         
         
     }
-    
+    // Animation
     func backgroundAnim() {
         
         if first == true {
@@ -115,6 +112,7 @@ class WeatherViewController: UIViewController {
         
     }
     
+    // Beautiful gradient ...
     func gradient(frame:CGRect) -> CAGradientLayer {
 
         let layer = CAGradientLayer()
@@ -127,7 +125,7 @@ class WeatherViewController: UIViewController {
         
         return layer
     }
-    
+    // ... And Func for color
     func modifie(color: UIColor, withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
 
         var currentHue: CGFloat = 0.0
@@ -145,6 +143,34 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    
+    // Get weather for New York  then Paris on start : Can be changed in SettingsController next...
+    func firstWeather () {
+        WeatherService.shared.getWeather(city:Settings.shared.currentCity,lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
+            if success == true {
+                Settings.shared.saveWeathersFirstIndex(from: current!)
+                self.secondWeather()
+                self.updateView(self.currentCityView, with: 0)
+            }
+            else {
+                self.presentUIAlertController(title: "Error", message: erreur!)
+                
+            } })
+    }
+    
+    func secondWeather () {
+        WeatherService.shared.getWeather(city: "New+York",lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
+            if success == true {
+                Settings.shared.saveWeathersLastIndex(from: current!)
+                self.updateView(self.wantedCityView, with: 1)
+            }
+            else {
+                self.presentUIAlertController(title: "Error", message: erreur!)
+                
+            } })
+    }
+    
+    // Update
     func updateView (_ view: WeatherView, with index: Int ) {
         view.cityText.text = Settings.shared.weathers[index].name
         view.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[index].main.temp ) + "°"

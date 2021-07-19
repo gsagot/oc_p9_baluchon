@@ -8,32 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Accueil-->
+        <!--Setting-->
         <scene sceneID="uNr-qd-BT9">
             <objects>
                 <viewController id="dbN-PG-4RP" customClass="SettingsViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zSN-Fv-OPj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-DI-SMF">
-                                <rect key="frame" x="107" y="74" width="200" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="RP9-u1-Ev1"/>
-                                    <constraint firstAttribute="height" constant="50" id="WU2-IS-YQ6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="38"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KvM-tm-x5Y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Qqy-DI-SMF" firstAttribute="top" secondItem="KvM-tm-x5Y" secondAttribute="top" constant="30" id="UpU-I5-AT3"/>
-                            <constraint firstItem="Qqy-DI-SMF" firstAttribute="centerX" secondItem="zSN-Fv-OPj" secondAttribute="centerX" id="flV-iH-e4h"/>
-                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Accueil" id="npD-ai-XyM"/>
+                    <tabBarItem key="tabBarItem" title="Setting" id="npD-ai-XyM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDo-rD-CJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

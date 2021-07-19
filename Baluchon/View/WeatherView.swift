@@ -63,7 +63,7 @@ class WeatherView: UIView {
         iconImage.tintColor = UIColor.blue
         //iconImage.backgroundColor = UIColor.blue
         self.addSubview(iconImage)
-        print (self.frame)
+       
     }
 
         

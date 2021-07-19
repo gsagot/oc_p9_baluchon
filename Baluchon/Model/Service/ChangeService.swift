@@ -33,17 +33,17 @@ class ChangeService {
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     print ("ERROR: \(String(describing: error?.localizedDescription))")
-                    completionHandler (false, "Can't connect to the server, please verify your connexion",nil)
+                    completionHandler (false, Settings.shared.errorData,nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     print ("ERROR: \(String(describing: response))")
-                    completionHandler (false, "Can't connect to the server, please try again", nil)
+                    completionHandler (false, Settings.shared.errorReponseCurrency, nil)
                     return
                 }
                 guard let result = try? JSONDecoder().decode(ChangeResult.self, from: data) else {
                     print("JSON ERROR: \(String(describing: error?.localizedDescription))")
-                    completionHandler (false, "An error occurred, please try again", nil)
+                    completionHandler (false, Settings.shared.errorJson, nil)
                     return
                 }
                 

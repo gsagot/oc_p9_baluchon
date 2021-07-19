@@ -83,7 +83,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please try again")
+            XCTAssert(error == "Error trying to translate")
             XCTAssertNil(translation)
             expectation.fulfill()
         })
@@ -190,7 +190,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please try again")
+            XCTAssert(error == "Can't detect language")
             XCTAssertNil(lang)
             expectation.fulfill()
         })

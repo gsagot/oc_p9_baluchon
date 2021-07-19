@@ -83,7 +83,7 @@ class ChangeServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please try again")
+            XCTAssert(error == "invalid base currency")
             XCTAssertNil(current)
             expectation.fulfill()
         })

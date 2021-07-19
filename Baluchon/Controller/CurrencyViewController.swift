@@ -20,6 +20,17 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+        ChangeService.shared.getChange(completionHandler: { (success, error, current) in
+            if success == true {
+                ...
+            }
+            else {
+                self.presentUIAlertController(title: "Error", message: error!)
+                
+            } })
+         */
        
         backgroundInit()
         self.view.addSubview(background)
@@ -62,16 +73,33 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // Keyboard Hide on tap function
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         currencyView.amountInDollarText.resignFirstResponder()
-        let index = (self.tableView.indexPathsForVisibleRows ?? [])
-        self.tableView.reloadRows(at: index, with: .automatic)
+        let value = currencyView.amountInDollarText.text ?? " "
+
+        if Double(value) != nil {
+            let index = (self.tableView.indexPathsForVisibleRows ?? [])
+            self.tableView.reloadRows(at: index, with: .automatic)
+        }
+        else {
+            presentUIAlertController(title:"error", message: Settings.shared.errorTyping)
+            
+        }
+
         
     }
     
     // Keyboard enter
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         currencyView.amountInDollarText.resignFirstResponder()
-        let index = (self.tableView.indexPathsForVisibleRows ?? [])
-        self.tableView.reloadRows(at: index, with: .automatic)
+        let value = currencyView.amountInDollarText.text ?? " "
+        
+        if Double(value) != nil {
+            let index = (self.tableView.indexPathsForVisibleRows ?? [])
+            self.tableView.reloadRows(at: index, with: .automatic)
+        }
+        else {
+            presentUIAlertController(title:"error", message: Settings.shared.errorTyping)
+                
+        }
         return true
     }
     

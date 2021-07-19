@@ -17,8 +17,7 @@ class WeatherService {
     //set url
     private static var location = String(" ")
     
-    private static var weatherUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=New+York&appid=\(key.weather)&lang=fr&units=metric")!
-
+ 
     //init()
     private init () {}
 
@@ -26,10 +25,12 @@ class WeatherService {
         self.weatherSession = weatherSession
     }
     
-    func getWeather(city: String, completionHandler: @escaping ((Bool, String?, WeatherResult?) -> Void)) {
+    func getWeather(city: String, lang: String, completionHandler: @escaping ((Bool, String?, WeatherResult?) -> Void)) {
         WeatherService.location = city
         
-        var request = URLRequest(url: WeatherService.weatherUrl)
+        let weatherUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(key.weather)&lang=\(lang)&units=metric")!
+        
+        var request = URLRequest(url: weatherUrl)
         request.httpMethod = "POST"
         
         task?.cancel()
@@ -38,17 +39,17 @@ class WeatherService {
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     print ("ERROR: \(String(describing: error?.localizedDescription))")
-                    completionHandler (false, "Can't connect to the server, please verify your connexion",nil)
+                    completionHandler (false, Settings.shared.errorData,nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     print ("ERROR: \(String(describing: response))")
-                    completionHandler (false, "Can't find city", nil)
+                    completionHandler (false, Settings.shared.errorReponseWeather, nil)
                     return
                 }
                 guard let result = try? JSONDecoder().decode(WeatherResult.self, from: data) else {
                     print("JSON ERROR: \(String(describing: error?.localizedDescription))")
-                    completionHandler (false, "An error occurred, please try again", nil)
+                    completionHandler (false, Settings.shared.errorJson, nil)
                     return
                 }
                 
