@@ -14,9 +14,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var validateButton = UIButton()
     var cityText = UITextField()
     
+    var background = UIImageView()
+    var screen = CGRect()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backgroundInit()
+        self.view.addSubview(background)
+        self.view.sendSubviewToBack(background)
         
         self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
         
@@ -39,6 +46,40 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        background.center.x = CGFloat(Settings.shared.posx)
+    }
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
+        backgroundAnim()
+        
+    }
+    
+    // Animation...
+    func backgroundInit() {
+        
+        screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
+        background.image = UIImage(named: "Skyline2")
+    
+        
+        
+    }
+    
+    func backgroundAnim() {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.background.center.x = CGFloat(Settings.shared.refX) - (self.view.bounds.width * 3)
+        }
+        
+        Settings.shared.posx = Float(background.center.x)
         
     }
     

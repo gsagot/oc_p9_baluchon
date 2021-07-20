@@ -23,16 +23,16 @@ class WeatherView: UIView {
     }
     
     convenience init(inView: UIView) {
-        let rect = CGRect(x: 0, y: 50, width: inView.frame.width, height: 80.0)
+        let rect = CGRect(x: 0, y: 30, width: inView.frame.width, height: 120.0)
         self.init(frame: rect)
         self.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
         
         
         
-        borderView.frame = CGRect(x:0,y:0,width:240,height:4)
+        borderView.frame = CGRect(x:0,y:rect.height,width:240,height:4)
         borderView.center.x = self.center.x
         borderView.backgroundColor = UIColor(white: 1, alpha: 1.0)
-        self.addSubview(borderView)
+        //self.addSubview(borderView)
         
         cityText.frame = CGRect(x:10,y:0,width:240,height:40)
         cityText.textColor = UIColor.white
@@ -41,7 +41,7 @@ class WeatherView: UIView {
         cityText.text = "Paris"
         self.addSubview(cityText)
         
-        descriptionText.frame = CGRect(x:10,y:cityText.frame.maxY,width:240,height:40)
+        descriptionText.frame = CGRect(x:10,y:cityText.frame.maxY,width:240,height:30)
         descriptionText.textColor = UIColor.white
         descriptionText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         descriptionText.font = UIFont(name: "HelveticaNeue", size: 20)
@@ -49,10 +49,10 @@ class WeatherView: UIView {
         self.addSubview(descriptionText)
         
         
-        temperatureText.frame = CGRect(x:10,y:descriptionText.frame.maxY,width:240,height:60)
+        temperatureText.frame = CGRect(x:10,y:descriptionText.frame.maxY,width:240,height:50)
         temperatureText.textColor = UIColor.white
         temperatureText.backgroundColor = UIColor(white: 1, alpha: 0)
-        temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
+        temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 40)
         temperatureText.text = "21" + "°"
         temperatureText.layer.cornerRadius = 10
         self.addSubview(temperatureText)

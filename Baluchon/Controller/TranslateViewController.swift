@@ -128,11 +128,9 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
         
         screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
-        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 3 , height: screen.width )
-        background.image = UIImage(named: "Skyline")
-        
-        Settings.shared.posx = Float(background.center.x)
-        Settings.shared.refX = Float(background.center.x)
+        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
+        background.image = UIImage(named: "Skyline2")
+    
         
         
     }

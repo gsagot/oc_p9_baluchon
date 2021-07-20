@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0AAE0126A76CF50096AEE1 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0AAE0026A76CF50096AEE1 /* BackgroundView.swift */; };
 		CA27BEDB26877E29002A2C63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA27BEDA26877E29002A2C63 /* AppDelegate.swift */; };
 		CA27BEDD26877E29002A2C63 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA27BEDC26877E29002A2C63 /* SceneDelegate.swift */; };
 		CA27BEDF26877E29002A2C63 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA27BEDE26877E29002A2C63 /* WeatherViewController.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA0AAE0026A76CF50096AEE1 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		CA27BED726877E29002A2C63 /* Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA27BEDA26877E29002A2C63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA27BEDC26877E29002A2C63 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				CA82A05F269DB9EA003B33F0 /* CurrencyView.swift */,
 				CA82A061269DBB15003B33F0 /* CurrencyCell.swift */,
 				CA42E959269EF3810058F253 /* WeatherView.swift */,
+				CA0AAE0026A76CF50096AEE1 /* BackgroundView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				CA44CBF12688A47C00E08E23 /* Change.swift in Sources */,
 				CA27BEDD26877E29002A2C63 /* SceneDelegate.swift in Sources */,
 				CA44CBE9268891EB00E08E23 /* ChangeService.swift in Sources */,
+				CA0AAE0126A76CF50096AEE1 /* BackgroundView.swift in Sources */,
 				CAAA4BAB26975F0C0085B1B3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

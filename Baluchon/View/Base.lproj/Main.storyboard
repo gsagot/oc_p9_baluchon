@@ -101,13 +101,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wj1-BH-DVa">
-                                <rect key="frame" x="10" y="184" width="394" height="478"/>
+                                <rect key="frame" x="10" y="194" width="394" height="468"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="wCk-GT-poX"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="qsf-Jd-lLX" customClass="CurrencyCell" customModule="Baluchon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="qsf-Jd-lLX" customClass="CurrencyCell" customModule="Baluchon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="394" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qsf-Jd-lLX" id="5Ae-lZ-tpR">
@@ -117,31 +117,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uet-Fy-Fra" customClass="CurrencyView" customModule="Baluchon" customModuleProvider="target">
-                                <rect key="frame" x="10" y="59" width="394" height="120"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="OJB-bc-hKC"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aH4-gv-Ie2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aH4-gv-Ie2" firstAttribute="bottom" secondItem="wj1-BH-DVa" secondAttribute="bottom" constant="151" id="9Zl-x5-Pdj"/>
-                            <constraint firstItem="aH4-gv-Ie2" firstAttribute="trailing" secondItem="Uet-Fy-Fra" secondAttribute="trailing" constant="10" id="Q4P-ie-Ys5"/>
-                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="centerX" secondItem="OHF-lV-8No" secondAttribute="centerX" id="QOl-kb-34V"/>
-                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="top" secondItem="aH4-gv-Ie2" secondAttribute="top" constant="15" id="cBG-Fg-TH6"/>
                             <constraint firstItem="aH4-gv-Ie2" firstAttribute="trailing" secondItem="wj1-BH-DVa" secondAttribute="trailing" constant="10" id="es9-lv-umC"/>
+                            <constraint firstItem="wj1-BH-DVa" firstAttribute="top" secondItem="aH4-gv-Ie2" secondAttribute="top" constant="150" id="p1B-Kr-YFp"/>
                             <constraint firstItem="wj1-BH-DVa" firstAttribute="leading" secondItem="aH4-gv-Ie2" secondAttribute="leading" constant="10" id="pYa-NW-CwK"/>
                             <constraint firstItem="wj1-BH-DVa" firstAttribute="centerX" secondItem="aH4-gv-Ie2" secondAttribute="centerX" id="scT-6a-pnI"/>
-                            <constraint firstItem="wj1-BH-DVa" firstAttribute="top" secondItem="Uet-Fy-Fra" secondAttribute="bottom" constant="5" id="sh8-wr-L4B"/>
-                            <constraint firstItem="Uet-Fy-Fra" firstAttribute="leading" secondItem="aH4-gv-Ie2" secondAttribute="leading" constant="10" id="ysv-z2-6TF"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Currency" image="picto_change" id="Ojx-cJ-URJ"/>
                     <connections>
-                        <outlet property="currencyView" destination="Uet-Fy-Fra" id="s1B-VW-ebV"/>
                         <outlet property="tableView" destination="wj1-BH-DVa" id="MGL-sV-rYR"/>
                     </connections>
                 </viewController>

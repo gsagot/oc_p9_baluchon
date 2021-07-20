@@ -22,12 +22,16 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         
         // Prepare layout
-        currentCityView = WeatherView(inView: self.view)
         wantedCityView = WeatherView(inView: self.view)
-        wantedCityView.frame = currentCityView.frame.offsetBy(dx: 0, dy: currentCityView.frame.maxY  + 30)
-
-        view.addSubview(currentCityView)
+        currentCityView = WeatherView(inView: self.view)
+        
+       
+        wantedCityView.center.y += 30
+        currentCityView.frame = wantedCityView.frame.offsetBy(dx: 0, dy: currentCityView.frame.maxY )
+        
+        //view.addSubview(currentCityView)
         view.addSubview(wantedCityView)
+        view.addSubview(currentCityView)
 
         // Prepare animations
         first = true
@@ -74,8 +78,8 @@ class WeatherViewController: UIViewController {
         
         screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
-        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 3 , height: screen.width )
-        background.image = UIImage(named: "Skyline")
+        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
+        background.image = UIImage(named: "Skyline2")
         
         Settings.shared.posx = Float(background.center.x)
         Settings.shared.refX = Float(background.center.x)
@@ -87,7 +91,7 @@ class WeatherViewController: UIViewController {
         
         if first == true {
         UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
-                        self.background.frame.size.height = (self.screen.width * 3) / 3
+                        self.background.frame.size.height = self.screen.width 
                         self.background.center.y -= self.background.frame.width / 2 }, completion: nil)
             
         }
@@ -150,7 +154,7 @@ class WeatherViewController: UIViewController {
             if success == true {
                 Settings.shared.saveWeathersFirstIndex(from: current!)
                 self.secondWeather()
-                self.updateView(self.currentCityView, with: 0)
+                self.updateView(self.wantedCityView, with: 0)
             }
             else {
                 self.presentUIAlertController(title: "Error", message: erreur!)
@@ -162,7 +166,7 @@ class WeatherViewController: UIViewController {
         WeatherService.shared.getWeather(city: "New+York",lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
             if success == true {
                 Settings.shared.saveWeathersLastIndex(from: current!)
-                self.updateView(self.wantedCityView, with: 1)
+                self.updateView(self.currentCityView, with: 1)
             }
             else {
                 self.presentUIAlertController(title: "Error", message: erreur!)

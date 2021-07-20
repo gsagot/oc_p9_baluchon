@@ -120,6 +120,7 @@ class Settings {
             print(error.localizedDescription)
         }
          
+         
    
     }
     
@@ -135,10 +136,10 @@ class Settings {
     
     func saveRates (from: ChangeResult) {
         
-        currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: " ", amount: from.rates.CHF))
-        currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: " ", amount: from.rates.EUR))
-        currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: " ", amount: from.rates.GBP))
-        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: " ", amount: from.rates.USD))
+        currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: "franc", amount: from.rates.CHF))
+        currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR))
+        currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP))
+        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD))
         
         
     }

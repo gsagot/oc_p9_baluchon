@@ -12,15 +12,22 @@ import UIKit
 class CurrencyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate  {
     
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var currencyView: CurrencyView!
+    var currencyView: CurrencyView!
     
     var background = UIImageView()
     var screen = CGRect()
-    
+    var coinEuro = [UIImage]()
+    var coinDollars = [UIImage]()
+    var coinFranc = [UIImage]()
+    var coinSterling = [UIImage]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        coinEuro = animatedImages(for: "euro")
+        coinDollars = animatedImages(for: "dollars")
+        coinFranc = animatedImages(for: "franc")
+        coinSterling = animatedImages(for: "sterling")
         /*
         ChangeService.shared.getChange(completionHandler: { (success, error, current) in
             if success == true {
@@ -31,7 +38,10 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
                 
             } })
          */
-       
+        currencyView = CurrencyView(inView: self.view)
+        currencyView.center.y += 30
+        self.view.addSubview(currencyView)
+        
         backgroundInit()
         self.view.addSubview(background)
         self.view.sendSubviewToBack(background)
@@ -62,6 +72,9 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         backgroundAnim()
         
     }
+    
+    
+ 
     
     // Alert Controller
     private func presentUIAlertController(title:String, message:String) {
@@ -121,9 +134,28 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         cell.currencyName.text = "  " + Settings.shared.currencies[indexPath.row].name
         cell.currencyAmount.text = " " + String(format:"%.2f ",Settings.shared.currencies[indexPath.row].rate * Double(amount!) ) + " "  + Settings.shared.currencies[indexPath.row].code
-      
+ 
+        //let animatedImage = UIImage.animatedImage(with: coin, duration: 1)
+        cell.currencyImage.center.x = tableView.frame.width - 30
+        //cell.currencyImage.image = animatedImage
+        
+        cell.currencyImage.animationImages = animatedImages(for: Settings.shared.currencies[indexPath.row].icon)
+        cell.currencyImage.animationDuration = 0.9
+        cell.currencyImage.animationRepeatCount = .zero
+        cell.currencyImage.image = cell.currencyImage.animationImages?.first
+        cell.currencyImage.startAnimating()
+        
+        print ("loaded")
+        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(indexPath)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+      
+     }
+
     
     func gradient(frame:CGRect) -> CAGradientLayer {
 
@@ -160,11 +192,9 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
-        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 3 , height: screen.width )
-        background.image = UIImage(named: "Skyline")
-        
-        Settings.shared.posx = Float(background.center.x)
-        Settings.shared.refX = Float(background.center.x)
+        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
+        background.image = UIImage(named: "Skyline2")
+    
         
         
     }
@@ -185,6 +215,18 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         Settings.shared.posx = Float(background.center.x)
         
+    }
+    
+    func animatedImages(for name: String) -> [UIImage] {
+        
+        var i = 0
+        var images = [UIImage]()
+        
+        while let image = UIImage(named: "\(name)_\(i)") {
+            images.append(image)
+            i += 1
+        }
+        return images
     }
 
 }
