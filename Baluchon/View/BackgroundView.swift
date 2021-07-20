@@ -21,12 +21,14 @@ class BackgroundView : UIImageView {
     }
     
     convenience init(inView: UIView) {
+        // Adapt the size of background to the size of the device
+        // Appearance on every device
         let h = inView.bounds.width
-        let w = inView.bounds.width * 3
+        let w = inView.bounds.width * 4
         let rect = CGRect(x: 0, y: inView.bounds.height - h, width: w, height: h)
         self.init(frame: rect)
         
-        self.image = UIImage(named: "Skyline")
+        self.image = UIImage(named: "Skyline2")
         
         
     }
@@ -44,9 +46,8 @@ class BackgroundView : UIImageView {
     
     func start(at:CGFloat) {
         // Where Background will start animation
-        UIView.animate(withDuration: 0.5) {
             self.center.x = at
-        }
+        
     }
     
     // Move Background in x axis

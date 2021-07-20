@@ -12,7 +12,7 @@
         <scene sceneID="uNr-qd-BT9">
             <objects>
                 <viewController id="dbN-PG-4RP" customClass="SettingsViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zSN-Fv-OPj">
+                    <view key="view" contentMode="scaleToFill" id="zSN-Fv-OPj" customClass="GradientView" customModule="Baluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="KvM-tm-x5Y"/>
@@ -28,7 +28,7 @@
         <scene sceneID="fir-zo-KLK">
             <objects>
                 <viewController id="fRA-RQ-Nrt" customClass="TranslateViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qVY-RM-4f9">
+                    <view key="view" contentMode="scaleToFill" id="qVY-RM-4f9" customClass="GradientView" customModule="Baluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -96,7 +96,7 @@
         <scene sceneID="Rdi-8M-LHT">
             <objects>
                 <viewController id="Oed-b8-cJa" customClass="CurrencyViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OHF-lV-8No">
+                    <view key="view" contentMode="scaleToFill" id="OHF-lV-8No" customClass="GradientView" customModule="Baluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -141,7 +141,7 @@
         <scene sceneID="JWk-UQ-GpP">
             <objects>
                 <viewController id="xQN-r4-jhr" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RkM-BR-gCF">
+                    <view key="view" contentMode="scaleToFill" id="RkM-BR-gCF" customClass="GradientView" customModule="Baluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="U76-eO-vcx"/>

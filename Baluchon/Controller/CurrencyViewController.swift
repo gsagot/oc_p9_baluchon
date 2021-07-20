@@ -14,7 +14,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView: UITableView!
     var currencyView: CurrencyView!
     
-    var background = UIImageView()
+    var background:BackgroundView!
     var screen = CGRect()
     var coinEuro = [UIImage]()
     var coinDollars = [UIImage]()
@@ -24,10 +24,33 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
+
+        // Animations
         coinEuro = animatedImages(for: "euro")
         coinDollars = animatedImages(for: "dollars")
         coinFranc = animatedImages(for: "franc")
         coinSterling = animatedImages(for: "sterling")
+        
+        // Prepare layout and add subviews
+        currencyView = CurrencyView(inView: self.view)
+        currencyView.center.y += 30
+        self.view.addSubview(currencyView)
+        
+        background = BackgroundView(inView: self.view)
+        self.view.addSubview(background)
+        //self.view.sendSubviewToBack(background)
+        
+        // gesture recognizer
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.view.addGestureRecognizer(tap)
+        
+        // This view controller itself will provide the delegate methods and row data for the table view and text
+        currencyView.amountInDollarText.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // Function
         /*
         ChangeService.shared.getChange(completionHandler: { (success, error, current) in
             if success == true {
@@ -38,29 +61,10 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
                 
             } })
          */
-        currencyView = CurrencyView(inView: self.view)
-        currencyView.center.y += 30
-        self.view.addSubview(currencyView)
-        
-        backgroundInit()
-        self.view.addSubview(background)
-        self.view.sendSubviewToBack(background)
-        
-        self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
-
-        // Do any additional setup after loading the view.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.view.addGestureRecognizer(tap)
-        
-        currencyView.amountInDollarText.delegate = self
-        
-        // This view controller itself will provide the delegate methods and row data for the table view.
-        tableView.delegate = self
-        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        background.center.x = CGFloat(Settings.shared.posx)
+        background.start(at: CGFloat(Settings.shared.posx))
         currencyView.alpha = 0
         tableView.alpha = 0
     }
@@ -69,12 +73,10 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
         
-        backgroundAnim()
+        background.translate(to: CGFloat(Settings.shared.refX ) - self.view.bounds.width )
+        anim()
         
     }
-    
-    
- 
     
     // Alert Controller
     private func presentUIAlertController(title:String, message:String) {
@@ -97,7 +99,6 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
 
-        
     }
     
     // Keyboard enter
@@ -130,22 +131,19 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         // create a new cell if needed or reuse an old one
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CurrencyCell
-        let  amount = Double(currencyView.amountInDollarText.text ?? "1.0" )
+        let amount = Double(currencyView.amountInDollarText.text ?? "1.0" )
+        let rate = Settings.shared.currencies[indexPath.row].rate
+        let code = Settings.shared.currencies[indexPath.row].code
         
         cell.currencyName.text = "  " + Settings.shared.currencies[indexPath.row].name
-        cell.currencyAmount.text = " " + String(format:"%.2f ",Settings.shared.currencies[indexPath.row].rate * Double(amount!) ) + " "  + Settings.shared.currencies[indexPath.row].code
+        cell.currencyAmount.text = " " + String(format:"%.2f ",rate * Double(amount!) ) + " "  + code
  
-        //let animatedImage = UIImage.animatedImage(with: coin, duration: 1)
         cell.currencyImage.center.x = tableView.frame.width - 30
-        //cell.currencyImage.image = animatedImage
-        
         cell.currencyImage.animationImages = animatedImages(for: Settings.shared.currencies[indexPath.row].icon)
         cell.currencyImage.animationDuration = 0.9
         cell.currencyImage.animationRepeatCount = .zero
         cell.currencyImage.image = cell.currencyImage.animationImages?.first
         cell.currencyImage.startAnimating()
-        
-        print ("loaded")
         
         return cell
     }
@@ -155,55 +153,9 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
       
      }
-
-    
-    func gradient(frame:CGRect) -> CAGradientLayer {
-
-        let layer = CAGradientLayer()
-        layer.frame = frame
-        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        let baseColor = UIColor(red: (80/255), green: (141/255), blue: (196/255), alpha: 1 * (255/255))
-        let lightColor = modifie(color: baseColor, withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: 0.4)
-        layer.colors = [baseColor.cgColor,lightColor.cgColor]
-        
-        return layer
-    }
-    
-    func modifie(color: UIColor, withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
-
-        var currentHue: CGFloat = 0.0
-        var currentSaturation: CGFloat = 0.0
-        var currentBrigthness: CGFloat = 0.0
-        var currentAlpha: CGFloat = 0.0
-
-        if color.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentAlpha){
-            return UIColor(hue: currentHue + hue,
-                           saturation: currentSaturation + additionalSaturation,
-                           brightness: currentBrigthness + additionalBrightness,
-                           alpha: currentAlpha)
-        } else {
-            return color
-        }
-    }
     
     
-    func backgroundInit() {
-        
-        screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        
-        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
-        background.image = UIImage(named: "Skyline2")
-    
-        
-        
-    }
-    
-    func backgroundAnim() {
-        
-        UIView.animate(withDuration: 0.5) {
-            self.background.center.x = CGFloat(Settings.shared.refX) - self.view.bounds.width
-        }
+    func anim() {
         
         UIView.animate(withDuration: 0.5, delay: 0.3, options: [], animations: {
             self.currencyView.alpha = 100
@@ -212,8 +164,6 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
             self.tableView.alpha = 100
         }, completion: nil)
-        
-        Settings.shared.posx = Float(background.center.x)
         
     }
     

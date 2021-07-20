@@ -12,7 +12,7 @@ class WeatherViewController: UIViewController {
     var currentCityView: WeatherView!
     var wantedCityView: WeatherView!
     
-    var background = UIImageView()
+    var background:BackgroundView!
     var first = false
     var screen = CGRect()
 
@@ -21,24 +21,23 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Prepare layout
+        // Prepare layout and add subviews
         wantedCityView = WeatherView(inView: self.view)
         currentCityView = WeatherView(inView: self.view)
+        background = BackgroundView(inView: self.view)
         
-       
         wantedCityView.center.y += 30
         currentCityView.frame = wantedCityView.frame.offsetBy(dx: 0, dy: currentCityView.frame.maxY )
         
-        //view.addSubview(currentCityView)
         view.addSubview(wantedCityView)
         view.addSubview(currentCityView)
+        
 
         // Prepare animations
         first = true
-        backgroundInit()
+        background.reference(this: background.center.x)
+        view.addSubview(background)
         
-        self.view.addSubview(background)
-        self.view.layer.insertSublayer(gradient(frame: self.view.bounds), at:0)
          
         }
     
@@ -57,49 +56,28 @@ class WeatherViewController: UIViewController {
         currentCityView.alpha = 0
         wantedCityView.alpha = 0
         
-        background.center.x = CGFloat(Settings.shared.posx)
+        background.start(at: CGFloat(Settings.shared.posx))
+        /*
         if first == true {
             background.frame.size.height = 0
             background.center.y += self.background.frame.width / 2
             
         }
+         */
     }
 
-    // Run Animation everytime the Controller is current
+    // Run Animation everytime the Controller become current
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
         
-        backgroundAnim()
+        background.translate(to: CGFloat(Settings.shared.refX))
+        anim()
         
     }
     
-    // Init for animation
-    func backgroundInit() {
-        
-        screen = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        
-        background.frame = CGRect(x: 0, y: screen.height - screen.width, width:screen.width * 4 , height: screen.width )
-        background.image = UIImage(named: "Skyline2")
-        
-        Settings.shared.posx = Float(background.center.x)
-        Settings.shared.refX = Float(background.center.x)
-        
-        
-    }
+
     // Animation
-    func backgroundAnim() {
-        
-        if first == true {
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
-                        self.background.frame.size.height = self.screen.width 
-                        self.background.center.y -= self.background.frame.width / 2 }, completion: nil)
-            
-        }
-        
-        UIView.animate(withDuration: 0.5) {
-            self.background.center.x = CGFloat(Settings.shared.refX)
-            
-        }
+    func anim() {
         
         UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
             self.currentCityView.alpha = 100
@@ -109,42 +87,7 @@ class WeatherViewController: UIViewController {
             self.wantedCityView.alpha = 100
         }, completion: nil)
         
-        Settings.shared.posx = Float(background.center.x)
         
-        first = false
-        
-        
-    }
-    
-    // Beautiful gradient ...
-    func gradient(frame:CGRect) -> CAGradientLayer {
-
-        let layer = CAGradientLayer()
-        layer.frame = frame
-        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        let baseColor = UIColor(red: (80/255), green: (141/255), blue: (196/255), alpha: 1 * (255/255))
-        let lightColor = modifie(color: baseColor, withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: 0.4)
-        layer.colors = [baseColor.cgColor,lightColor.cgColor]
-        
-        return layer
-    }
-    // ... And Func for color
-    func modifie(color: UIColor, withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
-
-        var currentHue: CGFloat = 0.0
-        var currentSaturation: CGFloat = 0.0
-        var currentBrigthness: CGFloat = 0.0
-        var currentAlpha: CGFloat = 0.0
-
-        if color.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentAlpha){
-            return UIColor(hue: currentHue + hue,
-                           saturation: currentSaturation + additionalSaturation,
-                           brightness: currentBrigthness + additionalBrightness,
-                           alpha: currentAlpha)
-        } else {
-            return color
-        }
     }
     
     
