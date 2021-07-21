@@ -15,6 +15,8 @@ class WeatherView: UIView {
     var iconImage = UIImageView()
     var borderView = UIView()
     
+    var weatherAnim = [UIImage]()
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -26,8 +28,6 @@ class WeatherView: UIView {
         let rect = CGRect(x: 0, y: 30, width: inView.frame.width, height: 120.0)
         self.init(frame: rect)
         self.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
-        
-        
         
         borderView.frame = CGRect(x:0,y:rect.height,width:240,height:4)
         borderView.center.x = self.center.x
@@ -59,11 +59,8 @@ class WeatherView: UIView {
         
         iconImage.frame = CGRect(x:0,y:0,width:100,height:100)
         iconImage.center = CGPoint(x: self.bounds.width - 50 - 20, y: descriptionText.center.y)
-        iconImage.image = UIImage(named: "02n")
-        iconImage.tintColor = UIColor.blue
-        //iconImage.backgroundColor = UIColor.blue
         self.addSubview(iconImage)
-       
+
     }
 
         

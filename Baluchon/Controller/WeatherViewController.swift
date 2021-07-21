@@ -122,11 +122,35 @@ class WeatherViewController: UIViewController {
         view.cityText.text = Settings.shared.weathers[index].name
         view.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[index].main.temp ) + "°"
         view.descriptionText.text = Settings.shared.weathers[index].weather[0].description
-        view.iconImage.image = UIImage(named: Settings.shared.weathers[index].weather[0].icon)
-        view.iconImage.tintColor = UIColor.blue
+
+        let icon = formatTextForURLRequest(string:Settings.shared.weathers[index].weather[0].icon)
+        
+        view.iconImage.animationImages = animatedImages(for: icon)
+       
+        view.iconImage.animationDuration = 0.9
+        view.iconImage.animationRepeatCount = .zero
+        view.iconImage.image = view.iconImage.animationImages?.first
+        view.iconImage.startAnimating()
         
         
     }
+    
+    func animatedImages(for name: String) -> [UIImage] {
+        
+        var i = 0
+        var images = [UIImage]()
+        
+        while let image = UIImage(named: "\(name)_\(i)") {
+            images.append(image)
+            i += 1
+        }
+        return images
+    }
+    
+    func formatTextForURLRequest(string:String)-> String {
+        return string.replacingOccurrences(of: " ", with: "+")
+    }
+    
  
  
     
