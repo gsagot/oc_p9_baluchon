@@ -20,10 +20,13 @@ class ChangeService {
         self.changeSession = changeSession
     }
     
-    private static var changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!
+    
 
     func getChange(completionHandler: @escaping ((Bool, String?, ChangeResult? ) -> Void)) {
-        var request = URLRequest(url: ChangeService.changeUrl)
+        
+        let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!
+        
+        var request = URLRequest(url: changeUrl)
         request.httpMethod = "POST"
         
         task?.cancel()

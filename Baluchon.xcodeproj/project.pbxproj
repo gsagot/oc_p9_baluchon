@@ -39,6 +39,7 @@
 		CA9025A426944C9600090B1F /* Change.json in Resources */ = {isa = PBXBuildFile; fileRef = CA9025A326944C9600090B1F /* Change.json */; };
 		CA9025A62694516100090B1F /* ChangeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9025A52694516100090B1F /* ChangeServiceTests.swift */; };
 		CA97DCC026A77CA600593C01 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA97DCBF26A77CA600593C01 /* GradientView.swift */; };
+		CA97DCC226A8016200593C01 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA97DCC126A8016200593C01 /* SettingsTests.swift */; };
 		CAAA4BAB26975F0C0085B1B3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4BAA26975F0C0085B1B3 /* SettingsViewController.swift */; };
 		CAAA4BAE2697629B0085B1B3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4BAD2697629B0085B1B3 /* Settings.swift */; };
 		CAAA4BB826991CD70085B1B3 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4BB726991CD70085B1B3 /* Key.swift */; };
@@ -92,6 +93,7 @@
 		CA9025A326944C9600090B1F /* Change.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Change.json; sourceTree = "<group>"; };
 		CA9025A52694516100090B1F /* ChangeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeServiceTests.swift; sourceTree = "<group>"; };
 		CA97DCBF26A77CA600593C01 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		CA97DCC126A8016200593C01 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		CAAA4BAA26975F0C0085B1B3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CAAA4BAD2697629B0085B1B3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CAAA4BB726991CD70085B1B3 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				CA67A613268CCEDE003299F6 /* WeatherServiceTests.swift */,
+				CA97DCC126A8016200593C01 /* SettingsTests.swift */,
 				CA82A059269C22E0003B33F0 /* FakeURLWithProtocol.swift */,
 				CA90259F2694380800090B1F /* TranslateServiceTests.swift */,
 				CA9025A52694516100090B1F /* ChangeServiceTests.swift */,
@@ -372,6 +375,7 @@
 				CA9025A02694380800090B1F /* TranslateServiceTests.swift in Sources */,
 				CA9025A62694516100090B1F /* ChangeServiceTests.swift in Sources */,
 				CA67A61E268CD103003299F6 /* FakeWeatherResponseData.swift in Sources */,
+				CA97DCC226A8016200593C01 /* SettingsTests.swift in Sources */,
 				CA90259E2693A6FE00090B1F /* URLSessionFake.swift in Sources */,
 				CA67A614268CCEDE003299F6 /* WeatherServiceTests.swift in Sources */,
 			);

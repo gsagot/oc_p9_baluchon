@@ -23,7 +23,7 @@ final class FakeURLWithProtocol: URLProtocol {
         guard let result = FakeURLWithProtocol.request else {
             return
         }
-        let (data, response, error) = result(request)
+        let (data, response, _) = result(request)
 
         if let responseStrong = response {
             client?.urlProtocol(self, didReceive: responseStrong, cacheStoragePolicy: .notAllowed)
@@ -31,9 +31,12 @@ final class FakeURLWithProtocol: URLProtocol {
         if let dataStrong = data {
             client?.urlProtocol(self, didLoad: dataStrong)
         }
-        if let errorStrong = error {
-            client?.urlProtocol(self, didFailWithError: errorStrong)
+        else {
+            class ProtocolError: Error {}
+            let protocolError = ProtocolError()
+            client?.urlProtocol(self, didFailWithError: protocolError)
         }
+
         client?.urlProtocolDidFinishLoading(self)
   
     }

@@ -11,8 +11,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     var langAvailable = ["English","French"]
     var picker = UIPickerView()
-    var validateButton = UIButton()
+    var valideLanguageButton = UIButton()
+    
     var cityText = UITextField()
+    var cityLabel = UITextView()
+    var langLabel = UITextView()
+    var valideCityButton = UIButton()
+    var valideLangButton = UIButton()
     
     var background:BackgroundView!
     var screen = CGRect()
@@ -26,17 +31,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         self.view.addSubview(background)
         //self.view.sendSubviewToBack(background)
         
-        pickerCustomize()
-        view.addSubview(picker)
-        
-        buttonCustomize()
-        view.addSubview(validateButton)
-        
-        textCustomize()
+
+        layout()
         view.addSubview(cityText)
+        view.addSubview(cityLabel)
+        view.addSubview(valideCityButton)
+        view.addSubview(langLabel)
+        view.addSubview(picker)
+        view.addSubview(valideLangButton)
         
       
-        
         // This view controller itself will provide the delegate methods for the picker view and text
         cityText.delegate = self
         picker.delegate = self
@@ -44,8 +48,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
         
         // gesture recognizer
-        let validation = UITapGestureRecognizer(target: self, action: #selector(self.handleValidation(_:)))
-        self.validateButton.addGestureRecognizer(validation)
+        let validationForCity = UITapGestureRecognizer(target: self, action: #selector(self.handleValidationForCity(_:)))
+        self.valideCityButton.addGestureRecognizer(validationForCity)
+        
+        let validationForlang = UITapGestureRecognizer(target: self, action: #selector(self.handleValidationForlang(_:)))
+        self.valideLangButton.addGestureRecognizer(validationForlang)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
@@ -64,17 +71,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
 
     
-    @objc func handleValidation(_ sender: UITapGestureRecognizer? = nil) {
-        
-        let choose = picker.selectedRow(inComponent: 0)
-        if choose == 0 {
-            Settings.shared.language = .en
-            validateButton.setTitle("Validate", for: .normal)
-        }
-        if choose == 1 {
-            Settings.shared.language = .fr
-            validateButton.setTitle("Valider", for: .normal)
-        }
+    @objc func handleValidationForCity(_ sender: UITapGestureRecognizer? = nil) {
         if cityText.text != nil {
             let cityFormated = formatTextForURLRequest(string: cityText.text!)
             WeatherService.shared.getWeather(city: cityFormated,lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
@@ -89,7 +86,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             
             
         }
-        print ("Current Language: \(Settings.shared.language)")
+    }
+    
+    @objc func handleValidationForlang(_ sender: UITapGestureRecognizer? = nil) {
+        let choose = picker.selectedRow(inComponent: 0)
+        
+        if choose == 0 {
+            Settings.shared.changeLanguage(with: .en)
+   
+        }
+        if choose == 1 {
+            Settings.shared.changeLanguage(with: .fr)
+        }
+        print ("Current Language: \(Settings.shared.currentLanguage)")
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -97,25 +106,39 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
     }
     
-    func pickerCustomize() {
-        picker.frame = CGRect(x: 0, y: 0, width: 260, height: 200)
-        picker.center = self.view.center
-        picker.setValue(UIColor.white, forKey: "textColor")
-    }
     
-    func buttonCustomize() {
-        validateButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        validateButton.center = self.view.center
-        validateButton.center.y +=  100
-        validateButton.setTitle("Validate", for: .normal)
-        validateButton.backgroundColor = UIColor.blue
-    }
-    
-    func textCustomize() {
-        cityText.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
-        cityText.center = self.view.center
-        cityText.center.y -=  100
+    func layout() {
+        cityText.frame = CGRect(x: 10, y: 200, width: self.view.frame.width - 100, height: 30)
         cityText.backgroundColor = UIColor.white
+        cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        
+        cityLabel.frame = CGRect(x: 10, y: 160, width: self.view.frame.width, height: 30)
+        cityLabel.backgroundColor = UIColor.init(white: 1, alpha: 0)
+        cityLabel.text = "A city to compare New York with : "
+        cityLabel.textColor = UIColor.white
+        cityLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        
+        valideCityButton.frame = CGRect(x: cityText.frame.maxX + 10 , y: cityText.frame.minY, width: 50, height: 50)
+        valideCityButton.center.y = cityText.center.y
+        let imageSearch = UIImage(systemName: "magnifyingglass.circle.fill")
+        valideCityButton.setBackgroundImage(imageSearch, for: .normal)
+            
+        
+        langLabel.frame = CGRect(x: 10, y: cityText.frame.maxY + 100, width: 180, height: 30)
+        langLabel.backgroundColor = UIColor.init(white: 1, alpha: 0)
+        langLabel.text = "Select language : "
+        langLabel.textColor = UIColor.white
+        langLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        
+        picker.frame = CGRect(x: langLabel.frame.minX, y: langLabel.frame.maxY - 20, width: self.view.frame.width - 100, height: 100)
+        picker.setValue(UIColor.white, forKey: "textColor")
+        
+        valideLangButton.frame = CGRect(x: 0 , y: 0, width: 50, height: 50)
+        valideLangButton.center.y = picker.center.y
+        valideLangButton.center.x = valideCityButton.center.x
+        let imageUpdate = UIImage(systemName: "arrow.clockwise.circle.fill")
+        valideLangButton.setBackgroundImage(imageUpdate, for: .normal)
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -127,9 +150,25 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
     }
     
+    /*
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        picker.subviews.last?.alpha = 0
+       // picker.subviews.last?.alpha = 0
         return langAvailable[row]
+        
+    }
+     */
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel: UILabel? = (view as? UILabel)
+           if pickerLabel == nil {
+               pickerLabel = UILabel()
+            pickerLabel?.textAlignment = .natural
+           }
+        
+        pickerLabel?.text = "    " + langAvailable[row]
+        pickerLabel?.textColor = UIColor.white
+
+           return pickerLabel!
     }
     
     func formatTextForURLRequest(string:String)-> String {

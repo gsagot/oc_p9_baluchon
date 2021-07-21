@@ -14,9 +14,6 @@ class WeatherService {
     private var weatherSession = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
     
-    //set url
-    private static var location = String(" ")
-    
  
     //init()
     private init () {}
@@ -26,7 +23,6 @@ class WeatherService {
     }
     
     func getWeather(city: String, lang: String, completionHandler: @escaping ((Bool, String?, WeatherResult?) -> Void)) {
-        WeatherService.location = city
         
         let weatherUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(key.weather)&lang=\(lang)&units=metric")!
         
@@ -60,8 +56,6 @@ class WeatherService {
         task?.resume()
     
     }
-    
-    
     
 
 }

@@ -17,7 +17,9 @@ class Settings {
     
     var currentCity = "Paris"
     
-    // language
+    var currentLanguage = "en"
+    
+    // Data used by app - updated with language
     var errorReponseWeather = "Can't find city"
     var errorReponseCurrency = "invalid base currency"
     var errorReponseTranslate = "Error trying to translate"
@@ -26,50 +28,9 @@ class Settings {
     var errorData = "Can't connect to the server, please verify your connexion"
     var errorTyping = "Typing error"
     
-    
-    var currentLanguage = "en"
-    
     enum Lang {
         case fr
         case en
-    }
-    
-    var language:Lang = .en {
-        didSet {
-            changeLang ()
-        }
-    }
-    
-    func changeLang () {
-        
-        if language == .en {
-            
-            currentLanguage = "en"
-            
-            errorReponseWeather = "Can't find city"
-            errorReponseCurrency = "invalid base currency"
-            errorReponseTranslate = "Error trying to translate"
-            errorReponseDetect = "Can't detect language"
-            errorJson = "An error occurred, please try again"
-            errorData = "Can't connect to the server, please verify your connexion"
-            errorTyping = "Typing error"
-            
-        }
-        if language == .fr {
-            
-            currentLanguage = "fr"
-            
-            errorReponseWeather = "Ville non disponible"
-            errorReponseCurrency = "La devise de base est invalide"
-            errorReponseTranslate = "Erreur en essayant de traduire"
-            errorReponseDetect = "Erreur en essayant de detecter la langue"
-            errorJson = "Une erreur est survenue, essayant encore svp"
-            errorData = "Impossible de se connecter au serveur, vérifiez votre connexion"
-            errorTyping = "Erreur de saisie"
- 
-        }
-        
-        
     }
     
     // For local tests
@@ -104,8 +65,6 @@ class Settings {
         }catch{
             print(error.localizedDescription)
         }
-        
-        
         do{
             let product = try decoder.decode(WeatherResult.self, from: jsonWeatherParis!)
             weathers.append(product)
@@ -140,8 +99,37 @@ class Settings {
         currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR))
         currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP))
         currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD))
+    }
+    
+    func changeLanguage (with language: Lang) {
         
-        
+        if language == .en {
+            
+            currentLanguage = "en"
+            
+            errorReponseWeather = "Can't find city"
+            errorReponseCurrency = "invalid base currency"
+            errorReponseTranslate = "Error trying to translate"
+            errorReponseDetect = "Can't detect language"
+            errorJson = "An error occurred, please try again"
+            errorData = "Can't connect to the server, please verify your connexion"
+            errorTyping = "Typing error"
+            
+        }
+        if language == .fr {
+            
+            currentLanguage = "fr"
+            
+            errorReponseWeather = "Ville non disponible"
+            errorReponseCurrency = "La devise de base est invalide"
+            errorReponseTranslate = "Erreur en essayant de traduire"
+            errorReponseDetect = "Erreur en essayant de detecter la langue"
+            errorJson = "Une erreur est survenue, essayant encore svp"
+            errorData = "Impossible de se connecter au serveur, vérifiez votre connexion"
+            errorTyping = "Erreur de saisie"
+ 
+        }
+
     }
 
     
