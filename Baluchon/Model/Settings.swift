@@ -27,6 +27,8 @@ class Settings {
     var errorJson = "An error occurred, please try again"
     var errorData = "Can't connect to the server, please verify your connexion"
     var errorTyping = "Typing error"
+    var infoSettingsLanguage = "Language updated : English"
+    var infoSettingsCity = "City updated : "
     
     enum Lang {
         case fr
@@ -114,7 +116,8 @@ class Settings {
             errorJson = "An error occurred, please try again"
             errorData = "Can't connect to the server, please verify your connexion"
             errorTyping = "Typing error"
-            
+            infoSettingsLanguage = "Language updated : English"
+            infoSettingsCity = "City updated : "
         }
         if language == .fr {
             
@@ -127,7 +130,8 @@ class Settings {
             errorJson = "Une erreur est survenue, essayant encore svp"
             errorData = "Impossible de se connecter au serveur, vérifiez votre connexion"
             errorTyping = "Erreur de saisie"
- 
+            infoSettingsLanguage = "Langue mise à jour: Français"
+            infoSettingsCity = "Ville mise à jour : "
         }
 
     }

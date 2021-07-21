@@ -19,6 +19,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     var valideCityButton = UIButton()
     var valideLangButton = UIButton()
     
+    var cogImageView = UIImageView()
+    
     var background:BackgroundView!
     var screen = CGRect()
     
@@ -33,8 +35,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         
 
         layout()
+        view.addSubview(cogImageView)
         view.addSubview(cityText)
         view.addSubview(cityLabel)
+        
         view.addSubview(valideCityButton)
         view.addSubview(langLabel)
         view.addSubview(picker)
@@ -78,6 +82,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                 if success == true {
                     print ("City is changed")
                     Settings.shared.currentCity = cityFormated
+                    self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsCity +  Settings.shared.currentCity )
                 }
                 else {
                     self.presentUIAlertController(title: "Error", message: erreur!)
@@ -99,6 +104,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             Settings.shared.changeLanguage(with: .fr)
         }
         print ("Current Language: \(Settings.shared.currentLanguage)")
+        self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsLanguage)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -108,6 +114,20 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     
     func layout() {
+        
+        cogImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        cogImageView.center.x = self.view.center.x
+        cogImageView.center.y = 100
+        //cogImageView.image = UIImage(named: "cog_01")
+        
+        cogImageView.animationImages = animatedImages(for: "cog")
+       
+        cogImageView.animationDuration = 0.9
+        cogImageView.animationRepeatCount = .zero
+        cogImageView.image = cogImageView.animationImages?.first
+        cogImageView.startAnimating()
+         
+        
         cityText.frame = CGRect(x: 10, y: 200, width: self.view.frame.width - 100, height: 30)
         cityText.backgroundColor = UIColor.white
         cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
@@ -183,6 +203,18 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         present(ac, animated: true, completion: nil)
     }
     
+    
+    func animatedImages(for name: String) -> [UIImage] {
+        
+        var i = 0
+        var images = [UIImage]()
+        
+        while let image = UIImage(named: "\(name)_\(i)") {
+            images.append(image)
+            i += 1
+        }
+        return images
+    }
    
     
     
