@@ -44,6 +44,7 @@
 		CAAA4BAE2697629B0085B1B3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4BAD2697629B0085B1B3 /* Settings.swift */; };
 		CAAA4BB826991CD70085B1B3 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAA4BB726991CD70085B1B3 /* Key.swift */; };
 		CABD7EE8269ED928009B5E73 /* Currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = CABD7EE7269ED928009B5E73 /* Currencies.json */; };
+		CADF8D9F26AA00BE00A97BE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADF8D9E26AA00BE00A97BE2 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		CAAA4BAD2697629B0085B1B3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CAAA4BB726991CD70085B1B3 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		CABD7EE7269ED928009B5E73 /* Currencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Currencies.json; sourceTree = "<group>"; };
+		CADF8D9E26AA00BE00A97BE2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				CA42E959269EF3810058F253 /* WeatherView.swift */,
 				CA0AAE0026A76CF50096AEE1 /* BackgroundView.swift */,
 				CA97DCBF26A77CA600593C01 /* GradientView.swift */,
+				CADF8D9E26AA00BE00A97BE2 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADF8D9F26AA00BE00A97BE2 /* SettingsView.swift in Sources */,
 				CAAA4BAE2697629B0085B1B3 /* Settings.swift in Sources */,
 				CA82A060269DB9EA003B33F0 /* CurrencyView.swift in Sources */,
 				CA97DCC026A77CA600593C01 /* GradientView.swift in Sources */,

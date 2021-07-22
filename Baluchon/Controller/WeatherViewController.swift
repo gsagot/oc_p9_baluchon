@@ -13,8 +13,7 @@ class WeatherViewController: UIViewController {
     var wantedCityView: WeatherView!
     
     var background:BackgroundView!
-    var first = false
-    var screen = CGRect()
+ 
 
     
     // Prepare once
@@ -34,47 +33,43 @@ class WeatherViewController: UIViewController {
         
 
         // Prepare animations
-        first = true
-        background.reference(this: background.center.x)
+        Settings.shared.AnimBackgroundRef = Float(background.center.x)
+        Settings.shared.AnimBackgroundPos = Float(background.center.x)
         view.addSubview(background)
-        
          
         }
     
-    // Alert Controller
+    // MARK: - ALERT CONTROLLER
+    
     private func presentUIAlertController(title:String, message:String) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(ac, animated: true, completion: nil)
     }
     
+    // MARK: - PREPARE ANIMATIONS
+    
     // Prepare everytime the Controller will be current
     override func viewWillAppear(_ animated: Bool) {
-        // Request Weather
-        firstWeather()
-    
         currentCityView.alpha = 0
         wantedCityView.alpha = 0
+        // Set Background skyline position...
+        background.start(at: CGFloat(Settings.shared.AnimBackgroundPos))
         
-        background.start(at: CGFloat(Settings.shared.posx))
-        /*
-        if first == true {
-            background.frame.size.height = 0
-            background.center.y += self.background.frame.width / 2
-            
-        }
-         */
+        // Request Weather
+        firstWeather()
     }
-
+    
+    // MARK: - LAUNCH ANIMATIONS
+    
     // Run Animation everytime the Controller become current
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
-        background.translate(to: CGFloat(Settings.shared.refX))
+        // Move Background skyline position...
+        background.move(to: CGFloat(Settings.shared.AnimBackgroundRef))
         anim()
         
     }
-    
 
     // Animation
     func anim() {
@@ -86,10 +81,13 @@ class WeatherViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.8, options: [], animations: {
             self.wantedCityView.alpha = 100
         }, completion: nil)
+        // ... Then store Background skyline position. It will be the start position in the next controller
+        Settings.shared.AnimBackgroundPos = Float(background.center.x)
         
         
     }
     
+    // MARK: - REQUEST FROM MODEL
     
     // Get weather for New York  then Paris on start : Can be changed in SettingsController next...
     func firstWeather () {
@@ -100,7 +98,7 @@ class WeatherViewController: UIViewController {
                 self.updateView(self.wantedCityView, with: 0)
             }
             else {
-                self.presentUIAlertController(title: "Error", message: erreur!)
+                self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
                 
             } })
     }
@@ -112,13 +110,14 @@ class WeatherViewController: UIViewController {
                 self.updateView(self.currentCityView, with: 1)
             }
             else {
-                self.presentUIAlertController(title: "Error", message: erreur!)
+                self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
                 
             } })
     }
     
-    // Update
-    func updateView (_ view: WeatherView, with index: Int ) {
+    // MARK: - UPDATE VIEW
+    
+    func updateView(_ view: WeatherView, with index: Int ) {
         view.cityText.text = Settings.shared.weathers[index].name
         view.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[index].main.temp ) + "°"
         view.descriptionText.text = Settings.shared.weathers[index].weather[0].description
@@ -135,11 +134,11 @@ class WeatherViewController: UIViewController {
         
     }
     
+    // MARK: - UTILS
+    
     func animatedImages(for name: String) -> [UIImage] {
-        
         var i = 0
         var images = [UIImage]()
-        
         while let image = UIImage(named: "\(name)_\(i)") {
             images.append(image)
             i += 1
@@ -147,16 +146,11 @@ class WeatherViewController: UIViewController {
         return images
     }
     
+    
     func formatTextForURLRequest(string:String)-> String {
-        return string.replacingOccurrences(of: " ", with: "+")
+        return string.replacingOccurrences(of: "n", with: "d")
     }
     
- 
- 
-    
-
-    
-
 
 
 }

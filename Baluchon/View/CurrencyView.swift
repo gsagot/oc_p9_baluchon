@@ -40,8 +40,7 @@ class CurrencyView: UIView {
         amountInDollarText.textColor = UIColor.white
         amountInDollarText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         amountInDollarText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
-        amountInDollarText.text = "10.0"
-        amountInDollarText.layer.cornerRadius = 10
+        amountInDollarText.text = "20.0"
         self.addSubview(amountInDollarText)
         
         currencyCodeText.frame = amountInDollarText.frame.offsetBy(dx: 0, dy: 50)
@@ -49,6 +48,8 @@ class CurrencyView: UIView {
         currencyCodeText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         currencyCodeText.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
         currencyCodeText.text = "EUR"
+        currencyCodeText.isSelectable = false
+        currencyCodeText.isEditable = false
         self.addSubview(currencyCodeText)
         
     }

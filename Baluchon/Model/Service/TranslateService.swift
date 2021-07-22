@@ -19,10 +19,10 @@ class TranslateService {
     init(translateSession: URLSession) {
         self.translateSession = translateSession
     }
-
-   
-    private var target = "en"
-    private var format = "text"
+    
+    func start(){
+        TranslateService.shared = TranslateService()
+    }
     
     private static var translateUrl = URL(string: "https://translation.googleapis.com/language/translate/v2?")!
     
@@ -33,7 +33,7 @@ class TranslateService {
         var request = URLRequest(url: TranslateService.translateUrl)
         request.httpMethod = "POST"
         
-        let body = "key=\(key.translation)&q=\(sentence)&source=\(source)&target=\(target)&format=text"
+        let body = "key=\(key.translation)&q=\(sentence)&source=\(source)&target=en&format=text"
         request.httpBody = body.data(using: .utf8)
         
         task?.cancel()

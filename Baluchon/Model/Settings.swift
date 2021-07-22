@@ -10,16 +10,20 @@ import Foundation
 class Settings {
     
     static var shared = Settings()
+    // MARK: - ANIMATION BACKGROUND
     
-    var posx:Float = 0
+    var AnimBackgroundPos:Float = 0
     
-    var refX:Float = 0
+    var AnimBackgroundRef:Float = 0
+    
+    // MARK: - DATAS
     
     var currentCity = "Paris"
     
     var currentLanguage = "en"
     
     // Data used by app - updated with language
+    var errorTitle = "Error"
     var errorReponseWeather = "Can't find city"
     var errorReponseCurrency = "invalid base currency"
     var errorReponseTranslate = "Error trying to translate"
@@ -29,6 +33,8 @@ class Settings {
     var errorTyping = "Typing error"
     var infoSettingsLanguage = "Language updated : English"
     var infoSettingsCity = "City updated : "
+    var labelSettingsCity = "Comparer New York avec une ville :"
+    var labelSettingsLang = "Select language : "
     
     enum Lang {
         case fr
@@ -109,6 +115,7 @@ class Settings {
             
             currentLanguage = "en"
             
+            errorTitle = "Error"
             errorReponseWeather = "Can't find city"
             errorReponseCurrency = "invalid base currency"
             errorReponseTranslate = "Error trying to translate"
@@ -118,11 +125,14 @@ class Settings {
             errorTyping = "Typing error"
             infoSettingsLanguage = "Language updated : English"
             infoSettingsCity = "City updated : "
+            labelSettingsCity = "A city to compare New York with :"
+            labelSettingsLang = "Select language : "
         }
         if language == .fr {
             
             currentLanguage = "fr"
             
+            errorTitle = "Erreur"
             errorReponseWeather = "Ville non disponible"
             errorReponseCurrency = "La devise de base est invalide"
             errorReponseTranslate = "Erreur en essayant de traduire"
@@ -132,6 +142,8 @@ class Settings {
             errorTyping = "Erreur de saisie"
             infoSettingsLanguage = "Langue mise à jour: Français"
             infoSettingsCity = "Ville mise à jour : "
+            labelSettingsCity = "Comparer New York avec une ville :"
+            labelSettingsLang = "séléctionner une langue : "
         }
 
     }

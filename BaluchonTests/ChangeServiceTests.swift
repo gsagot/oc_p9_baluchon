@@ -10,6 +10,11 @@ import XCTest
 @testable import Baluchon
 
 class ChangeServiceTests: XCTestCase {
+    
+    override func setUp() {
+        super.setUp()
+        ChangeService.shared.start()
+    }
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -20,8 +20,10 @@ class ChangeService {
         self.changeSession = changeSession
     }
     
+    func start(){
+        ChangeService.shared = ChangeService()
+    }
     
-
     func getChange(completionHandler: @escaping ((Bool, String?, ChangeResult? ) -> Void)) {
         
         let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!

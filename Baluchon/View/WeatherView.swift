@@ -37,15 +37,21 @@ class WeatherView: UIView {
         cityText.frame = CGRect(x:10,y:0,width:240,height:40)
         cityText.textColor = UIColor.white
         cityText.backgroundColor = UIColor(white: 1, alpha: 0.0)
-        cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
-        cityText.text = "Paris"
+        cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
+        cityText.text = "City"
+        cityText.isScrollEnabled = false
+        cityText.isSelectable = false
+        cityText.isEditable = false
         self.addSubview(cityText)
         
-        descriptionText.frame = CGRect(x:10,y:cityText.frame.maxY,width:240,height:30)
+        descriptionText.frame = CGRect(x:10,y:cityText.frame.maxY,width:240,height:40)
         descriptionText.textColor = UIColor.white
         descriptionText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         descriptionText.font = UIFont(name: "HelveticaNeue", size: 20)
-        descriptionText.text = "Scatered cloud "
+        descriptionText.text = "Weather description "
+        descriptionText.isScrollEnabled = false
+        descriptionText.isSelectable = false
+        descriptionText.isEditable = false
         self.addSubview(descriptionText)
         
         
@@ -53,7 +59,7 @@ class WeatherView: UIView {
         temperatureText.textColor = UIColor.white
         temperatureText.backgroundColor = UIColor(white: 1, alpha: 0)
         temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 40)
-        temperatureText.text = "21" + "°"
+        temperatureText.text = "0" + "°"
         temperatureText.layer.cornerRadius = 10
         self.addSubview(temperatureText)
         

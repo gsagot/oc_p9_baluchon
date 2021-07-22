@@ -136,7 +136,7 @@ class WeatherServiceTests: XCTestCase {
     //PROTOCOL TESTS///////////////////////////////////////////////
     // ////////////////////////////////////////////////////////////
     
-    
+ 
     func testGetWeatherByProtocolShouldPostFailedCallbackIfError() {
         URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
@@ -267,7 +267,7 @@ class WeatherServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    
+  
 }
 
 
