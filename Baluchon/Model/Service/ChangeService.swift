@@ -26,7 +26,9 @@ class ChangeService {
     
     func getChange(completionHandler: @escaping ((Bool, String?, ChangeResult? ) -> Void)) {
         
-        let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!
+        //let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!
+        
+        let changeUrl = formatUrl()
         
         var request = URLRequest(url: changeUrl)
         request.httpMethod = "POST"
@@ -56,6 +58,15 @@ class ChangeService {
             }
         }
         task?.resume()
+        
+    }
+    
+    private func formatUrl ()->URL {
+        let bodyUrl = "access_key=\(key.rate)"
+        let changeUrl = "http://data.fixer.io/api/latest?"
+        guard let resultUrl = URL(string: changeUrl + bodyUrl) else {return URL(string:"http://data.fixer.io/")!}
+        
+        return resultUrl
         
     }
     

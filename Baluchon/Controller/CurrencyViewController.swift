@@ -43,14 +43,16 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         // Function
         /*
          ChangeService.shared.getChange(completionHandler: { (success, error, current) in
-         if success == true {
-         ...
-         }
-         else {
-         self.presentUIAlertController(title: "Error", message: error!)
-         
-         } })
+                                            if success == true {
+                                                Settings.shared.saveRates(from: current!)
+                                                
+                                            }
+                                            else {
+                                                self.presentUIAlertController(title: "Error", message: error!)
+                                                
+                                            }})
          */
+         
     }
     
     // MARK: - ALERT CONTROLLER

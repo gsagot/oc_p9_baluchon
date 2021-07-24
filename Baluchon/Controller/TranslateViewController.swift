@@ -79,26 +79,28 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     // MARK: - REQUEST FROM MODEL
     
     // detect language
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         fromTextView.resignFirstResponder()
         
         if fromTextView.text != nil {
-                TranslateService.shared.getLanguage(sentence: fromTextView.text!,
-                                                    completionHandler: { (success, erreur, language) in
-                                                        if success == true {
-                                                            self.translate(with: language!)
-                                                        }else{
-                                                            self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!) } })
+            TranslateService.shared.getLanguage(sentence: fromTextView.text!,
+                                                completionHandler: { (success, erreur, language) in
+                                                    if success == true {
+                                                        self.translate(with: language!)
+                                                    }else{
+                                                        self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!) } })
             
         }else {
             presentUIAlertController(title: Settings.shared.errorTitle, message: Settings.shared.errorTyping)
         }
-         
+        
         return true
     }
     
     
     // Translate
+    
     func translate (with language: String){
         
         TranslateService.shared.getTranslation(sentence: fromTextView.text!,

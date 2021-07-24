@@ -24,7 +24,7 @@ class WeatherService {
     
     func getWeather(city: String, lang: String, completionHandler: @escaping ((Bool, String?, WeatherResult?) -> Void)) {
         
-        let weatherUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(key.weather)&lang=\(lang)&units=metric")!
+        let weatherUrl = formatUrl(city: city, lang: lang)
         
         var request = URLRequest(url: weatherUrl)
         request.httpMethod = "POST"
@@ -55,6 +55,15 @@ class WeatherService {
 
         task?.resume()
     
+    }
+    
+    private func formatUrl (city:String, lang:String)->URL {
+        let bodyUrl = "q=\(city)&appid=\(key.weather)&lang=\(lang)&units=metric"
+        let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?"
+        guard let resultUrl = URL(string: weatherUrl + bodyUrl) else {return URL(string:"https://api.openweathermap.org/")!}
+        
+        return resultUrl
+        
     }
     
 

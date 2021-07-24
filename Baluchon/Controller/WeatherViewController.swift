@@ -119,6 +119,11 @@ class WeatherViewController: UIViewController {
     
     func updateView(_ view: WeatherView, with index: Int ) {
         view.cityText.text = Settings.shared.weathers[index].name
+        if view.cityText.text.count > 16 {
+            view.cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 21)
+        }else {
+            view.cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
+        }
         view.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[index].main.temp ) + "°"
         view.descriptionText.text = Settings.shared.weathers[index].weather[0].description
 
@@ -150,6 +155,7 @@ class WeatherViewController: UIViewController {
     func formatTextForURLRequest(string:String)-> String {
         return string.replacingOccurrences(of: "n", with: "d")
     }
+
     
 
 

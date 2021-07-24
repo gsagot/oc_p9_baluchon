@@ -72,19 +72,21 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     
     @objc func handleValidationForCity(_ sender: UITapGestureRecognizer? = nil) {
         if settingsView.cityText.text != nil {
-            let cityFormated = formatTextForURLRequest(string: settingsView.cityText.text!)
-            WeatherService.shared.getWeather(city: cityFormated,lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
-                if success == true {
-                    print ("City is changed")
-                    Settings.shared.currentCity = cityFormated
-                    self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsCity +  Settings.shared.currentCity )
-                }
-                else {
-                    self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
-                    
-                } })
-            
-            
+            // Avoid space for weather request and replace by "+"
+            // Also add "+" to the end : without Lyon become arrondissement de Lyon...
+            let cityTextFormated = formatTextForURLRequest(string: settingsView.cityText.text!) + "+"
+            let languageSelected = Settings.shared.currentLanguage
+            WeatherService.shared.getWeather(city: cityTextFormated,lang: languageSelected, completionHandler: { (success, erreur, current) in
+                                                if success == true {
+                                                    print ("City is changed")
+                                                    Settings.shared.currentCity = cityTextFormated
+                                                    self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsCity )
+                                                }
+                                                else {
+                                                    self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
+                                                    
+                                                } })
+  
         }
     }
     
@@ -124,12 +126,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     
-    func updateView() {
-        settingsView.cityLabel.text = Settings.shared.labelSettingsCity
-        settingsView.langLabel.text = Settings.shared.labelSettingsLang
-    }
-    
-    // MARK: - PICKER VIEW UPDATE / LAYOUT
+    // MARK: - PICKER VIEW LAYOUT
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -161,10 +158,21 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
      */
     
+    // MARK: - UPDATE VIEW
+    
+    func updateView() {
+        settingsView.cityLabel.text = Settings.shared.labelSettingsCity
+        settingsView.langLabel.text = Settings.shared.labelSettingsLang
+    }
+    
     // MARK: - UTILS
     
     func formatTextForURLRequest(string:String)-> String {
         return string.replacingOccurrences(of: " ", with: "+")
+    }
+    
+    func formatTextForView(string:String)-> String {
+        return string.replacingOccurrences(of: "+", with: " ")
     }
     
     func animatedImages(for name: String) -> [UIImage] {

@@ -137,7 +137,7 @@ class Settings {
             errorReponseCurrency = "La devise de base est invalide"
             errorReponseTranslate = "Erreur en essayant de traduire"
             errorReponseDetect = "Erreur en essayant de detecter la langue"
-            errorJson = "Une erreur est survenue, essayant encore svp"
+            errorJson = "Une erreur est survenue, veuillez réessayer svp"
             errorData = "Impossible de se connecter au serveur, vérifiez votre connexion"
             errorTyping = "Erreur de saisie"
             infoSettingsLanguage = "Langue mise à jour: Français"

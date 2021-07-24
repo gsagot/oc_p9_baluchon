@@ -17,8 +17,7 @@ class CurrencyView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
-        
+
     }
     
     override init(frame: CGRect) {

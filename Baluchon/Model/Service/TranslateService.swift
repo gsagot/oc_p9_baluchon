@@ -24,13 +24,13 @@ class TranslateService {
         TranslateService.shared = TranslateService()
     }
     
-    private static var translateUrl = URL(string: "https://translation.googleapis.com/language/translate/v2?")!
     
-    private static var detectUrl = URL(string:"https://translation.googleapis.com/language/translate/v2/detect")!
     
     func getTranslation(sentence: String, source: String, completionHandler: @escaping ((Bool, String?, TranslationResult? ) -> Void)) {
         
-        var request = URLRequest(url: TranslateService.translateUrl)
+        let translateUrl = getTranslationUrl()
+        
+        var request = URLRequest(url: translateUrl)
         request.httpMethod = "POST"
         
         let body = "key=\(key.translation)&q=\(sentence)&source=\(source)&target=en&format=text"
@@ -65,7 +65,9 @@ class TranslateService {
     
     func getLanguage(sentence: String, completionHandler: @escaping ((Bool, String?, String? ) -> Void)) {
         
-        var request = URLRequest(url: TranslateService.detectUrl)
+        let detectUrl = getDetectionUrl(sentence: sentence)
+        
+        var request = URLRequest(url: detectUrl)
         request.httpMethod = "POST"
         
         let body = "key=\(key.translation)&q=\(sentence)"
@@ -95,6 +97,22 @@ class TranslateService {
             
         }
         task?.resume()
+    }
+    
+    private func getTranslationUrl ()->URL {
+        let translateUrl = "https://translation.googleapis.com/language/translate/v2?"
+        guard let resultUrl = URL(string: translateUrl) else {return URL(string:"https://translation.googleapis.com/")!}
+        
+        return resultUrl
+        
+    }
+    
+    private func getDetectionUrl (sentence:String)->URL {
+        let detectUrl = "https://translation.googleapis.com/language/translate/v2/detect"
+        guard let resultUrl = URL(string: detectUrl) else {return URL(string:"https://translation.googleapis.com/")!}
+        
+        return resultUrl
+        
     }
     
 }
