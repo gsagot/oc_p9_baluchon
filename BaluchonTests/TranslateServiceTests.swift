@@ -47,7 +47,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(translation)
             expectation.fulfill()
         })
@@ -66,7 +66,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(translation)
             expectation.fulfill()
         })
@@ -88,7 +88,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Error trying to translate")
+            XCTAssert(error == Settings.shared.errorReponseTranslate)
             XCTAssertNil(translation)
             expectation.fulfill()
         })
@@ -111,7 +111,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "An error occurred, please try again")
+            XCTAssert(error == Settings.shared.errorJson)
             XCTAssertNil(translation)
             expectation.fulfill()
         })
@@ -154,7 +154,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(lang)
             expectation.fulfill()
         })
@@ -173,7 +173,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(lang)
             expectation.fulfill()
         })
@@ -195,7 +195,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't detect language")
+            XCTAssert(error == Settings.shared.errorReponseDetect)
             XCTAssertNil(lang)
             expectation.fulfill()
         })
@@ -218,7 +218,7 @@ class TranslateServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "An error occurred, please try again")
+            XCTAssert(error == Settings.shared.errorJson)
             XCTAssertNil(lang)
             expectation.fulfill()
         })
@@ -248,8 +248,271 @@ class TranslateServiceTests: XCTestCase {
  
     }
     
+    //PROTOCOL TESTS///////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////
     
+    func testGetTranslateByProtocolShouldPostFailedCallbackIfError() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = FakeResponseData.translateError
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getTranslation (sentence:"Bonjour",source:"en",completionHandler:{ (success, error, translation) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testGetTranslateByProtocolShouldPostFailedCallbackIfNoData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getTranslation (sentence:"Bonjour",source:"en",completionHandler:{ (success, error, translation) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetTranslateByProtocolShouldPostFailedCallbackIfIncorrectResponse() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.translateIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseKO
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getTranslation (sentence:"Bonjour",source:"en",completionHandler:{ (success, error, translation) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorReponseTranslate)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
 
+    
+    func testGetTranslateByProtocolShouldPostFailedCallbackIfIncorrectData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.translateIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getTranslation (sentence:"Bonjour",source:"en",completionHandler:{ (success, error, translation) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorJson)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetTranslateByProtocolShouldPostFailedCallbackIfCorrectResponseWithData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.translateCorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getTranslation (sentence:"Bonjour",source:"en",completionHandler:{ (success, error, translation) in
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(translation?.data.translations[0].translatedText == "Bonjour Monde")
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
 
+    }
+    
+    
+    // ///////////////////////////////////////////
+    
+    func testGetLanguageByProtocolShouldPostFailedCallbackIfError() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = FakeResponseData.detectError
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getLanguage (sentence:"Bonjour",completionHandler:{ (success, error, lang) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(lang)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testGetLanguageByProtocolShouldPostFailedCallbackIfNoData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getLanguage (sentence:"Bonjour",completionHandler:{ (success, error, lang) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(lang)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetLanguageByProtocolShouldPostFailedCallbackIfIncorrectResponse() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.detectIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseKO
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getLanguage (sentence:"Bonjour",completionHandler:{ (success, error, lang) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorReponseDetect)
+            XCTAssertNil(lang)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+
+    
+    func testGetLanguageByProtocolShouldPostFailedCallbackIfIncorrectData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.detectIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getLanguage (sentence:"Bonjour",completionHandler:{ (success, error, lang) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorJson)
+            XCTAssertNil(lang)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetLanguageByProtocolShouldPostFailedCallbackIfCorrectResponseWithData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.detectCorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let translateService = TranslateService(translateSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translateService.getLanguage (sentence:"Bonjour",completionHandler:{ (success, error, lang) in
+        // Then
+            XCTAssertTrue(success)
+            XCTAssertNil(error)
+            XCTAssert(lang == "fr")
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
 }
 

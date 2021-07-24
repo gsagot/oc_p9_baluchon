@@ -41,53 +41,20 @@ class Settings {
         case en
     }
     
-    // For local tests
-    var jsonCurrencies: Data? {
-        let bundle = Bundle(for: Settings.self)
-        let url = bundle.url(forResource: "Currencies", withExtension: "json")!
-        return try! Data(contentsOf: url)
-    }
-    
-    var jsonWeatherParis: Data? {
-        let bundle = Bundle(for: Settings.self)
-        let url = bundle.url(forResource: "WeatherParis", withExtension: "json")!
-        return try! Data(contentsOf: url)
-    }
-    
-     var jsonWeatherNY: Data? {
-        let bundle = Bundle(for: Settings.self)
-        let url = bundle.url(forResource: "WeatherNY", withExtension: "json")!
-        return try! Data(contentsOf: url)
-    }
-    
     var currencies = [Currency]()
     
     var weathers = [WeatherResult]()
     
     private init() {
-        // For local tests
-        let decoder = JSONDecoder()
-        do{
-            let product = try decoder.decode(ChangeResult.self, from: jsonCurrencies!)
-            saveRates(from: product)
-        }catch{
-            print(error.localizedDescription)
-        }
-        do{
-            let product = try decoder.decode(WeatherResult.self, from: jsonWeatherParis!)
-            weathers.append(product)
-        }catch{
-            print(error.localizedDescription)
-        }
         
-        do{
-            let product = try decoder.decode(WeatherResult.self, from: jsonWeatherNY!)
-            weathers.append(product)
-        }catch{
-            print(error.localizedDescription)
+        let curencyData = ChangeResult(base: "EUR", rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
+        saveRates(from: curencyData)
+        
+        let weatherData = WeatherResult(weather: [Weather(description: "Description", icon: "10d")], main: Main(temp: 10, humidity: 79), name: "Paris")
+        for _ in 0...1 {
+            weathers.append(weatherData)
+            
         }
-         
-         
    
     }
     

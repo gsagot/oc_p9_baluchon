@@ -47,7 +47,7 @@ class ChangeServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -66,7 +66,7 @@ class ChangeServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -88,7 +88,7 @@ class ChangeServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "invalid base currency")
+            XCTAssert(error == Settings.shared.errorReponseCurrency)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -111,7 +111,7 @@ class ChangeServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "An error occurred, please try again")
+            XCTAssert(error == Settings.shared.errorJson)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -139,27 +139,136 @@ class ChangeServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
  
+    //PROTOCOL TESTS///////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////
     
-    /*
-    
-    func testGetRatesShouldPostSuccessCallbackIfUseRealRequest() {
+    func testGetChangeByProtocolShouldPostFailedCallbackIfError() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
-        let ratesService = ChangeService.shared
-            
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = FakeResponseData.changeError
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let changeService = ChangeService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        ratesService.getChange (completionHandler: { (success, error, current) in
-
+        changeService.getChange (completionHandler:{ (success, error, current) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetChangeByProtocolShouldPostFailedCallbackIfNoData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse? = nil
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let changeService = ChangeService(changeSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange (completionHandler:{ (success, error, current) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorData)
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    func testGetChangeByProtocolShouldPostFailedCallbackIfIncorrectResponse(){
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.changeIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseKO
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let changeService = ChangeService(changeSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange (completionHandler:{ (success, error, current) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorReponseCurrency)
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+ 
+    }
+    
+    
+    func testGetChangeByProtocolShouldPostFailedCallbackIfIncorrectData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.changeIncorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let changeService = ChangeService(changeSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange (completionHandler:{ (success, error, current) in
+        // Then
+            XCTAssertFalse(success)
+            XCTAssert(error == Settings.shared.errorJson)
+            XCTAssertNil(current)
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testGetChangeByProtocolShouldPostSuccessCallbackIfCorrectResponseWithData() {
+        URLProtocol.registerClass(FakeURLWithProtocol.self)
+        // Given
+        FakeURLWithProtocol.request = { request in
+            let data: Data? = FakeResponseData.changeCorrectData
+            let response: HTTPURLResponse? = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (data, response, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [FakeURLWithProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let changeService = ChangeService(changeSession: session)
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        changeService.getChange (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertTrue(success)
             XCTAssertNil(error)
-            XCTAssert(current != nil)
+            XCTAssert(current?.base == "EUR")
             expectation.fulfill()
         })
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 1)
     }
-     
-     */
-    
 
 }

@@ -32,9 +32,14 @@ class SettingsTests: XCTestCase {
         }
     }
     
-    func testCurrentLanguage_WhenChangeLanguage_ThenCurrentLanguageShouldUpdate() {
+    func testCurrentLanguageWhenChangeToEnglishLanguageThenCurrentLanguageShouldUpdate() {
         Settings.shared.changeLanguage(with: .en)
         XCTAssert(Settings.shared.currentLanguage == "en")
+    }
+    
+    func testCurrentLanguageWhenChangeToFrenchLanguageThenCurrentLanguageShouldUpdate() {
+        Settings.shared.changeLanguage(with: .fr)
+        XCTAssert(Settings.shared.currentLanguage == "fr")
     }
     
     

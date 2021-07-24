@@ -42,7 +42,7 @@ class WeatherServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -60,7 +60,7 @@ class WeatherServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -81,7 +81,7 @@ class WeatherServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't find city")
+            XCTAssert(error == Settings.shared.errorReponseWeather)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -102,7 +102,7 @@ class WeatherServiceTests: XCTestCase {
             
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "An error occurred, please try again")
+            XCTAssert(error == Settings.shared.errorJson)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -155,7 +155,7 @@ class WeatherServiceTests: XCTestCase {
         weatherService.getWeather (city:"New+York",lang:"en",completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion")
+            XCTAssert(error == Settings.shared.errorData)
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -181,7 +181,7 @@ class WeatherServiceTests: XCTestCase {
         weatherService.getWeather (city:"New+York",lang:"en",completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't connect to the server, please verify your connexion" )
+            XCTAssert(error == Settings.shared.errorData )
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -207,7 +207,7 @@ class WeatherServiceTests: XCTestCase {
         weatherService.getWeather (city:"New+York",lang:"en",completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "Can't find city" )
+            XCTAssert(error == Settings.shared.errorReponseWeather )
             XCTAssertNil(current)
             expectation.fulfill()
         })
@@ -234,7 +234,7 @@ class WeatherServiceTests: XCTestCase {
         weatherService.getWeather (city:"New+York",lang:"en",completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
-            XCTAssert(error == "An error occurred, please try again" )
+            XCTAssert(error == Settings.shared.errorJson )
             XCTAssertNil(current)
             expectation.fulfill()
         })
