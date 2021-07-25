@@ -25,7 +25,7 @@ class CurrencyView: UIView {
     }
     
     convenience init(inView: UIView) {
-        let rect = CGRect(x: 10, y: 0, width: inView.frame.width - 20, height: 120.0)
+        let rect = CGRect(x: 10, y: 30, width: inView.frame.width - 20, height: 120.0)
         self.init(frame: rect)
         
         self.backgroundColor = UIColor(white: 1.0, alpha: 0.0)
@@ -35,7 +35,7 @@ class CurrencyView: UIView {
         borderView.center.x = (rect.maxX - 10) / 2
         self.addSubview(borderView)
         
-        amountInDollarText.frame = CGRect(x:10,y:10,width:240,height:40)
+        amountInDollarText.frame = CGRect(x:10,y:0,width:240,height:40)
         amountInDollarText.textColor = UIColor.white
         amountInDollarText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         amountInDollarText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
