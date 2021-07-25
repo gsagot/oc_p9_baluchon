@@ -32,9 +32,10 @@ class Settings {
     var errorData = "Can't connect to the server, please verify your connexion"
     var errorTyping = "Typing error"
     var infoSettingsLanguage = "Language updated : English"
-    var infoSettingsCity = "City updated : "
+    var infoSettingsCity = "City updated"
     var labelSettingsCity = "Comparer New York avec une ville :"
     var labelSettingsLang = "Select language : "
+    var textDetectLanguageView = "Language detected : "
     
     enum Lang {
         case fr
@@ -94,6 +95,7 @@ class Settings {
             infoSettingsCity = "City updated : "
             labelSettingsCity = "A city to compare New York with :"
             labelSettingsLang = "Select language : "
+            textDetectLanguageView = "Language detected : "
         }
         if language == .fr {
             
@@ -111,6 +113,7 @@ class Settings {
             infoSettingsCity = "Ville mise à jour : "
             labelSettingsCity = "Comparer New York avec une ville :"
             labelSettingsLang = "séléctionner une langue : "
+            textDetectLanguageView = "Langue detectée : "
         }
 
     }

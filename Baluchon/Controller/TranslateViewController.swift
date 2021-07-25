@@ -7,10 +7,11 @@
 
 import UIKit
 
-class TranslateViewController: UIViewController, UITextFieldDelegate {
+class TranslateViewController: UIViewController, UITextViewDelegate {
     
-    @IBOutlet var fromTextView: UITextField!
-    @IBOutlet var toTextView: UITextField!
+    @IBOutlet var translateTextView: UITextView!
+    @IBOutlet var detectTextView: UITextView!
+    @IBOutlet var translateButton: UIButton!
     
     var background:BackgroundView!
     
@@ -26,8 +27,11 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
         
+        let tapToTranslate = UITapGestureRecognizer(target: self, action: #selector(self.handleTapToTranslate(_:)))
+        self.translateButton.addGestureRecognizer(tapToTranslate)
+        
         // This view controller itself will provide the delegate methods for text
-        fromTextView.delegate = self
+        translateTextView.delegate = self
     }
     
     // MARK: - ALERT CONTROLLER
@@ -42,8 +46,9 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         background.start(at: CGFloat(Settings.shared.AnimBackgroundPos))
-        self.fromTextView.alpha = 0
-        self.toTextView.alpha = 0
+        self.translateTextView.alpha = 0
+        self.detectTextView.alpha = 0
+        self.translateButton.alpha = 0
     }
 
     // MARK: - LAUNCH ANIMATIONS
@@ -58,12 +63,18 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     func anim() {
         
         UIView.animate(withDuration: 0.5, delay: 0.3, options: [], animations: {
-            self.fromTextView.alpha = 100
+            self.translateTextView.alpha = 100
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
-            self.toTextView.alpha = 100
+            self.detectTextView.alpha = 100
         }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
+            self.translateButton.alpha = 100
+        }, completion: nil)
+        
+       
         
         Settings.shared.AnimBackgroundPos = Float(background.center.x)
         
@@ -73,49 +84,61 @@ class TranslateViewController: UIViewController, UITextFieldDelegate {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
-        fromTextView.resignFirstResponder()
+        translateTextView.resignFirstResponder()
     }
     
-    // MARK: - REQUEST FROM MODEL
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+           if(text == "\n") {
+               textView.resignFirstResponder()
+               return false
+           }
+           return true
+       }
     
     // detect language
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        fromTextView.resignFirstResponder()
-        
-        if fromTextView.text != nil {
-            TranslateService.shared.getLanguage(sentence: fromTextView.text!,
+    @objc func handleTapToTranslate(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        if translateTextView.text != nil {
+            TranslateService.shared.getLanguage(sentence: translateTextView.text!,
                                                 completionHandler: { (success, erreur, language) in
                                                     if success == true {
                                                         self.translate(with: language!)
+                                                        self.updateView(self.detectTextView,
+                                                                        with:Settings.shared.textDetectLanguageView + language!)
                                                     }else{
-                                                        self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!) } })
+                                                        self.presentUIAlertController(title: Settings.shared.errorTitle,
+                                                                                      message: erreur!) } })
             
         }else {
-            presentUIAlertController(title: Settings.shared.errorTitle, message: Settings.shared.errorTyping)
+            presentUIAlertController(title: Settings.shared.errorTitle,
+                                     message: Settings.shared.errorTyping)
         }
-        
-        return true
     }
     
+    // MARK: - REQUEST FROM MODEL
     
     // Translate
     
     func translate (with language: String){
         
-        TranslateService.shared.getTranslation(sentence: fromTextView.text!,
+        TranslateService.shared.getTranslation(sentence: translateTextView.text!,
                                                source: language,
                                                completionHandler: { (success, erreur, translation) in
                                                 if success == true {
-                                                    self.toTextView.text = translation!.data.translations[0].translatedText
+                                                    self.updateView(self.translateTextView,
+                                                                    with: translation!.data.translations[0].translatedText)
                                                 }else{
-                                                    self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
+                                                    self.presentUIAlertController(title: Settings.shared.errorTitle,
+                                                                                  message: erreur!)
                                                 } })
         
     }
     
     
     // MARK: - UPDATE VIEW
-    
+    func updateView ( _ view: UITextView, with: String) {
+        view.text = with
+    }
 
 }
