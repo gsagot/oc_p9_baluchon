@@ -21,7 +21,7 @@
 		CA42E95A269EF3810058F253 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA42E959269EF3810058F253 /* WeatherView.swift */; };
 		CA42E95C269F529D0058F253 /* Detect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA42E95B269F529D0058F253 /* Detect.swift */; };
 		CA42E95E26A037B80058F253 /* Detect.json in Resources */ = {isa = PBXBuildFile; fileRef = CA42E95D26A037B80058F253 /* Detect.json */; };
-		CA44CBE9268891EB00E08E23 /* ChangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44CBE8268891EB00E08E23 /* ChangeService.swift */; };
+		CA44CBE9268891EB00E08E23 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44CBE8268891EB00E08E23 /* CurrencyService.swift */; };
 		CA44CBEB2688A00900E08E23 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44CBEA2688A00900E08E23 /* CurrencyViewController.swift */; };
 		CA44CBF12688A47C00E08E23 /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA44CBF02688A47C00E08E23 /* Change.swift */; };
 		CA59A3392688FF2B0031DC13 /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA59A3382688FF2B0031DC13 /* TranslateViewController.swift */; };
@@ -83,7 +83,7 @@
 		CA42E959269EF3810058F253 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		CA42E95B269F529D0058F253 /* Detect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detect.swift; sourceTree = "<group>"; };
 		CA42E95D26A037B80058F253 /* Detect.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Detect.json; sourceTree = "<group>"; };
-		CA44CBE8268891EB00E08E23 /* ChangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeService.swift; sourceTree = "<group>"; };
+		CA44CBE8268891EB00E08E23 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		CA44CBEA2688A00900E08E23 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		CA44CBF02688A47C00E08E23 /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		CA59A3382688FF2B0031DC13 /* TranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 		CA90259C269374AE00090B1F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				CA44CBE8268891EB00E08E23 /* ChangeService.swift */,
+				CA44CBE8268891EB00E08E23 /* CurrencyService.swift */,
 				CA59A33A268900200031DC13 /* TranslateService.swift */,
 				CA27BEEE26877E89002A2C63 /* WeatherService.swift */,
 				CAAA4BAC26975F510085B1B3 /* Structure */,
@@ -428,7 +428,7 @@
 				CA59A33B268900200031DC13 /* TranslateService.swift in Sources */,
 				CA44CBF12688A47C00E08E23 /* Change.swift in Sources */,
 				CA27BEDD26877E29002A2C63 /* SceneDelegate.swift in Sources */,
-				CA44CBE9268891EB00E08E23 /* ChangeService.swift in Sources */,
+				CA44CBE9268891EB00E08E23 /* CurrencyService.swift in Sources */,
 				CA0AAE0126A76CF50096AEE1 /* BackgroundView.swift in Sources */,
 				CAAA4BAB26975F0C0085B1B3 /* SettingsViewController.swift in Sources */,
 			);

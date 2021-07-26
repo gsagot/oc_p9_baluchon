@@ -45,9 +45,9 @@ class BaluchonUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         let tabBar = app.tabBars["Tab Bar"]
-        tabBar.buttons["Currency"].tap()
-        tabBar.buttons["Traduction"].tap()
-        tabBar.buttons["Setting"].tap()
+        tabBar.children(matching: .button).element(boundBy: 1).tap()
+        tabBar.children(matching: .button).element(boundBy: 2).tap()
+        tabBar.children(matching: .button).element(boundBy: 3).tap()
         
                 
     }

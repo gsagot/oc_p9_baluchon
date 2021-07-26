@@ -180,7 +180,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - REQUEST FROM MODEL
     
     func currency() {
-        ChangeService.shared.getChange(completionHandler: { (success, error, current) in
+        CurrencyService.shared.getChange(completionHandler: { (success, error, current) in
                                         if success == true {
                                             Settings.shared.saveRates(from: current!)
                                             

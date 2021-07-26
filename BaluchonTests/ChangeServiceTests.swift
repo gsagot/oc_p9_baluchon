@@ -13,7 +13,7 @@ class ChangeServiceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        ChangeService.shared.start()
+        CurrencyService.shared.start()
     }
 
     override func setUpWithError() throws {
@@ -38,7 +38,7 @@ class ChangeServiceTests: XCTestCase {
     
     func testGetChangeShouldPostFailedCallbackIfError() {
         // Given
-        let changeService = ChangeService(
+        let changeService = CurrencyService(
             changeSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.changeError))
             
         // When
@@ -57,7 +57,7 @@ class ChangeServiceTests: XCTestCase {
     
     func testGetChangeShouldPostFailedCallbackIfNoData() {
         // Given
-        let changeService = ChangeService(
+        let changeService = CurrencyService(
             changeSession: URLSessionFake(data: nil, response: nil, error: nil))
             
         // When
@@ -76,7 +76,7 @@ class ChangeServiceTests: XCTestCase {
     
     func testGetChangeShouldPostFailedCallbackIfIncorrectResponse(){
         // Given
-        let changeService = ChangeService(
+        let changeService = CurrencyService(
             changeSession: URLSessionFake(
                 data: FakeResponseData.changeIncorrectData,
                 response: FakeResponseData.responseKO,
@@ -99,7 +99,7 @@ class ChangeServiceTests: XCTestCase {
     
     func testGetChangeShouldPostFailedCallbackIfIncorrectData() {
         // Given
-        let changeService = ChangeService(
+        let changeService = CurrencyService(
             changeSession: URLSessionFake(
                 data: FakeResponseData.changeIncorrectData,
                 response: FakeResponseData.responseOK,
@@ -120,7 +120,7 @@ class ChangeServiceTests: XCTestCase {
     
     func testGetChangeShouldPostSuccessCallbackIfCorrectResponseWithData() {
         // Given
-        let changeService = ChangeService(
+        let changeService = CurrencyService(
             changeSession: URLSessionFake(
                 data: FakeResponseData.changeCorrectData,
                 response: FakeResponseData.responseOK,
@@ -154,7 +154,7 @@ class ChangeServiceTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLWithProtocol.self]
         let session = URLSession(configuration: configuration)
-        let changeService = ChangeService(changeSession: session)
+        let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         changeService.getChange (completionHandler:{ (success, error, current) in
@@ -180,7 +180,7 @@ class ChangeServiceTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLWithProtocol.self]
         let session = URLSession(configuration: configuration)
-        let changeService = ChangeService(changeSession: session)
+        let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         changeService.getChange (completionHandler:{ (success, error, current) in
@@ -206,7 +206,7 @@ class ChangeServiceTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLWithProtocol.self]
         let session = URLSession(configuration: configuration)
-        let changeService = ChangeService(changeSession: session)
+        let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         changeService.getChange (completionHandler:{ (success, error, current) in
@@ -233,7 +233,7 @@ class ChangeServiceTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLWithProtocol.self]
         let session = URLSession(configuration: configuration)
-        let changeService = ChangeService(changeSession: session)
+        let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         changeService.getChange (completionHandler:{ (success, error, current) in
@@ -258,7 +258,7 @@ class ChangeServiceTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [FakeURLWithProtocol.self]
         let session = URLSession(configuration: configuration)
-        let changeService = ChangeService(changeSession: session)
+        let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         changeService.getChange (completionHandler:{ (success, error, current) in

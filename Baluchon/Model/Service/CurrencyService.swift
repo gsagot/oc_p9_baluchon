@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ChangeService {
+class CurrencyService {
     
-    static var shared = ChangeService()
+    static var shared = CurrencyService()
     
     private var changeSession = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
@@ -21,7 +21,7 @@ class ChangeService {
     }
     
     func start(){
-        ChangeService.shared = ChangeService()
+        CurrencyService.shared = CurrencyService()
     }
     
     func getChange(completionHandler: @escaping ((Bool, String?, ChangeResult? ) -> Void)) {
