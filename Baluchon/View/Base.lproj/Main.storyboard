@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Setting-->
+        <!--Settings View Controller-->
         <scene sceneID="uNr-qd-BT9">
             <objects>
                 <viewController id="dbN-PG-4RP" customClass="SettingsViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,13 +18,13 @@
                         <viewLayoutGuide key="safeArea" id="KvM-tm-x5Y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" id="npD-ai-XyM"/>
+                    <tabBarItem key="tabBarItem" title="" image="picto_settings" id="npD-ai-XyM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDo-rD-CJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1407" y="2227"/>
         </scene>
-        <!--Traduction-->
+        <!--Translate View Controller-->
         <scene sceneID="fir-zo-KLK">
             <objects>
                 <viewController id="fRA-RQ-Nrt" customClass="TranslateViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -75,7 +75,7 @@
                             <constraint firstItem="zUr-Ou-ON7" firstAttribute="trailing" secondItem="idz-GR-Ikb" secondAttribute="trailing" constant="10" id="yOh-AP-Bti"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Traduction" image="picto_traduction" id="fj0-O7-qqQ"/>
+                    <tabBarItem key="tabBarItem" title="" image="picto_traduction" id="fj0-O7-qqQ"/>
                     <connections>
                         <outlet property="detectTextView" destination="ecI-TD-KhW" id="Ovs-Qh-ZKa"/>
                         <outlet property="translateButton" destination="Uu1-r6-ld9" id="KpE-V0-KNs"/>
@@ -107,7 +107,7 @@
             </objects>
             <point key="canvasLocation" x="-1588" y="1290"/>
         </scene>
-        <!--Currency-->
+        <!--Currency View Controller-->
         <scene sceneID="Rdi-8M-LHT">
             <objects>
                 <viewController id="Oed-b8-cJa" customClass="CurrencyViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -143,7 +143,7 @@
                             <constraint firstItem="wj1-BH-DVa" firstAttribute="centerX" secondItem="aH4-gv-Ie2" secondAttribute="centerX" id="scT-6a-pnI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Currency" image="picto_change" id="Ojx-cJ-URJ"/>
+                    <tabBarItem key="tabBarItem" title="" image="picto_change" id="Ojx-cJ-URJ"/>
                     <connections>
                         <outlet property="tableView" destination="wj1-BH-DVa" id="MGL-sV-rYR"/>
                     </connections>
@@ -152,7 +152,7 @@
             </objects>
             <point key="canvasLocation" x="302.89855072463769" y="1491.9642857142856"/>
         </scene>
-        <!--Weather-->
+        <!--Weather View Controller-->
         <scene sceneID="JWk-UQ-GpP">
             <objects>
                 <viewController id="xQN-r4-jhr" customClass="WeatherViewController" customModule="Baluchon" customModuleProvider="target" sceneMemberID="viewController">
@@ -162,7 +162,7 @@
                         <viewLayoutGuide key="safeArea" id="U76-eO-vcx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather" image="picto_meteo" id="ni7-hp-MV3"/>
+                    <tabBarItem key="tabBarItem" title="" image="picto_meteo" id="ni7-hp-MV3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUm-ad-uMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,6 +173,7 @@
         <image name="arrow.left.arrow.right" catalog="system" width="119" height="128"/>
         <image name="picto_change" width="25" height="25"/>
         <image name="picto_meteo" width="25" height="25"/>
+        <image name="picto_settings" width="25" height="25"/>
         <image name="picto_traduction" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

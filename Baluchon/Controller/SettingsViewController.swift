@@ -8,8 +8,6 @@
 import UIKit
 
 class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    var langAvailable = ["English","French"]
 
     var cogImageView = UIImageView()
     var background:BackgroundView!
@@ -139,7 +137,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return langAvailable.count
+        return Settings.shared.langAvailable.count
         
     }
     
@@ -150,7 +148,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             pickerLabel?.textAlignment = .natural
            }
         
-        pickerLabel?.text = "    " + langAvailable[row]
+        pickerLabel?.text = "    " + Settings.shared.langAvailable[row]
         pickerLabel?.textColor = UIColor.white
 
            return pickerLabel!
@@ -169,6 +167,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     func updateView() {
         settingsView.cityLabel.text = Settings.shared.labelSettingsCity
         settingsView.langLabel.text = Settings.shared.labelSettingsLang
+        settingsView.picker.reloadAllComponents()
     }
     
     // MARK: - UTILS

@@ -9,6 +9,7 @@ import UIKit
 
 class TranslateViewController: UIViewController, UITextViewDelegate {
     
+ 
     @IBOutlet var translateTextView: UITextView!
     @IBOutlet var detectTextView: UITextView!
     @IBOutlet var translateButton: UIButton!

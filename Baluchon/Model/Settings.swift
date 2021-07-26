@@ -19,12 +19,17 @@ class Settings {
     
     // MARK: - APPLICATION VARIABLES
     
+    enum Lang {
+        case fr
+        case en
+    }
+    
     var currentCity = "Paris"
     
     var currentLanguage = "en"
     
-    
-    // Data used by app - updated with language
+    var langAvailable = ["English","French"]
+  
     var errorTitle = "Error"
     var errorReponseWeather = "Can't find city"
     var errorReponseCurrency = "invalid base currency"
@@ -33,16 +38,11 @@ class Settings {
     var errorJson = "An error occurred, please try again"
     var errorData = "Can't connect to the server, please verify your connexion"
     var errorTyping = "Typing error"
-    var infoSettingsLanguage = "Language updated : English"
+    var infoSettingsLanguage = "Language updated"
     var infoSettingsCity = "City updated"
-    var labelSettingsCity = "Comparer New York avec une ville :"
+    var labelSettingsCity = "A city to compare New York with :"
     var labelSettingsLang = "Select language : "
     var textDetectLanguageView = "Language detected : "
-    
-    enum Lang {
-        case fr
-        case en
-    }
     
     var currencies = [Currency]()
     
@@ -96,6 +96,9 @@ class Settings {
             
             currentLanguage = "en"
             
+            langAvailable[0] = "English"
+            langAvailable[1] = "French"
+            
             errorTitle = "Error"
             errorReponseWeather = "Can't find city"
             errorReponseCurrency = "invalid base currency"
@@ -104,8 +107,8 @@ class Settings {
             errorJson = "An error occurred, please try again"
             errorData = "Can't connect to the server, please verify your connexion"
             errorTyping = "Typing error"
-            infoSettingsLanguage = "Language updated : English"
-            infoSettingsCity = "City updated : "
+            infoSettingsLanguage = "Language updated"
+            infoSettingsCity = "City updated "
             labelSettingsCity = "A city to compare New York with :"
             labelSettingsLang = "Select language : "
             textDetectLanguageView = "Language detected : "
@@ -113,6 +116,9 @@ class Settings {
         if language == .fr {
             
             currentLanguage = "fr"
+            
+            langAvailable[0] = "Anglais"
+            langAvailable[1] = "Français"
             
             errorTitle = "Erreur"
             errorReponseWeather = "Ville non disponible"
@@ -122,7 +128,7 @@ class Settings {
             errorJson = "Une erreur est survenue, veuillez réessayer svp"
             errorData = "Impossible de se connecter au serveur, vérifiez votre connexion"
             errorTyping = "Erreur de saisie"
-            infoSettingsLanguage = "Langue mise à jour: Français"
+            infoSettingsLanguage = "Langue mise à jour"
             infoSettingsCity = "Ville mise à jour : "
             labelSettingsCity = "Comparer New York avec une ville :"
             labelSettingsLang = "séléctionner une langue : "
