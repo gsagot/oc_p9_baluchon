@@ -12,9 +12,10 @@ import UIKit
 class CurrencyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate  {
     
     @IBOutlet var tableView: UITableView!
-    var currencyView: CurrencyView!
     
+    var currencyView: CurrencyView!
     var background:BackgroundView!
+    var refreshView:RefreshView!
 
     // MARK: - REQUEST FROM MODEL
     
@@ -24,12 +25,22 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
         
         // Prepare layout and add subviews
-        currencyView = CurrencyView(inView: self.view)
+        
+        let frame = self.view
+        let gradientView = GradientView(inView: frame!)
+        self.view.addSubview(gradientView)
+        self.view.sendSubviewToBack(gradientView)
+       
+        currencyView = CurrencyView(inView: frame!)
         currencyView.center.y += 30
         self.view.addSubview(currencyView)
         
-        background = BackgroundView(inView: self.view)
+        background = BackgroundView(inView: frame!)
         self.view.addSubview(background)
+        
+        refreshView = RefreshView(inView: frame!)
+        self.view.addSubview(refreshView)
+        self.refreshView.lastUpdateText.text = Settings.shared.currencies[0].date
         
         // gesture recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -41,17 +52,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         
         // Function
-        /*
-         ChangeService.shared.getChange(completionHandler: { (success, error, current) in
-                                            if success == true {
-                                                Settings.shared.saveRates(from: current!)
-                                                
-                                            }
-                                            else {
-                                                self.presentUIAlertController(title: "Error", message: error!)
-                                                
-                                            }})
-         */
+        // currency()
          
     }
     
@@ -175,6 +176,23 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
      self.tableView.reloadRows(at: [indexPath], with: .automatic)
      }
      */
+    
+    // MARK: - REQUEST FROM MODEL
+    
+    func currency() {
+        ChangeService.shared.getChange(completionHandler: { (success, error, current) in
+                                        if success == true {
+                                            Settings.shared.saveRates(from: current!)
+                                            
+                                        }
+                                        else {
+                                            self.presentUIAlertController(title: "Error", message: error!)
+                                            
+                                        }})
+        
+
+        
+    }
     
     // MARK: - UTILS
     

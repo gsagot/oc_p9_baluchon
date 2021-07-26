@@ -10,17 +10,19 @@ import Foundation
 class Settings {
     
     static var shared = Settings()
-    // MARK: - ANIMATION BACKGROUND
+    
+    // MARK: - ANIMATION BACKGROUND VARIABLES
     
     var AnimBackgroundPos:Float = 0
     
     var AnimBackgroundRef:Float = 0
     
-    // MARK: - DATAS
+    // MARK: - APPLICATION VARIABLES
     
     var currentCity = "Paris"
     
     var currentLanguage = "en"
+    
     
     // Data used by app - updated with language
     var errorTitle = "Error"
@@ -48,18 +50,18 @@ class Settings {
     
     private init() {
         
-        let curencyData = ChangeResult(base: "EUR", rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
+        let curencyData = ChangeResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
         saveRates(from: curencyData)
         
-        let weatherData = WeatherResult(weather: [Weather(description: "Description", icon: "10d")], main: Main(temp: 10, humidity: 79), name: "Paris")
+        let weatherData = WeatherResult(weather: [Weather(description: "Description", icon: "10d")], main: Main(temp: 10, humidity: 79), name: "Paris", dt:1626215100)
+        
         for _ in 0...1 {
             weathers.append(weatherData)
-            
         }
    
     }
     
-    // MARK: - FUNCTIONS
+    // MARK: - FUNCTIONS TO STORE DATA FROM SERVICES
     
     func saveWeathersFirstIndex (from:WeatherResult) {
         weathers[0] = from
@@ -68,14 +70,25 @@ class Settings {
     func saveWeathersLastIndex (from:WeatherResult) {
         weathers[1] = from
     }
-    
+   
     func saveRates (from: ChangeResult) {
-        
-        currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: "franc", amount: from.rates.CHF))
-        currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR))
-        currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP))
-        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD))
+        currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: "franc", amount: from.rates.CHF, date: from.date))
+        currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR, date: from.date))
+        currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP, date: from.date))
+        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD, date: from.date))
     }
+    
+    // MARK: - UTILS
+    
+    func getDate(dt: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(dt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MM YYYY - HH:mm"
+        let result = dateFormatter.string(from: date)
+        return result
+    }
+    
+    // MARK: - CHANGE APPLICATION LANGUAGE
     
     func changeLanguage (with language: Lang) {
         

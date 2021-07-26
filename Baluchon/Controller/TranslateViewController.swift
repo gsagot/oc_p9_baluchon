@@ -20,7 +20,11 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
         // Do any additional setup after loading the view.
         
         // Prepare layout and add subviews
-        background = BackgroundView(inView: self.view)
+        let frame = self.view
+        let gradientView = GradientView(inView: frame!)
+        self.view.addSubview(gradientView)
+        self.view.sendSubviewToBack(gradientView)
+        background = BackgroundView(inView: frame!)
         self.view.addSubview(background)
         
         // gesture recognizer

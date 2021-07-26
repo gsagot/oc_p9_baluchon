@@ -19,9 +19,15 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let frame = self.view
+        let gradientView = GradientView(inView: frame!)
+        self.view.addSubview(gradientView)
+        self.view.sendSubviewToBack(gradientView)
+        
+        
         // Prepare layout and add subviews
-        background = BackgroundView(inView: self.view)
-        settingsView = SettingsView(inView: self.view)
+        background = BackgroundView(inView: frame!)
+        settingsView = SettingsView(inView: frame!)
         self.view.addSubview(cogImageView)
         self.view.addSubview(settingsView)
         self.view.addSubview(background)

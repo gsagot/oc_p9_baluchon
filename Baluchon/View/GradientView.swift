@@ -9,6 +9,21 @@ import UIKit
 
 class GradientView : UIView {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    convenience init(inView: UIView) {
+        let rect = CGRect(x: 0, y: 0, width: inView.frame.width, height: inView.frame.height)
+        self.init(frame: rect)
+        
+        self.layer.insertSublayer(gradient(frame: self.bounds), at:0)
+    }
+ 
     func gradient(frame:CGRect) -> CAGradientLayer {
 
         let layer = CAGradientLayer()
@@ -39,10 +54,8 @@ class GradientView : UIView {
         }
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.layer.insertSublayer(gradient(frame: self.bounds), at:0)
-    }
+
+
 
     
     

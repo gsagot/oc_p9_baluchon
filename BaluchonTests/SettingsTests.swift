@@ -44,7 +44,7 @@ class SettingsTests: XCTestCase {
     
     
     func testSaveWeatherDataWhenGetWeatherThenDataShouldBeSavedinArrayAtIndexOne(){
-        let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris")
+        let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris", dt: 1626215100)
         Settings.shared.saveWeathersLastIndex(from: weatherData)
         XCTAssert(Settings.shared.weathers[1].main.humidity == 79)
         
@@ -52,7 +52,7 @@ class SettingsTests: XCTestCase {
     }
     
     func testSaveWeatherDataWhenGetWeatherThenDataShouldBeSavedinArrayAtIndexZero(){
-        let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris")
+        let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris", dt: 1626215100)
         Settings.shared.saveWeathersFirstIndex(from: weatherData)
         XCTAssert(Settings.shared.weathers[0].main.humidity == 79)
         
