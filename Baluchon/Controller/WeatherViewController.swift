@@ -14,35 +14,35 @@ class WeatherViewController: UIViewController {
     
     var background:BackgroundView!
     
-    var refreshView:RefreshView!
+    var bringUpToDateView:UpdateView!
  
-
-    
-    // Prepare once
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print (view.frame)
+        // Do any additional setup after loading the view.
+        
         // Prepare layout and add subviews
         let frame = self.view
         let gradientView = GradientView(inView: frame!)
         self.view.addSubview(gradientView)
         self.view.sendSubviewToBack(gradientView)
         
+        // Create Views
         wantedCityView = WeatherView(inView: frame!)
         currentCityView = WeatherView(inView: frame!)
         background = BackgroundView(inView: frame!)
-        refreshView = RefreshView(inView: frame!)
+        bringUpToDateView = UpdateView(inView: frame!)
         
-        
+        // Layout 
         wantedCityView.center.y += 30
         currentCityView.frame = wantedCityView.frame.offsetBy(dx: 0, dy: currentCityView.frame.maxY )
         
         view.addSubview(wantedCityView)
         view.addSubview(currentCityView)
-        view.addSubview(refreshView)
+        view.addSubview(bringUpToDateView)
         
-        self.refreshView.lastUpdateText.text = Settings.shared.getDate(dt: Settings.shared.weathers[0].dt )
+        updateView(wantedCityView, with: 0 )
+        updateView(currentCityView, with: 1 )
 
         // Prepare animations
         Settings.shared.AnimBackgroundRef = Float(background.center.x)
@@ -50,8 +50,8 @@ class WeatherViewController: UIViewController {
         view.addSubview(background)
         
         // gesture recognizer
-        let refresh = UITapGestureRecognizer(target: self, action: #selector(self.refreshWeather(_:)))
-        self.refreshView.refreshButton.addGestureRecognizer(refresh)
+        let updateTap = UITapGestureRecognizer(target: self, action: #selector(self.updateWeather(_:)))
+        self.bringUpToDateView.refreshButton.addGestureRecognizer(updateTap)
          
         }
     
@@ -67,7 +67,6 @@ class WeatherViewController: UIViewController {
     
     // Prepare everytime the Controller will be current
     override func viewWillAppear(_ animated: Bool) {
-        
         // Request Weather
         firstWeather()
         // Set Alpha for Views
@@ -104,8 +103,7 @@ class WeatherViewController: UIViewController {
         
     }
     
-    @objc func refreshWeather(_ sender: UITapGestureRecognizer? = nil) {
-        print ("yes")
+    @objc func updateWeather(_ sender: UITapGestureRecognizer? = nil) {
         firstWeather()
         
     }
@@ -159,7 +157,7 @@ class WeatherViewController: UIViewController {
         view.descriptionText.text = Settings.shared.weathers[index].weather[0].description
         
         // Get Date in weather dt and transform it in something readable for human
-        self.refreshView.lastUpdateText.text = Settings.shared.getDate(dt: Settings.shared.weathers[0].dt )
+        self.bringUpToDateView.lastUpdateText.text = Settings.shared.getDate(dt: Settings.shared.weathers[0].dt )
         
         // Get icon to look for for weather anim
         let icon = formatTextForURLRequest(string:Settings.shared.weathers[index].weather[0].icon)

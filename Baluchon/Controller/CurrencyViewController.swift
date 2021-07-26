@@ -15,7 +15,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     
     var currencyView: CurrencyView!
     var background:BackgroundView!
-    var refreshView:RefreshView!
+    var bringUpToDateView:UpdateView!
 
     // MARK: - REQUEST FROM MODEL
     
@@ -38,21 +38,28 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         background = BackgroundView(inView: frame!)
         self.view.addSubview(background)
         
-        refreshView = RefreshView(inView: frame!)
-        self.view.addSubview(refreshView)
-        self.refreshView.lastUpdateText.text = Settings.shared.currencies[0].date
+        bringUpToDateView = UpdateView(inView: frame!)
+        self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
+        self.view.addSubview(bringUpToDateView)
+        
         
         // gesture recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap)
+        
+        let updateTap = UITapGestureRecognizer(target: self, action: #selector(self.updateCurrencies(_:)))
+        self.bringUpToDateView.refreshButton.addGestureRecognizer(updateTap)
         
         // This view controller itself will provide the delegate methods and row data for the table view and text
         currencyView.amountInDollarText.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
+        
         // Function
-        // currency()
+        lastCurrencies()
+        
+        
          
     }
     
@@ -101,37 +108,21 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // Keyboard Hide on tap function
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         currencyView.amountInDollarText.resignFirstResponder()
-        let value = currencyView.amountInDollarText.text ?? " "
-        
-        if Double(value) != nil {
-            let index = (self.tableView.indexPathsForVisibleRows ?? [])
-            self.tableView.reloadRows(at: index, with: .automatic)
-        }
-        else {
-            let index = (self.tableView.indexPathsForVisibleRows ?? [])
-            self.tableView.reloadRows(at: index, with: .automatic)
-            presentUIAlertController(title:Settings.shared.errorTitle, message: Settings.shared.errorTyping)
-            
-        }
+        updateView()
+
         
     }
     
     // Keyboard enter
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         currencyView.amountInDollarText.resignFirstResponder()
-        let value = currencyView.amountInDollarText.text ?? " "
-        
-        if Double(value) != nil {
-            let index = (self.tableView.indexPathsForVisibleRows ?? [])
-            self.tableView.reloadRows(at: index, with: .automatic)
-        }
-        else {
-            let index = (self.tableView.indexPathsForVisibleRows ?? [])
-            self.tableView.reloadRows(at: index, with: .automatic)
-            presentUIAlertController(title:Settings.shared.errorTitle, message: Settings.shared.errorTyping)
-            
-        }
+        updateView()
         return true
+    }
+    
+    @objc func updateCurrencies(_ sender: UITapGestureRecognizer? = nil) {
+        lastCurrencies()
+        
     }
     
     // MARK: - TABLE VIEW UPDATE / LAYOUT
@@ -179,11 +170,11 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - REQUEST FROM MODEL
     
-    func currency() {
+    func lastCurrencies() {
         CurrencyService.shared.getChange(completionHandler: { (success, error, current) in
                                         if success == true {
                                             Settings.shared.saveRates(from: current!)
-                                            
+                                            self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
                                         }
                                         else {
                                             self.presentUIAlertController(title: "Error", message: error!)
@@ -191,6 +182,27 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
                                         }})
         
 
+        
+    }
+    
+    // MARK: - UPDATE VIEW
+    
+    func updateView() {
+        let value = currencyView.amountInDollarText.text ?? " "
+        
+        self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
+        
+        if Double(value) != nil {
+            let index = (self.tableView.indexPathsForVisibleRows ?? [])
+            self.tableView.reloadRows(at: index, with: .automatic)
+            
+        }
+        else {
+            let index = (self.tableView.indexPathsForVisibleRows ?? [])
+            self.tableView.reloadRows(at: index, with: .automatic)
+            presentUIAlertController(title:Settings.shared.errorTitle, message: Settings.shared.errorTyping)
+            
+        }
         
     }
     

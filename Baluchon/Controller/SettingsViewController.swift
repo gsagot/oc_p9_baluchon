@@ -82,7 +82,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             let languageSelected = Settings.shared.currentLanguage
             WeatherService.shared.getWeather(city: cityTextFormated,lang: languageSelected, completionHandler: { (success, erreur, current) in
                                                 if success == true {
-                                                    print ("City is changed")
                                                     Settings.shared.currentCity = cityTextFormated
                                                     self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsCity )
                                                 }

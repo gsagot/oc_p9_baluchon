@@ -7,10 +7,10 @@
 
 import UIKit
 
-class RefreshView : UIView {
+class UpdateView : UIView {
     
     var refreshButton = UIButton()
-    var lastUpdateText = UITextField()
+    var lastUpdateText = UITextView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -29,17 +29,22 @@ class RefreshView : UIView {
         
         self.center.x = inView.center.x
         
-        lastUpdateText.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
-        lastUpdateText.center.x = inView.center.x
-        lastUpdateText.center.y += 40
+        lastUpdateText.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
+        lastUpdateText.center.x = inView.center.x - 30
+        lastUpdateText.center.y += 36
         lastUpdateText.font = UIFont(name: "HelveticaNeue", size: 16)
         lastUpdateText.textColor = UIColor.white
-        lastUpdateText.textAlignment = .center
+        lastUpdateText.textAlignment = .right
+        lastUpdateText.isSelectable = false
+        lastUpdateText.isEditable = false
+        lastUpdateText.isScrollEnabled = false
+        lastUpdateText.backgroundColor = UIColor(white: 1, alpha: 0)
         self.addSubview(lastUpdateText)
         
         
         let image = UIImage(systemName: "arrow.clockwise.circle.fill")
-        refreshButton.frame = CGRect(x: lastUpdateText.frame.maxX + 15, y: 40, width: 30, height: 30)
+        refreshButton.frame = CGRect(x: lastUpdateText.frame.maxX + 5, y: 0, width: 30, height: 30)
+        refreshButton.center.y += 40
         refreshButton.tintColor = UIColor.white
         refreshButton.setBackgroundImage(image, for: .normal)
         
