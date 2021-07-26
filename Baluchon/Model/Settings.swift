@@ -44,17 +44,25 @@ class Settings {
     var labelSettingsLang = "Select language : "
     var textDetectLanguageView = "Language detected : "
     
-    var currencies = [Currency]()
+    // MARK: - PRIVATE
     
-    var weathers = [WeatherResult]()
+    private var currencies = [Currency]()
+    
+    private var weathers = [WeatherResult]()
     
     private init() {
         // Create data for tests offline
         // API requests will overwrite this data
         
-        let curencyData = ChangeResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
-        createCurrenciesArray(from: curencyData)
+        // Currencies ...
+        let curencyData = CurrencyResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
         
+        currencies.append(Currency(code: "CHF", rate:curencyData.rates.CHF, icon: "franc", date: curencyData.date))
+        currencies.append(Currency(code: "EUR", rate:curencyData.rates.EUR, icon: "euro", date: curencyData.date))
+        currencies.append(Currency(code: "GBP", rate:curencyData.rates.GBP, icon: "sterling", date: curencyData.date))
+        currencies.append(Currency(code: "USD", rate:curencyData.rates.USD, icon: "dollars", date: curencyData.date))
+        
+        // Weathers ...
         let weatherData = WeatherResult(weather: [Weather(description: "Description", icon: "10d")], main: Main(temp: 10, humidity: 79), name: "Paris", dt:1626215100)
         
         for _ in 0...1 {
@@ -72,19 +80,24 @@ class Settings {
     func saveWeathersLastIndex (from:WeatherResult) {
         weathers[1] = from
     }
-   
-    func createCurrenciesArray (from: ChangeResult) {
-        currencies.append(Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: "franc", amount: from.rates.CHF, date: from.date))
-        currencies.append(Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR, date: from.date))
-        currencies.append(Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP, date: from.date))
-        currencies.append(Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD, date: from.date))
+    
+    func readWeather (at index: Int)-> WeatherResult {
+        return weathers[index]
     }
     
-    func saveRates (from: ChangeResult) {
-        currencies[0] = Currency(code: "CHF",name:"Swiss Franc", rate:from.rates.CHF, icon: "franc", amount: from.rates.CHF, date: from.date)
-        currencies[1] = Currency(code: "EUR",name:"Euro", rate:from.rates.EUR, icon: "euro", amount: from.rates.EUR, date: from.date)
-        currencies[2] = Currency(code: "GBP",name:"British Pound Sterling", rate:from.rates.GBP, icon: "sterling", amount: from.rates.GBP, date: from.date)
-        currencies[3] = Currency(code: "USD",name:"United States Dollar", rate:from.rates.USD, icon: "dollars", amount: from.rates.USD, date: from.date)
+    func readCurrency (at index: Int)-> Currency {
+        return currencies[index]
+    }
+    
+    func getNumberOfCurrencies ()-> Int {
+        return currencies.count
+    }
+    
+    func saveRate (from: CurrencyResult) {
+        currencies[0] = Currency(code: "CHF", rate:from.rates.CHF, icon: "franc", date: from.date)
+        currencies[1] = Currency(code: "EUR", rate:from.rates.EUR, icon: "euro", date: from.date)
+        currencies[2] = Currency(code: "GBP", rate:from.rates.GBP, icon: "sterling", date: from.date)
+        currencies[3] = Currency(code: "USD", rate:from.rates.USD, icon: "dollars", date: from.date)
     }
     
     // MARK: - UTILS

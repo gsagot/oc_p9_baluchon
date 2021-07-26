@@ -9,7 +9,7 @@ import XCTest
 
 @testable import Baluchon
 
-class ChangeServiceTests: XCTestCase {
+class CurrencyServiceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -43,7 +43,7 @@ class ChangeServiceTests: XCTestCase {
             
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange(completionHandler: { (success, error, current) in
+        changeService.getRate(completionHandler: { (success, error, current) in
             
         // Then
             XCTAssertFalse(success)
@@ -62,7 +62,7 @@ class ChangeServiceTests: XCTestCase {
             
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange(completionHandler: { (success, error, current) in
+        changeService.getRate(completionHandler: { (success, error, current) in
             
         // Then
             XCTAssertFalse(success)
@@ -78,13 +78,13 @@ class ChangeServiceTests: XCTestCase {
         // Given
         let changeService = CurrencyService(
             changeSession: URLSessionFake(
-                data: FakeResponseData.changeIncorrectData,
+                data: FakeResponseData.currencyIncorrectData,
                 response: FakeResponseData.responseKO,
                 error: nil))
             
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange(completionHandler: { (success, error, current) in
+        changeService.getRate(completionHandler: { (success, error, current) in
             
         // Then
             XCTAssertFalse(success)
@@ -101,13 +101,13 @@ class ChangeServiceTests: XCTestCase {
         // Given
         let changeService = CurrencyService(
             changeSession: URLSessionFake(
-                data: FakeResponseData.changeIncorrectData,
+                data: FakeResponseData.currencyIncorrectData,
                 response: FakeResponseData.responseOK,
                 error: nil))
             
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange(completionHandler: { (success, error, current) in
+        changeService.getRate(completionHandler: { (success, error, current) in
             
         // Then
             XCTAssertFalse(success)
@@ -122,13 +122,13 @@ class ChangeServiceTests: XCTestCase {
         // Given
         let changeService = CurrencyService(
             changeSession: URLSessionFake(
-                data: FakeResponseData.changeCorrectData,
+                data: FakeResponseData.currencyCorrectData,
                 response: FakeResponseData.responseOK,
                 error: nil))
             
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange(completionHandler: { (success, error, current) in
+        changeService.getRate(completionHandler: { (success, error, current) in
             
         // Then
             XCTAssertTrue(success)
@@ -157,7 +157,7 @@ class ChangeServiceTests: XCTestCase {
         let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange (completionHandler:{ (success, error, current) in
+        changeService.getRate (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
             XCTAssert(error == Settings.shared.errorData)
@@ -183,7 +183,7 @@ class ChangeServiceTests: XCTestCase {
         let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange (completionHandler:{ (success, error, current) in
+        changeService.getRate (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
             XCTAssert(error == Settings.shared.errorData)
@@ -198,7 +198,7 @@ class ChangeServiceTests: XCTestCase {
         URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
         FakeURLWithProtocol.request = { request in
-            let data: Data? = FakeResponseData.changeIncorrectData
+            let data: Data? = FakeResponseData.currencyIncorrectData
             let response: HTTPURLResponse? = FakeResponseData.responseKO
             let error: Error? = nil
             return (data, response, error)
@@ -209,7 +209,7 @@ class ChangeServiceTests: XCTestCase {
         let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange (completionHandler:{ (success, error, current) in
+        changeService.getRate (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
             XCTAssert(error == Settings.shared.errorReponseCurrency)
@@ -225,7 +225,7 @@ class ChangeServiceTests: XCTestCase {
         URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
         FakeURLWithProtocol.request = { request in
-            let data: Data? = FakeResponseData.changeIncorrectData
+            let data: Data? = FakeResponseData.currencyIncorrectData
             let response: HTTPURLResponse? = FakeResponseData.responseOK
             let error: Error? = nil
             return (data, response, error)
@@ -236,7 +236,7 @@ class ChangeServiceTests: XCTestCase {
         let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange (completionHandler:{ (success, error, current) in
+        changeService.getRate (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertFalse(success)
             XCTAssert(error == Settings.shared.errorJson)
@@ -250,7 +250,7 @@ class ChangeServiceTests: XCTestCase {
         URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
         FakeURLWithProtocol.request = { request in
-            let data: Data? = FakeResponseData.changeCorrectData
+            let data: Data? = FakeResponseData.currencyCorrectData
             let response: HTTPURLResponse? = FakeResponseData.responseOK
             let error: Error? = nil
             return (data, response, error)
@@ -261,7 +261,7 @@ class ChangeServiceTests: XCTestCase {
         let changeService = CurrencyService(changeSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getChange (completionHandler:{ (success, error, current) in
+        changeService.getRate (completionHandler:{ (success, error, current) in
         // Then
             XCTAssertTrue(success)
             XCTAssertNil(error)

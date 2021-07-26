@@ -39,7 +39,6 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(background)
         
         bringUpToDateView = UpdateView(inView: frame!)
-        self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
         self.view.addSubview(bringUpToDateView)
         
         
@@ -57,8 +56,8 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         // Function
+        updateView()
         lastCurrencies()
-        
         
          
     }
@@ -129,7 +128,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Settings.shared.currencies.count
+        return Settings.shared.getNumberOfCurrencies()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,18 +142,24 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CurrencyCell
         let amount = Double(currencyView.amountInDollarText.text ?? "10")
         
-        let rate = Settings.shared.currencies[indexPath.row].rate
-        let code = Settings.shared.currencies[indexPath.row].code
+        // read value at index
+        let rate = Settings.shared.readCurrency(at: indexPath.row).rate
+        let code = Settings.shared.readCurrency(at: indexPath.row).code
+        let icon = Settings.shared.readCurrency(at: indexPath.row).icon
         
+        // Layout cell with tableView
         cell.currencyImage.center.x = tableView.frame.width - 30
         
-        cell.currencyImage.animationImages = animatedImages(for: Settings.shared.currencies[indexPath.row].icon)
+        // Anim
+        cell.currencyImage.animationImages = animatedImages(for: icon)
         cell.currencyImage.animationDuration = 0.9
         cell.currencyImage.animationRepeatCount = .zero
         cell.currencyImage.image = cell.currencyImage.animationImages?.first
         cell.currencyImage.startAnimating()
-        cell.currencyAmount.text = " " + String(format:"%.2f ",rate * Double(0) ) + " "  + code
         
+        // Update Amount 
+        cell.currencyAmount.text = " " + String(format:"%.2f ",rate * Double(0) ) + " "  + code
+
         guard amount != nil else {return cell}
         cell.currencyAmount.text = " " + String(format:"%.2f ",rate * Double(amount!) ) + " "  + code
         
@@ -171,10 +176,10 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - REQUEST FROM MODEL
     
     func lastCurrencies() {
-        CurrencyService.shared.getChange(completionHandler: { (success, error, current) in
+        CurrencyService.shared.getRate(completionHandler: { (success, error, current) in
                                         if success == true {
-                                            Settings.shared.saveRates(from: current!)
-                                            self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
+                                            Settings.shared.saveRate(from: current!)
+                                            self.updateView()
                                         }
                                         else {
                                             self.presentUIAlertController(title: "Error", message: error!)
@@ -190,7 +195,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     func updateView() {
         let value = currencyView.amountInDollarText.text ?? " "
         
-        self.bringUpToDateView.lastUpdateText.text = Settings.shared.currencies[0].date
+        self.bringUpToDateView.lastUpdateText.text = Settings.shared.readCurrency(at: 0).date
         
         if Double(value) != nil {
             let index = (self.tableView.indexPathsForVisibleRows ?? [])

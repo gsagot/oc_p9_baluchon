@@ -27,9 +27,9 @@ class FakeResponseData {
         return try! Data(contentsOf: url)
     }
     
-    static var changeCorrectData: Data? {
+    static var currencyCorrectData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "Change", withExtension: "json")!
+        let url = bundle.url(forResource: "Currencies", withExtension: "json")!
         return try! Data(contentsOf: url)
     }
 
@@ -39,7 +39,7 @@ class FakeResponseData {
     
     static let detectIncorrectData = "erreur".data(using: .utf8)!
     
-    static let changeIncorrectData = "erreur".data(using: .utf8)!
+    static let currencyIncorrectData = "erreur".data(using: .utf8)!
     
 
 

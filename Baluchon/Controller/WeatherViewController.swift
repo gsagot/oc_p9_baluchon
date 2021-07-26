@@ -142,28 +142,34 @@ class WeatherViewController: UIViewController {
     // MARK: - UPDATE VIEW
     
     func updateView(_ view: WeatherView, with index: Int ) {
-        
         // Get city name
-        view.cityText.text = Settings.shared.weathers[index].name
+        let city = Settings.shared.readWeather(at: index).name
+        // Get Weather temp for this location
+        let temp = Settings.shared.readWeather(at: index).main.temp
+        // Get Description
+        let description = Settings.shared.readWeather(at: index).weather[0].description
+        // Need icon for anim
+        let weatherIcon = Settings.shared.readWeather(at: index).weather[0].icon
+        // Use the same icon for night or day so replace the 'n' by 'd'
+        let iconAnim = formatTextForURLRequest(string:weatherIcon)
+        // Date to display last update
+        let updateTime = Settings.shared.readWeather(at: index).dt
         
-        // Update Font size If too long city selected
+        // Update views
+        view.cityText.text = city
         if view.cityText.text.count > 16 {
             view.cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 21)
         }else {
             view.cityText.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
         }
-        // Get Weather temp for this location
-        view.temperatureText.text = String(format: "%.0f", Settings.shared.weathers[index].main.temp ) + "°"
-        view.descriptionText.text = Settings.shared.weathers[index].weather[0].description
+        view.temperatureText.text = String(format: "%.0f", temp ) + "°"
+        view.descriptionText.text = description
         
         // Get Date in weather dt and transform it in something readable for human
-        self.bringUpToDateView.lastUpdateText.text = Settings.shared.getDate(dt: Settings.shared.weathers[0].dt )
-        
-        // Get icon to look for for weather anim
-        let icon = formatTextForURLRequest(string:Settings.shared.weathers[index].weather[0].icon)
-        
+        self.bringUpToDateView.lastUpdateText.text = Settings.shared.getDate(dt: updateTime)
+
         // Build animation
-        view.iconImage.animationImages = animatedImages(for: icon)
+        view.iconImage.animationImages = animatedImages(for: iconAnim)
         view.iconImage.animationDuration = 0.9
         view.iconImage.animationRepeatCount = .zero
         view.iconImage.image = view.iconImage.animationImages?.first

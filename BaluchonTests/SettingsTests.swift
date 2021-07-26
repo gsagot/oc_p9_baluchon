@@ -46,7 +46,7 @@ class SettingsTests: XCTestCase {
     func testSaveWeatherDataWhenGetWeatherThenDataShouldBeSavedinArrayAtIndexOne(){
         let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris", dt: 1626215100)
         Settings.shared.saveWeathersLastIndex(from: weatherData)
-        XCTAssert(Settings.shared.weathers[1].main.humidity == 79)
+        XCTAssert(Settings.shared.readWeather(at: 1).main.humidity == 79)
         
         
     }
@@ -54,9 +54,16 @@ class SettingsTests: XCTestCase {
     func testSaveWeatherDataWhenGetWeatherThenDataShouldBeSavedinArrayAtIndexZero(){
         let weatherData = WeatherResult(weather: [Weather(description: "légère pluie", icon: "10d")], main: Main(temp: 293.09, humidity: 79), name: "Paris", dt: 1626215100)
         Settings.shared.saveWeathersFirstIndex(from: weatherData)
-        XCTAssert(Settings.shared.weathers[0].main.humidity == 79)
+        XCTAssert(Settings.shared.readWeather(at: 0).main.humidity == 79)
+
+    }
+    
+    func testSaveCurrenciesDataWhenSaveCurrencyThenDataShouldBeSavedinArrayAtIndexZero(){
+        let curencyData = CurrencyResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.10358))
+        Settings.shared.saveRate(from: curencyData)
+        XCTAssert(Settings.shared.readCurrency(at: 0).rate == 1.10358)
         
-        
+      
     }
     
     

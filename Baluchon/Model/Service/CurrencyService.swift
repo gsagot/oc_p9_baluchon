@@ -24,7 +24,7 @@ class CurrencyService {
         CurrencyService.shared = CurrencyService()
     }
     
-    func getChange(completionHandler: @escaping ((Bool, String?, ChangeResult? ) -> Void)) {
+    func getRate(completionHandler: @escaping ((Bool, String?, CurrencyResult? ) -> Void)) {
         
         //let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=\(key.rate)")!
         
@@ -48,7 +48,7 @@ class CurrencyService {
                     completionHandler (false, Settings.shared.errorReponseCurrency, nil)
                     return
                 }
-                guard let result = try? JSONDecoder().decode(ChangeResult.self, from: data) else {
+                guard let result = try? JSONDecoder().decode(CurrencyResult.self, from: data) else {
                     print("JSON ERROR: \(String(describing: error?.localizedDescription))")
                     completionHandler (false, Settings.shared.errorJson, nil)
                     return

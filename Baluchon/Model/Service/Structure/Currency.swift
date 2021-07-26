@@ -15,7 +15,7 @@ struct Rates: Codable {
     
 }
 
-struct ChangeResult: Codable {
+struct CurrencyResult: Codable {
     var base: String
     var date: String
     var rates: Rates
@@ -24,9 +24,7 @@ struct ChangeResult: Codable {
 
 struct Currency {
     var code:String
-    var name:String
     var rate:Double
     var icon:String
-    var amount:Double
     var date:String
 }
