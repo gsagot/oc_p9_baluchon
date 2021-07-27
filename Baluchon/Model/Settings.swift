@@ -24,10 +24,6 @@ class Settings {
         case en
     }
     
-    var currentCity = "Paris"
-    
-    var currentLanguage = "en"
-    
     var langAvailable = ["English","French"]
   
     var errorTitle = "Error"
@@ -49,6 +45,10 @@ class Settings {
     private var currencies = [Currency]()
     
     private var weathers = [WeatherResult]()
+    
+    private var currentCity = "Paris"
+    
+    private var currentLanguage = "en"
     
     private init() {
         // Create data for tests offline
@@ -72,6 +72,18 @@ class Settings {
     }
     
     // MARK: - FUNCTIONS TO STORE DATA FROM SERVICES
+    
+    func getCurrentCity()-> String{
+        return currentCity
+    }
+    
+    func getCurrentLanguage()-> String{
+        return currentLanguage
+    }
+    
+    func setCurrentCity(_ city:String) {
+        currentCity = city
+    }
     
     func saveWeathersFirstIndex (from:WeatherResult) {
         weathers[0] = from

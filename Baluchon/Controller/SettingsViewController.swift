@@ -79,10 +79,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
             // Avoid space for weather request and replace by "+"
             // Also add "+" to the end : without Lyon become arrondissement de Lyon...
             let cityTextFormated = formatTextForURLRequest(string: settingsView.cityText.text!) + "+"
-            let languageSelected = Settings.shared.currentLanguage
+            let languageSelected = Settings.shared.getCurrentLanguage()
             WeatherService.shared.getWeather(city: cityTextFormated,lang: languageSelected, completionHandler: { (success, erreur, current) in
                                                 if success == true {
-                                                    Settings.shared.currentCity = cityTextFormated
+                                                    Settings.shared.setCurrentCity(cityTextFormated)
+                                                    print ("Current City: \( Settings.shared.getCurrentCity() )" )
                                                     self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsCity )
                                                 }
                                                 else {
@@ -103,7 +104,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         if choose == 1 {
             Settings.shared.changeLanguage(with: .fr)
         }
-        print ("Current Language: \(Settings.shared.currentLanguage)")
+        print ("Current Language: \( Settings.shared.getCurrentLanguage() )" )
         updateView()
         self.presentUIAlertController(title: "Info", message: Settings.shared.infoSettingsLanguage)
     }

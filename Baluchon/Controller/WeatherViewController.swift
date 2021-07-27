@@ -110,24 +110,28 @@ class WeatherViewController: UIViewController {
     
     // MARK: - REQUEST FROM MODEL
     
-    // Get weather first for New York ...
+    // Get weather first for Paris.
     func firstWeather () {
-        WeatherService.shared.getWeather(city:Settings.shared.currentCity,lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
-            if success == true {
-                // Store in weather array
-                Settings.shared.saveWeathersFirstIndex(from: current!)
-                self.secondWeather()
-                self.updateView(self.wantedCityView, with: 0)
-            }
-            else {
-                self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
-                
-            } })
+        let city = Settings.shared.getCurrentCity()
+        let lang = Settings.shared.getCurrentLanguage()
+        WeatherService.shared.getWeather(city:city, lang:lang ,completionHandler: { (success, erreur, current) in
+                                            if success == true {
+                                                // Store in weather array
+                                                Settings.shared.saveWeathersFirstIndex(from: current!)
+                                                self.secondWeather()
+                                                self.updateView(self.wantedCityView, with: 0)
+                                            }
+                                            else {
+                                                self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
+                                                
+                                            } })
     }
     
-    // then for Paris ...
+    // Then for New York.
     func secondWeather () {
-        WeatherService.shared.getWeather(city: "New+York",lang: Settings.shared.currentLanguage , completionHandler: { (success, erreur, current) in
+        let city = "New+York"
+        let lang = Settings.shared.getCurrentLanguage()
+        WeatherService.shared.getWeather(city:city, lang:lang, completionHandler: { (success, erreur, current) in
             if success == true {
                 // Store in weather array
                 Settings.shared.saveWeathersLastIndex(from: current!)

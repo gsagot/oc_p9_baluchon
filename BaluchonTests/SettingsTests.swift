@@ -34,12 +34,17 @@ class SettingsTests: XCTestCase {
     
     func testCurrentLanguageWhenChangeToEnglishLanguageThenCurrentLanguageShouldUpdate() {
         Settings.shared.changeLanguage(with: .en)
-        XCTAssert(Settings.shared.currentLanguage == "en")
+        XCTAssert(Settings.shared.getCurrentLanguage() == "en")
     }
     
     func testCurrentLanguageWhenChangeToFrenchLanguageThenCurrentLanguageShouldUpdate() {
         Settings.shared.changeLanguage(with: .fr)
-        XCTAssert(Settings.shared.currentLanguage == "fr")
+        XCTAssert(Settings.shared.getCurrentLanguage() == "fr")
+    }
+    
+    func testCurrentCityWhenChangeCityThenCurrentCityShouldUpdate() {
+        Settings.shared.setCurrentCity("Bordeaux")
+        XCTAssert(Settings.shared.getCurrentCity() == "Bordeaux")
     }
     
     
