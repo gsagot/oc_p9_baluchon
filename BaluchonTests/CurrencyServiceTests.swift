@@ -36,112 +36,6 @@ class CurrencyServiceTests: XCTestCase {
         }
     }
     
-    func testGetChangeShouldPostFailedCallbackIfError() {
-        // Given
-        let changeService = CurrencyService(
-            changeSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.changeError))
-            
-        // When
-        let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getRate(completionHandler: { (success, error, current) in
-            
-        // Then
-            XCTAssertFalse(success)
-            XCTAssert(error == Settings.shared.errorData)
-            XCTAssertNil(current)
-            expectation.fulfill()
-        })
-        wait(for: [expectation], timeout: 1)
- 
-    }
-    
-    func testGetChangeShouldPostFailedCallbackIfNoData() {
-        // Given
-        let changeService = CurrencyService(
-            changeSession: URLSessionFake(data: nil, response: nil, error: nil))
-            
-        // When
-        let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getRate(completionHandler: { (success, error, current) in
-            
-        // Then
-            XCTAssertFalse(success)
-            XCTAssert(error == Settings.shared.errorData)
-            XCTAssertNil(current)
-            expectation.fulfill()
-        })
-        wait(for: [expectation], timeout: 1)
- 
-    }
-    
-    func testGetChangeShouldPostFailedCallbackIfIncorrectResponse(){
-        // Given
-        let changeService = CurrencyService(
-            changeSession: URLSessionFake(
-                data: FakeResponseData.currencyIncorrectData,
-                response: FakeResponseData.responseKO,
-                error: nil))
-            
-        // When
-        let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getRate(completionHandler: { (success, error, current) in
-            
-        // Then
-            XCTAssertFalse(success)
-            XCTAssert(error == Settings.shared.errorReponseCurrency)
-            XCTAssertNil(current)
-            expectation.fulfill()
-        })
-        wait(for: [expectation], timeout: 1)
- 
-    }
-    
-    
-    func testGetChangeShouldPostFailedCallbackIfIncorrectData() {
-        // Given
-        let changeService = CurrencyService(
-            changeSession: URLSessionFake(
-                data: FakeResponseData.currencyIncorrectData,
-                response: FakeResponseData.responseOK,
-                error: nil))
-            
-        // When
-        let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getRate(completionHandler: { (success, error, current) in
-            
-        // Then
-            XCTAssertFalse(success)
-            XCTAssert(error == Settings.shared.errorJson)
-            XCTAssertNil(current)
-            expectation.fulfill()
-        })
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    func testGetChangeShouldPostSuccessCallbackIfCorrectResponseWithData() {
-        // Given
-        let changeService = CurrencyService(
-            changeSession: URLSessionFake(
-                data: FakeResponseData.currencyCorrectData,
-                response: FakeResponseData.responseOK,
-                error: nil))
-            
-        // When
-        let expectation = XCTestExpectation(description: "Wait for queue change.")
-        changeService.getRate(completionHandler: { (success, error, current) in
-            
-        // Then
-            XCTAssertTrue(success)
-            XCTAssertNil(error)
-            XCTAssert(current?.rates.EUR == 1)
-            expectation.fulfill()
-        })
-        wait(for: [expectation], timeout: 1)
-    }
- 
-    //PROTOCOL TESTS///////////////////////////////////////////////
-    // ////////////////////////////////////////////////////////////
-    
     func testGetChangeByProtocolShouldPostFailedCallbackIfError() {
         URLProtocol.registerClass(FakeURLWithProtocol.self)
         // Given
@@ -270,5 +164,111 @@ class CurrencyServiceTests: XCTestCase {
         })
         wait(for: [expectation], timeout: 1)
     }
+    
+    // BEFORE iOS 13
+    /*
+      func testGetChangeShouldPostFailedCallbackIfError() {
+          // Given
+          let changeService = CurrencyService(
+              changeSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.changeError))
+              
+          // When
+          let expectation = XCTestExpectation(description: "Wait for queue change.")
+          changeService.getRate(completionHandler: { (success, error, current) in
+              
+          // Then
+              XCTAssertFalse(success)
+              XCTAssert(error == Settings.shared.errorData)
+              XCTAssertNil(current)
+              expectation.fulfill()
+          })
+          wait(for: [expectation], timeout: 1)
+   
+      }
+      
+      func testGetChangeShouldPostFailedCallbackIfNoData() {
+          // Given
+          let changeService = CurrencyService(
+              changeSession: URLSessionFake(data: nil, response: nil, error: nil))
+              
+          // When
+          let expectation = XCTestExpectation(description: "Wait for queue change.")
+          changeService.getRate(completionHandler: { (success, error, current) in
+              
+          // Then
+              XCTAssertFalse(success)
+              XCTAssert(error == Settings.shared.errorData)
+              XCTAssertNil(current)
+              expectation.fulfill()
+          })
+          wait(for: [expectation], timeout: 1)
+   
+      }
+      
+      func testGetChangeShouldPostFailedCallbackIfIncorrectResponse(){
+          // Given
+          let changeService = CurrencyService(
+              changeSession: URLSessionFake(
+                  data: FakeResponseData.currencyIncorrectData,
+                  response: FakeResponseData.responseKO,
+                  error: nil))
+              
+          // When
+          let expectation = XCTestExpectation(description: "Wait for queue change.")
+          changeService.getRate(completionHandler: { (success, error, current) in
+              
+          // Then
+              XCTAssertFalse(success)
+              XCTAssert(error == Settings.shared.errorReponseCurrency)
+              XCTAssertNil(current)
+              expectation.fulfill()
+          })
+          wait(for: [expectation], timeout: 1)
+   
+      }
+      
+      
+      func testGetChangeShouldPostFailedCallbackIfIncorrectData() {
+          // Given
+          let changeService = CurrencyService(
+              changeSession: URLSessionFake(
+                  data: FakeResponseData.currencyIncorrectData,
+                  response: FakeResponseData.responseOK,
+                  error: nil))
+              
+          // When
+          let expectation = XCTestExpectation(description: "Wait for queue change.")
+          changeService.getRate(completionHandler: { (success, error, current) in
+              
+          // Then
+              XCTAssertFalse(success)
+              XCTAssert(error == Settings.shared.errorJson)
+              XCTAssertNil(current)
+              expectation.fulfill()
+          })
+          wait(for: [expectation], timeout: 1)
+      }
+      
+      func testGetChangeShouldPostSuccessCallbackIfCorrectResponseWithData() {
+          // Given
+          let changeService = CurrencyService(
+              changeSession: URLSessionFake(
+                  data: FakeResponseData.currencyCorrectData,
+                  response: FakeResponseData.responseOK,
+                  error: nil))
+              
+          // When
+          let expectation = XCTestExpectation(description: "Wait for queue change.")
+          changeService.getRate(completionHandler: { (success, error, current) in
+              
+          // Then
+              XCTAssertTrue(success)
+              XCTAssertNil(error)
+              XCTAssert(current?.rates.EUR == 1)
+              expectation.fulfill()
+          })
+          wait(for: [expectation], timeout: 1)
+      }
+   */
 
 }

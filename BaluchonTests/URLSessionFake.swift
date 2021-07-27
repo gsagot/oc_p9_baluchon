@@ -7,6 +7,12 @@
 
 import Foundation
 
+// WARNING !
+// Thid method creates warning with iOS 13 and above ...
+// init() is deprecated
+// Use URLProtocol instead of URLSession
+
+/*
 class URLSessionFake: URLSession {
     var data: Data?
     var response: URLResponse?
@@ -52,6 +58,7 @@ class URLSessionDataTaskFake: URLSessionDataTask {
 
     override func cancel() {}
 }
+ */
 
 
 
