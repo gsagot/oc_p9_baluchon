@@ -39,6 +39,7 @@ class Settings {
     var labelSettingsCity:String!
     var labelSettingsLang:String!
     var textDetectLanguageView:String!
+    var placeHolderTranslateView:String!
     
     // MARK: - PRIVATE
     
@@ -160,6 +161,7 @@ class Settings {
             labelSettingsCity = "A city to compare New York with :"
             labelSettingsLang = "Select language : "
             textDetectLanguageView = "Language detected : "
+            placeHolderTranslateView = "Text to translate here"
         }
         if language == .fr {
             
@@ -180,6 +182,7 @@ class Settings {
             labelSettingsCity = "Comparer New York avec une ville :"
             labelSettingsLang = "séléctionner une langue : "
             textDetectLanguageView = "Langue detectée : "
+            placeHolderTranslateView = "Text à traduire ici"
         }
 
     }

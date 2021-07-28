@@ -13,6 +13,7 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var translateTextView: UITextView!
     @IBOutlet var detectTextView: UITextView!
     @IBOutlet var translateButton: UIButton!
+    @IBOutlet var resultTextView: UITextView!
     
     var background:BackgroundView!
     
@@ -27,6 +28,12 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
         self.view.sendSubviewToBack(gradientView)
         background = BackgroundView(inView: frame!)
         self.view.addSubview(background)
+        self.view.bringSubviewToFront(resultTextView)
+        
+        resultTextView.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        resultTextView.isSelectable = false
+        resultTextView.isEditable = false
+        
         
         // gesture recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -53,13 +60,19 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
         background.start(at: CGFloat(Settings.shared.AnimBackgroundPos))
         self.translateTextView.alpha = 0
         self.detectTextView.alpha = 0
+        self.resultTextView.alpha = 0
         self.translateButton.alpha = 0
+      
     }
 
     // MARK: - LAUNCH ANIMATIONS
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidLoad()
+        
+        translateTextView.text = Settings.shared.placeHolderTranslateView
+        translateTextView.textColor = UIColor.lightGray
+        resultTextView.text = " "
         
         background.move(to: CGFloat(Settings.shared.AnimBackgroundRef) - (self.view.bounds.width * 2) )
         anim()
@@ -79,6 +92,9 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
             self.translateButton.alpha = 100
         }, completion: nil)
         
+        UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
+            self.resultTextView.alpha = 100
+        }, completion: nil)
        
         
         Settings.shared.AnimBackgroundPos = Float(background.center.x)
@@ -99,6 +115,14 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
            }
            return true
        }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor (red:(103/255), green:(141/255), blue: (196/255), alpha: (255/255) )
+        }
+    }
+
     
     // detect language
     
@@ -131,7 +155,7 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
                                                source: language,
                                                completionHandler: { (success, erreur, translation) in
                                                 if success == true {
-                                                    self.updateView(self.translateTextView,
+                                                    self.updateView(self.resultTextView,
                                                                     with: translation!.data.translations[0].translatedText)
                                                 }else{
                                                     self.presentUIAlertController(title: Settings.shared.errorTitle,

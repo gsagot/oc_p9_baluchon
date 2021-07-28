@@ -66,7 +66,20 @@ class SettingsTests: XCTestCase {
     func testSaveCurrenciesDataWhenSaveCurrencyThenDataShouldBeSavedinArrayAtIndexZero(){
         let curencyData = CurrencyResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.10358))
         Settings.shared.saveRate(from: curencyData)
-        XCTAssert(Settings.shared.readCurrency(at: 0).rate == 1.10358)
+        XCTAssert(Settings.shared.readCurrency(at: 2).rate == 1.10358)
+        
+      
+    }
+    
+    
+    func testFormatTextWhenformatTextThenTextShouldUpdate(){
+        let city = "New York"
+        let otherCity = "Bordeaux+"
+        let icon = "10n"
+        
+        XCTAssert(Settings.shared.formatTextForURLRequest(string: city) == "New+York")
+        XCTAssert(Settings.shared.formatTextForView(string: otherCity) == "Bordeaux ")
+        XCTAssert(Settings.shared.formatTextForIconAnim(string: icon) == "10d")
         
       
     }
