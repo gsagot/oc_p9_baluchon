@@ -72,6 +72,9 @@ class WeatherViewController: UIViewController {
         // Set Alpha for Views
         currentCityView.alpha = 0
         wantedCityView.alpha = 0
+        bringUpToDateView.alpha = 0
+        bringUpToDateView.center.y -= 50
+        
         // Set Background skyline position...
         background.start(at: CGFloat(Settings.shared.AnimBackgroundPos))
     }
@@ -96,6 +99,10 @@ class WeatherViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5, delay: 0.8, options: [], animations: {
             self.wantedCityView.alpha = 100
+        }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.8, options: [], animations: {
+            self.bringUpToDateView.center.y += 50
+            self.bringUpToDateView.alpha = 100
         }, completion: nil)
         // ... Then store Background skyline position. It will be the start position in the next controller
         Settings.shared.AnimBackgroundPos = Float(background.center.x)

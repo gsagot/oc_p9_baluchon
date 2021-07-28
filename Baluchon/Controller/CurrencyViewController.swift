@@ -76,6 +76,9 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         background.start(at: CGFloat(Settings.shared.AnimBackgroundPos))
         currencyView.alpha = 0
         tableView.alpha = 0
+        bringUpToDateView.alpha = 0
+        bringUpToDateView.center.y -= 50
+       
     }
     
     // MARK: - LAUNCH ANIMATIONS
@@ -96,6 +99,11 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         
         UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
             self.tableView.alpha = 100
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
+            self.bringUpToDateView.center.y += 50
+            self.bringUpToDateView.alpha = 100
         }, completion: nil)
         
         Settings.shared.AnimBackgroundPos = Float(background.center.x)
