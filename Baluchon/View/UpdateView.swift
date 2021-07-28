@@ -9,8 +9,8 @@ import UIKit
 
 class UpdateView : UIView {
     
-    var refreshButton = UIButton()
-    var lastUpdateText = UITextView()
+    let refreshButton = UIButton()
+    let lastUpdateText = UITextView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

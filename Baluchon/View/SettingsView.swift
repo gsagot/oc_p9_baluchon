@@ -9,14 +9,14 @@ import UIKit
 
 class SettingsView : UIView {
     
-    var picker = UIPickerView()
-    var valideLanguageButton = UIButton()
+    let picker = UIPickerView()
+    let valideLanguageButton = UIButton()
     
-    var cityText = UITextField()
-    var cityLabel = UITextView()
-    var langLabel = UITextView()
-    var valideCityButton = UIButton()
-    var valideLangButton = UIButton()
+    let cityText = UITextField()
+    let cityLabel = UITextView()
+    let langLabel = UITextView()
+    let valideCityButton = UIButton()
+    let valideLangButton = UIButton()
     
     
     required init?(coder: NSCoder) {

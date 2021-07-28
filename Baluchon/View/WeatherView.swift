@@ -9,13 +9,13 @@ import UIKit
 
 class WeatherView: UIView {
     
-    var temperatureText = UITextField()
-    var cityText = UITextView()
-    var descriptionText = UITextView()
-    var iconImage = UIImageView()
-    var borderView = UIView()
+    let temperatureText = UITextField()
+    let cityText = UITextView()
+    let descriptionText = UITextView()
+    let iconImage = UIImageView()
+    let borderView = UIView()
     
-    var weatherAnim = [UIImage]()
+    //var weatherAnim = [UIImage]()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

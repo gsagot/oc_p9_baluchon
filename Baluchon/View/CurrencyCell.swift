@@ -9,9 +9,9 @@ import UIKit
 
 class CurrencyCell: UITableViewCell {
     
-    var currencyName = UITextView()
-    var currencyAmount = UITextView()
-    var currencyImage = UIImageView()
+    let currencyName = UITextView()
+    let currencyAmount = UITextView()
+    let currencyImage = UIImageView()
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

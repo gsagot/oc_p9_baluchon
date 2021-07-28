@@ -24,21 +24,21 @@ class Settings {
         case en
     }
     
-    var langAvailable = ["English","French"]
+    var langAvailable = [String]()
   
-    var errorTitle = "Error"
-    var errorReponseWeather = "Can't find city"
-    var errorReponseCurrency = "invalid base currency"
-    var errorReponseTranslate = "Error trying to translate"
-    var errorReponseDetect = "Can't detect language"
-    var errorJson = "An error occurred, please try again"
-    var errorData = "Can't connect to the server, please verify your connexion"
-    var errorTyping = "Typing error"
-    var infoSettingsLanguage = "Language updated"
-    var infoSettingsCity = "City updated"
-    var labelSettingsCity = "A city to compare New York with :"
-    var labelSettingsLang = "Select language : "
-    var textDetectLanguageView = "Language detected : "
+    var errorTitle:String!
+    var errorReponseWeather:String!
+    var errorReponseCurrency:String!
+    var errorReponseTranslate:String!
+    var errorReponseDetect:String!
+    var errorJson:String!
+    var errorData:String!
+    var errorTyping:String!
+    var infoSettingsLanguage:String!
+    var infoSettingsCity:String!
+    var labelSettingsCity:String!
+    var labelSettingsLang:String!
+    var textDetectLanguageView:String!
     
     // MARK: - PRIVATE
     
@@ -68,6 +68,9 @@ class Settings {
         for _ in 0...1 {
             weathers.append(weatherData)
         }
+        
+        // Language
+        changeLanguage ( with: .en)
    
     }
     
@@ -130,9 +133,8 @@ class Settings {
             
             currentLanguage = "en"
             
-            langAvailable[0] = "English"
-            langAvailable[1] = "French"
-            
+            langAvailable = ["English","French"]
+
             errorTitle = "Error"
             errorReponseWeather = "Can't find city"
             errorReponseCurrency = "invalid base currency"
@@ -151,8 +153,7 @@ class Settings {
             
             currentLanguage = "fr"
             
-            langAvailable[0] = "Anglais"
-            langAvailable[1] = "Français"
+            langAvailable = ["Anglais","Français"]
             
             errorTitle = "Erreur"
             errorReponseWeather = "Ville non disponible"

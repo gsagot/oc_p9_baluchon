@@ -9,11 +9,11 @@ import UIKit
 
 class CurrencyView: UIView {
     
-    var amountInDollarText = UITextField()
-    var currencyCodeText = UITextView()
-    var explenationText = UITextView()
-    var validationButton = UIButton()
-    var borderView = UIView()
+    let amountInDollarText = UITextField()
+    let currencyCodeText = UITextView()
+    let explenationText = UITextView()
+    let validationButton = UIButton()
+    let borderView = UIView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
