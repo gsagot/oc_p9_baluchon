@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherView: UIView {
     
-    let temperatureText = UITextField()
+    let temperatureText = UITextView()
     let cityText = UITextView()
     let descriptionText = UITextView()
     let iconImage = UIImageView()
@@ -51,11 +51,14 @@ class WeatherView: UIView {
         
         
         temperatureText.frame = CGRect(x:10,y:descriptionText.frame.maxY,width:240,height:50)
+        temperatureText.center.y -= 10
         temperatureText.textColor = UIColor.white
         temperatureText.backgroundColor = UIColor(white: 1, alpha: 0)
         temperatureText.font = UIFont(name: "HelveticaNeue-Bold", size: 40)
         temperatureText.text = "0" + "°"
-        temperatureText.layer.cornerRadius = 10
+        temperatureText.isScrollEnabled = false
+        temperatureText.isSelectable = false
+        temperatureText.isEditable = false
         self.addSubview(temperatureText)
         
         iconImage.frame = CGRect(x:0,y:0,width:100,height:100)

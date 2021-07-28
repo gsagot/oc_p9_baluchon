@@ -49,8 +49,12 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         let updateTap = UITapGestureRecognizer(target: self, action: #selector(self.updateCurrencies(_:)))
         self.bringUpToDateView.refreshButton.addGestureRecognizer(updateTap)
         
+        let validationAmountTap = UITapGestureRecognizer(target: self, action: #selector(self.handleValidationForCity(_:)))
+        self.currencyView.validationButton.addGestureRecognizer(validationAmountTap)
+        
         // This view controller itself will provide the delegate methods and row data for the table view and text
         currencyView.amountInDollarText.delegate = self
+        currencyView.amountInDollarText.keyboardType = .numbersAndPunctuation
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -115,9 +119,23 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // Keyboard Hide on tap function
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         currencyView.amountInDollarText.resignFirstResponder()
-        updateView()
 
+    }
+    
+    @objc func handleValidationForCity(_ sender: UITapGestureRecognizer? = nil) {
+        currencyView.amountInDollarText.resignFirstResponder()
+        updateView()
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 5
     }
     
     // Keyboard enter
@@ -126,6 +144,7 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         updateView()
         return true
     }
+    
     
     @objc func updateCurrencies(_ sender: UITapGestureRecognizer? = nil) {
         lastCurrencies()

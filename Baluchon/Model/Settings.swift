@@ -57,10 +57,10 @@ class Settings {
         // Currencies ...
         let curencyData = CurrencyResult(base: "EUR",date:"2021-07-06",rates: Rates(USD: 1.184953, EUR: 1, GBP: 0.855412, CHF: 1.09357))
         
+        currencies.append(Currency(code: "USD", rate:curencyData.rates.USD, icon: "dollars", date: curencyData.date))
+        currencies.append(Currency(code: "GBP", rate:curencyData.rates.GBP, icon: "sterling", date: curencyData.date))
         currencies.append(Currency(code: "CHF", rate:curencyData.rates.CHF, icon: "franc", date: curencyData.date))
         currencies.append(Currency(code: "EUR", rate:curencyData.rates.EUR, icon: "euro", date: curencyData.date))
-        currencies.append(Currency(code: "GBP", rate:curencyData.rates.GBP, icon: "sterling", date: curencyData.date))
-        currencies.append(Currency(code: "USD", rate:curencyData.rates.USD, icon: "dollars", date: curencyData.date))
         
         // Weathers ...
         let weatherData = WeatherResult(weather: [Weather(description: "Description", icon: "10d")], main: Main(temp: 10, humidity: 79), name: "Paris", dt:1626215100)
@@ -109,10 +109,10 @@ class Settings {
     }
     
     func saveRate (from: CurrencyResult) {
-        currencies[0] = Currency(code: "CHF", rate:from.rates.CHF, icon: "franc", date: from.date)
-        currencies[1] = Currency(code: "EUR", rate:from.rates.EUR, icon: "euro", date: from.date)
-        currencies[2] = Currency(code: "GBP", rate:from.rates.GBP, icon: "sterling", date: from.date)
-        currencies[3] = Currency(code: "USD", rate:from.rates.USD, icon: "dollars", date: from.date)
+        currencies[0] = Currency(code: "USD", rate:from.rates.USD, icon: "dollars", date: from.date)
+        currencies[1] = Currency(code: "GBP", rate:from.rates.GBP, icon: "sterling", date: from.date)
+        currencies[2] = Currency(code: "CHF", rate:from.rates.CHF, icon: "franc", date: from.date)
+        currencies[3] = Currency(code: "EUR", rate:from.rates.EUR, icon: "euro", date: from.date)
     }
     
     // MARK: - UTILS

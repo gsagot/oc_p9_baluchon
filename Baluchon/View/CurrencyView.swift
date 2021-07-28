@@ -35,7 +35,7 @@ class CurrencyView: UIView {
         borderView.center.x = (rect.maxX - 10) / 2
         self.addSubview(borderView)
         
-        amountInDollarText.frame = CGRect(x:10,y:20,width:240,height:40)
+        amountInDollarText.frame = CGRect(x:10,y:20,width:180,height:50)
         amountInDollarText.textColor = UIColor.white
         amountInDollarText.backgroundColor = UIColor(white: 1, alpha: 0.0)
         amountInDollarText.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
@@ -51,6 +51,11 @@ class CurrencyView: UIView {
         currencyCodeText.isEditable = false
         self.addSubview(currencyCodeText)
         
+        validationButton.frame = CGRect(x:amountInDollarText.frame.width,y:20,width:50,height:50)
+        let imageUpdate = UIImage(systemName: "checkmark.circle.fill")
+        validationButton.setBackgroundImage(imageUpdate, for: .normal)
+        validationButton.tintColor = UIColor.white
+        self.addSubview(validationButton)
     }
     
 }

@@ -31,7 +31,7 @@ class UpdateView : UIView {
         
         lastUpdateText.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
         lastUpdateText.center.x = inView.center.x - 30
-        lastUpdateText.center.y += 36
+        lastUpdateText.center.y += 35
         lastUpdateText.font = UIFont(name: "HelveticaNeue", size: 16)
         lastUpdateText.textColor = UIColor.white
         lastUpdateText.textAlignment = .right
@@ -42,9 +42,9 @@ class UpdateView : UIView {
         self.addSubview(lastUpdateText)
         
         
-        let image = UIImage(systemName: "arrow.clockwise.circle.fill")
-        refreshButton.frame = CGRect(x: lastUpdateText.frame.maxX + 5, y: 0, width: 30, height: 30)
-        refreshButton.center.y += 40
+        let image = UIImage(systemName: "arrow.clockwise.circle")
+        refreshButton.frame = CGRect(x: lastUpdateText.frame.maxX + 5, y: 0, width: 20, height: 20)
+        refreshButton.center.y += 43
         refreshButton.tintColor = UIColor.white
         refreshButton.setBackgroundImage(image, for: .normal)
         
