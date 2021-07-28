@@ -125,6 +125,18 @@ class Settings {
         return result
     }
     
+    func formatTextForURLRequest(string:String)-> String {
+        return string.replacingOccurrences(of: " ", with: "+")
+    }
+    
+    func formatTextForView(string:String)-> String {
+        return string.replacingOccurrences(of: "+", with: " ")
+    }
+    
+    func formatTextForIconAnim(string:String)-> String {
+        return string.replacingOccurrences(of: "n", with: "d")
+    }
+
     // MARK: - CHANGE APPLICATION LANGUAGE
     
     func changeLanguage (with language: Lang) {

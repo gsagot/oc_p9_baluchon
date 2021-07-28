@@ -78,7 +78,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
         if settingsView.cityText.text != nil {
             // Avoid space for weather request and replace by "+"
             // Also add "+" to the end : without Lyon become arrondissement de Lyon...
-            let cityTextFormated = formatTextForURLRequest(string: settingsView.cityText.text!) + "+"
+            let cityTextFormated = Settings.shared.formatTextForURLRequest(string: settingsView.cityText.text!) + "+"
             let languageSelected = Settings.shared.getCurrentLanguage()
             WeatherService.shared.getWeather(city: cityTextFormated,lang: languageSelected, completionHandler: { (success, erreur, current) in
                                                 if success == true {
@@ -90,7 +90,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
                                                     self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
                                                     
                                                 } })
-  
+            
         }
     }
     
@@ -171,14 +171,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIPickerVie
     }
     
     // MARK: - UTILS
-    
-    func formatTextForURLRequest(string:String)-> String {
-        return string.replacingOccurrences(of: " ", with: "+")
-    }
-    
-    func formatTextForView(string:String)-> String {
-        return string.replacingOccurrences(of: "+", with: " ")
-    }
     
     func animatedImages(for name: String) -> [UIImage] {
         

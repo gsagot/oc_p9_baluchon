@@ -162,7 +162,7 @@ class WeatherViewController: UIViewController {
         // Need icon for anim
         let weatherIcon = Settings.shared.readWeather(at: index).weather[0].icon
         // Use the same icon for night or day so replace the 'n' by 'd'
-        let iconAnim = formatTextForURLRequest(string:weatherIcon)
+        let iconAnim = Settings.shared.formatTextForIconAnim(string:weatherIcon)
         // Date to display last update
         let updateTime = Settings.shared.readWeather(at: index).dt
         
@@ -203,10 +203,7 @@ class WeatherViewController: UIViewController {
     }
     
     
-    func formatTextForURLRequest(string:String)-> String {
-        return string.replacingOccurrences(of: "n", with: "d")
-    }
-
+  
     
 
 
