@@ -15,6 +15,7 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var translateButton: UIButton!
     @IBOutlet var resultTextView: UITextView!
     
+    var indicator:UIActivityIndicatorView!
     var background:BackgroundView!
     
     override func viewDidLoad() {
@@ -26,6 +27,13 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
         let gradientView = GradientView(inView: frame!)
         self.view.addSubview(gradientView)
         self.view.sendSubviewToBack(gradientView)
+        
+        indicator = UIActivityIndicatorView()
+        indicator.frame = CGRect(x:self.view.center.x - 10, y:30, width: 20, height: 20)
+        indicator.color = UIColor.white
+        indicator.hidesWhenStopped = true
+        self.view.addSubview(indicator)
+        
         background = BackgroundView(inView: frame!)
         self.view.addSubview(background)
         self.view.bringSubviewToFront(resultTextView)
@@ -33,7 +41,6 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
         resultTextView.backgroundColor = UIColor(white: 1, alpha: 0.7)
         resultTextView.isSelectable = false
         resultTextView.isEditable = false
-        
         
         // gesture recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -128,14 +135,18 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
     
     @objc func handleTapToTranslate(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
+        indicator.startAnimating()
+        
         if translateTextView.text != nil {
             TranslateService.shared.getLanguage(sentence: translateTextView.text!,
                                                 completionHandler: { (success, erreur, language) in
                                                     if success == true {
+                                                        
                                                         self.translate(with: language!)
                                                         self.updateView(self.detectTextView,
                                                                         with:Settings.shared.textDetectLanguageView + language!)
                                                     }else{
+                                                        self.indicator.stopAnimating()
                                                         self.presentUIAlertController(title: Settings.shared.errorTitle,
                                                                                       message: erreur!) } })
             
@@ -158,6 +169,7 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
                                                     self.updateView(self.resultTextView,
                                                                     with: translation!.data.translations[0].translatedText)
                                                 }else{
+                                                    self.indicator.stopAnimating()
                                                     self.presentUIAlertController(title: Settings.shared.errorTitle,
                                                                                   message: erreur!)
                                                 } })
@@ -167,6 +179,7 @@ class TranslateViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - UPDATE VIEW
     func updateView ( _ view: UITextView, with: String) {
+        indicator.stopAnimating()
         view.text = with
     }
 

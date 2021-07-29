@@ -11,6 +11,7 @@ class UpdateView : UIView {
     
     let refreshButton = UIButton()
     let lastUpdateText = UITextView()
+    var indicator = UIActivityIndicatorView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -47,8 +48,14 @@ class UpdateView : UIView {
         refreshButton.center.y += 43
         refreshButton.tintColor = UIColor.white
         refreshButton.setBackgroundImage(image, for: .normal)
-        
         self.addSubview(refreshButton)
+        
+        indicator.frame = refreshButton.frame
+        indicator.color = UIColor.white
+        indicator.isHidden = false
+        indicator.hidesWhenStopped = true
+        self.addSubview(indicator)
+        self.bringSubviewToFront(indicator)
         
         
         

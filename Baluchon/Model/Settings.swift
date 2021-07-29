@@ -182,7 +182,7 @@ class Settings {
             labelSettingsCity = "Comparer New York avec une ville :"
             labelSettingsLang = "séléctionner une langue : "
             textDetectLanguageView = "Langue detectée : "
-            placeHolderTranslateView = "Text à traduire ici"
+            placeHolderTranslateView = "Texte à traduire ici"
         }
 
     }

@@ -69,6 +69,7 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // Request Weather
         firstWeather()
+        
         // Set Alpha for Views
         currentCityView.alpha = 0
         wantedCityView.alpha = 0
@@ -121,14 +122,19 @@ class WeatherViewController: UIViewController {
     func firstWeather () {
         let city = Settings.shared.getCurrentCity()
         let lang = Settings.shared.getCurrentLanguage()
+        
+        startActivity()
+        
         WeatherService.shared.getWeather(city:city, lang:lang ,completionHandler: { (success, erreur, current) in
                                             if success == true {
                                                 // Store in weather array
                                                 Settings.shared.saveWeathersFirstIndex(from: current!)
-                                                self.secondWeather()
                                                 self.updateView(self.wantedCityView, with: 0)
+                                                self.secondWeather()
+                                                
                                             }
                                             else {
+                                                self.stopActivity()
                                                 self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
                                                 
                                             } })
@@ -138,6 +144,9 @@ class WeatherViewController: UIViewController {
     func secondWeather () {
         let city = "New+York"
         let lang = Settings.shared.getCurrentLanguage()
+        
+        startActivity()
+
         WeatherService.shared.getWeather(city:city, lang:lang, completionHandler: { (success, erreur, current) in
             if success == true {
                 // Store in weather array
@@ -146,7 +155,7 @@ class WeatherViewController: UIViewController {
             }
             else {
                 self.presentUIAlertController(title: Settings.shared.errorTitle, message: erreur!)
-                
+                self.stopActivity()
             } })
     }
     
@@ -177,16 +186,28 @@ class WeatherViewController: UIViewController {
         view.descriptionText.text = description
         
         // Get Date in weather dt and transform it in something readable for human
-        self.bringUpToDateView.lastUpdateText.text = Settings.shared.getDate(dt: updateTime)
-
+        bringUpToDateView.lastUpdateText.text = Settings.shared.getDate(dt: updateTime)
+        stopActivity()
+        
         // Build animation
         view.iconImage.animationImages = animatedImages(for: iconAnim)
         view.iconImage.animationDuration = 0.9
         view.iconImage.animationRepeatCount = .zero
         view.iconImage.image = view.iconImage.animationImages?.first
         view.iconImage.startAnimating()
-        
-        
+            
+    }
+    
+    func startActivity () {
+        bringUpToDateView.indicator.startAnimating()
+        bringUpToDateView.refreshButton.isHidden = true
+  
+    }
+    
+    func stopActivity () {
+        bringUpToDateView.indicator.stopAnimating()
+        bringUpToDateView.refreshButton.isHidden = false
+  
     }
     
     // MARK: - UTILS

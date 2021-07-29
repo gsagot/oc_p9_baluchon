@@ -203,13 +203,17 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - REQUEST FROM MODEL
     
     func lastCurrencies() {
+        startActivity()
+        
         CurrencyService.shared.getRate(completionHandler: { (success, error, current) in
                                         if success == true {
                                             Settings.shared.saveRate(from: current!)
+                                            self.stopActivity()
                                             self.updateView()
                                         }
                                         else {
-                                            self.presentUIAlertController(title: "Error", message: error!)
+                                            self.stopActivity()
+                                            self.presentUIAlertController(title: Settings.shared.errorTitle, message: error!)
                                             
                                         }})
         
@@ -236,6 +240,18 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
         
+    }
+    
+    func startActivity () {
+        bringUpToDateView.indicator.startAnimating()
+        bringUpToDateView.refreshButton.isHidden = true
+  
+    }
+    
+    func stopActivity () {
+        bringUpToDateView.indicator.stopAnimating()
+        bringUpToDateView.refreshButton.isHidden = false
+  
     }
     
     // MARK: - UTILS
